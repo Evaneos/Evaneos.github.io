@@ -1,4 +1,10 @@
-# Lancement du blog technique Evaneos.com
+---
+layout: post
+title: Lancement du blog technique Evaneos.com
+category: Evaneos
+---
+
+## Lancement du blog technique Evaneos.com
 
 Bonjour et bienvenue sur le blog technique d'Evaneos.com ! 
 
