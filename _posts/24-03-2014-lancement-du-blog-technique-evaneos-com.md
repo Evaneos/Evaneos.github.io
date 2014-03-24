@@ -4,8 +4,6 @@ title: Lancement du blog technique Evaneos.com
 category: Evaneos
 ---
 
-## Lancement du blog technique Evaneos.com
-
 Bonjour et bienvenue sur le blog technique d'Evaneos.com ! 
 
 Dans ce blog, à une fréquence régulière vous pourrez trouver des articles sur les différents problèmes techniques auxquels nous sommes confrontés, ainsi que des retours d'expériences sur les technologies que nous utilisons.
