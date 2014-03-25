@@ -2,6 +2,8 @@
 layout: post
 title: Lancement du blog technique Evaneos.com
 category: Evaneos
+author: clement
+comments: true
 ---
 
 Bonjour et bienvenue sur le blog technique d'[Evaneos.com](http://www.evaneos.com) !

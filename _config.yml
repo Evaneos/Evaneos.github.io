@@ -6,3 +6,10 @@ url:
 
 redcarpet:
   extensions: [strikethrough]
+
+authors:
+  clement:
+    name: Clément
+    twitter: clemkeirua
+
+disqus: tech-evaneos

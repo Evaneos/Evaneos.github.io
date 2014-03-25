@@ -2,6 +2,8 @@
 layout: post
 title: Les soirées Dev
 category: Evaneos
+comments: true
+author: clement
 ---
 
 Pour démarrer ce blog technique, quoi de mieux qu'un article qui ne parle pas de technique ? Je vais plutôt commencer par vous parler d'un des éléments de notre **culture d'entreprise**.
