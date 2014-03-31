@@ -56,7 +56,7 @@ Pour le CSS, c'est la même chose.
 
 Comme dit précédemment, nous avons des tâches de compilation pour les fichiers Javascript et pour le CSS. Une fois compilé, les fichiers compilés ne sont pas inclus parmi les fichiers versionnés de Git. Cela n'a en effet pas de sens de versionner des fichiers compilés, qui n'ont pas grand chose à voir avec l'historique des tâches de développement.
 
-On ne peut donc pas réaliser un déploiment classique ( qui se fait en gros via git et qui revient, grossièrement, à un git pull).
+On ne peut donc pas réaliser un déploiment classique (qui revient grossièrement à un git pull).
 
 Au lieu de cela, la mise en ligne des fichiers compilés, que ce soit en CSS ou en javascript, se fait par la mise en ligne des fichiers via un rsync dans le répertoire où les fichiers doivent arriver. 
 
@@ -65,6 +65,7 @@ Au lieu de cela, la mise en ligne des fichiers compilés, que ce soit en CSS ou 
 En développement, il est assez désagréable de devoir concaténer tous les fichiers javascripts à chaque modification, et c'est encore pire lorsque l'on travaille avec les fichiers less.
 
 Afin de rendre le développement plus fluide, le fonctionnement est donc légèrement différent:
+
 - côté CSS, une tâche grunt surveille les fichiers less, et les recompile à chaque modification
 - côté Javascript, ce n'est pas le fichier compilé qui est inclus dans la page, mais les différents fichiers, dans l'ordre où ils seront compilés. La seul véritable différence qu'il peut y avoir lors de la mise en production vient de la concaténation/minification, qui doit être testée avant un déploiement.
 
