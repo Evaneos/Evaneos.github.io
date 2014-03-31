@@ -12,7 +12,7 @@ Dans cet article je vais vous présenter comment nous gérons les déploiements 
 
 Les librairies externes sont gérées via [Bower](http://bower.io/), un gestionnaire de dépendances pour les librairies Javascript, qui tourne sous NodeJS. On lui fournit un fichier JSON de configuration, et les librairies sont téléchargées dans un répertoire local. C'est notamment dans ce fichier de configuration que l'on spécifie les numéros de version à utiliser.
 
-L'utilisation de Bower a permis de centraliser les librairies externes, qui avant ne suivaient pas de véritable logique : quand on avait besoin d'une librairie, on la téléchargeait, et la mettait dans un répertoire public. Cela fonctionne bien ç très court terme, mais devient vite compliqué dès qu'on veut mettre à jour une librairie, ou utiliser une librairie déjà présente car on ne sait pas qui s'en sert. Bref, cela n'était plus compatible avec nos besoins d'industrialisation.
+L'utilisation de Bower a permis de centraliser les librairies externes, qui avant ne suivaient pas de véritable logique : quand on avait besoin d'une librairie, on la téléchargeait, et la mettait dans un répertoire public. Cela fonctionne bien à très court terme, mais devient vite compliqué dès qu'on veut mettre à jour une librairie, ou utiliser une librairie déjà présente car on ne sait pas qui s'en sert. Bref, cela n'était plus compatible avec nos besoins d'industrialisation.
 
 Comme nous utilisons un seul fichier de configuration Bower, toutes les applications du backoffice doivent fonctionner avec des librairies dans la même version. Cette contrainte nous permet d'éviter de multiplier les différences de versions entre les applications, mais peut être source de régressions difficiles à anticiper lorsque les librairies utilisées introduisent des changements non-rétrocompatibles.
 
@@ -41,12 +41,12 @@ Voici un exemple de ce que peut contenir un fichier de configuration d'une appli
         - angular
     icon: icon-dashboard
 
-Ce fichier est mangé par Grunt qui s'en sert pour connaitre les dépendances lorsqu'il faut générer le javascript compilé d'une application. Il est également utilisé par la partie PHP pour gérer le reste : affichage de la bonne icône dans un menu, gestion du contrôle d'accès pour les contrôleurs associés...
+Ce fichier est mangé par Grunt qui s'en sert pour connaître les dépendances lorsqu'il faut générer le javascript compilé d'une application. Il est également utilisé par la partie PHP pour gérer le reste : affichage de la bonne icône dans un menu, gestion du contrôle d'accès pour les contrôleurs associés...
 
 #### Compilation d'une application
 
-La compilation est relativement simple : on concatene tous les fichiers javascripts de l'application en un fichier, et on minifie le tout. On produit un fichier du type nom_de_lapplications.js (ou nom_de_lapplications.min.js si minifié).
-Pour les librairies, on concatene toutes les librairies en un fichier vendor_nom_de_lapplications.min.js.
+La compilation est relativement simple : on concatène tous les fichiers javascripts de l'application en un fichier, et on minifie le tout. On produit un fichier du type nom_de_lapplications.js (ou nom_de_lapplications.min.js si minifié).
+Pour les librairies, on concatène toutes les librairies en un fichier vendor_nom_de_lapplications.min.js.
 
 Dans le contrôleur de l'application, quand on charge le fichier de configuration on sait dans quelle application on se trouve, et donc quels sont les fichiers javascript à inclure.
 
