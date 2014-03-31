@@ -6,7 +6,7 @@ comments: true
 author: clement
 ---
 
-Dans cet article je vais vous présenter comment nous gérons les déploiements d'applications javascript. Notre backoffice est constitué d'un grand nombre d'applications ayant chacun un rôle propre. Il y a notamment plusieurs CRUD pour les différents rôles métiers et les différents aspects de notre travail, ainsi que des outils de statistiques pour les différents pôles.
+Dans cet article je vais vous présenter comment nous gérons les déploiements d'applications javascript. Notre backoffice est constitué d'un grand nombre d'applications ayant chacun un rôle propre. Il y a notamment plusieurs CRUD pour les différents rôles métiers et les différents aspects de notre travail, ainsi que des outils de statistiques pour les différents pôles. Bref pour répondre aux divers besoins métiers, pour être efficace, et pour éviter la duplication, l'utilisation de Grunt et Bower s'est avérée être un atout.
 
 ### Bower pour la gestion des dépendances
 
@@ -58,7 +58,7 @@ Comme dit précédemment, nous avons des tâches de compilation pour les fichier
 
 On ne peut donc pas réaliser un déploiment classique (qui revient grossièrement à un git pull).
 
-Au lieu de cela, la mise en ligne des fichiers compilés, que ce soit en CSS ou en javascript, se fait par la mise en ligne des fichiers via un rsync dans le répertoire où les fichiers doivent arriver. 
+Au lieu de cela, la mise en ligne des fichiers compilés (javascript et css) se fait via un rsync dans le répertoire où les fichiers doivent arriver.
 
 #### Et la gestion d'environnement ?
 
@@ -68,4 +68,9 @@ Afin de rendre le développement plus fluide, le fonctionnement est donc légèr
 
 - côté CSS, une tâche grunt surveille les fichiers less, et les recompile à chaque modification
 - côté Javascript, ce n'est pas le fichier compilé qui est inclus dans la page, mais les différents fichiers, dans l'ordre où ils seront compilés. La seul véritable différence qu'il peut y avoir lors de la mise en production vient de la concaténation/minification, qui doit être testée avant un déploiement.
+
+
+
+Evidemment, bien que Grunt et Bower nous ait apporté beaucoup, tout n'est pas rose. Configurer des tâches Grunt est particulièrement désagréable, car la syntaxe utilisée n'est pas pratique. De plus, la courbe d'apprentissage n'est pas aussi rapide que nous le pensions au départ. Mais une fois mis en place, cela nous a permis d'uniformiser la conception et le déploiement des applications.
+
 
