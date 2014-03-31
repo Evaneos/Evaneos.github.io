@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Configuration d'applications Javascript
+title: Configuration d'applications Javascript avec Grunt et Bower
 category: Evaneos
 comments: true
 author: clement
