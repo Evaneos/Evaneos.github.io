@@ -242,7 +242,8 @@ article.page header .metas {
 .content ul,
 .content ol,
 .content pre,
-.content figure {
+.content figure,
+.content .highlight {
   margin-bottom: 1em;
 }
 .content p + h2,
@@ -250,21 +251,25 @@ article.page header .metas {
 .content ol + h2,
 .content pre + h2,
 .content figure + h2,
+.content .highlight + h2,
 .content p + h3,
 .content ul + h3,
 .content ol + h3,
 .content pre + h3,
 .content figure + h3,
+.content .highlight + h3,
 .content p + h4,
 .content ul + h4,
 .content ol + h4,
 .content pre + h4,
 .content figure + h4,
+.content .highlight + h4,
 .content p + h5,
 .content ul + h5,
 .content ol + h5,
 .content pre + h5,
-.content figure + h5 {
+.content figure + h5,
+.content .highlight + h5 {
   margin-top: 1.5em;
 }
 .content h2 {
@@ -315,6 +320,20 @@ article.page header .metas {
 .content ol {
   list-style-type: decimal;
 }
+.content .highlight {
+  background: #efefef;
+}
+.content .highlight pre {
+  font-family: monospace;
+  padding: 10px 20px;
+  margin-bottom: 0;
+  overflow: auto;
+}
+.content .highlight pre code {
+  display: block;
+  font-size: .9em;
+  line-height: 1.8em;
+}
 .post-archive h2 {
   font-family: 'Raleway', Comic, serif;
   font-weight: 800;
@@ -333,4 +352,66 @@ article.page header .metas {
 }
 .post-archive ul li a:hover {
   color: #c03575;
+}
+@media screen and (max-width: 1200px) and (min-width: 1020px) {
+  .wrapper .sidebar {
+    width: 290px;
+  }
+  .wrapper .sidebar .in .site-title a {
+    font-size: 2em;
+  }
+}
+@media (max-width: 1019px) {
+  .wrapper {
+    min-height: auto;
+    height: auto;
+  }
+  .wrapper .sidebar {
+    float: none;
+    display: block;
+    width: 100%;
+    clear: both;
+    height: auto;
+    min-height: auto;
+    text-align: left;
+  }
+  .wrapper .sidebar .in .site-title {
+    display: block;
+    clear: both;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+  .wrapper .sidebar .in .site-title a {
+    font-size: 1.4em!important;
+    display: inline!important;
+  }
+  .wrapper .sidebar .in .site-title a span {
+    font-size: 1em;
+    display: inline!important;
+  }
+  .wrapper .sidebar .in nav {
+    margin: 0;
+  }
+  .wrapper .sidebar .in nav ul li {
+    display: inline-block;
+  }
+  .wrapper .sidebar .in nav ul li a {
+    line-height: 1.3em;
+    padding-right: 1em;
+  }
+  .wrapper .sidebar p.legal {
+    background: #eaeaea;
+    text-align: center;
+    padding: 3px;
+  }
+  .wrapper .content-wrapper {
+    float: none;
+    max-width: 660px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    padding: 0 15px;
+    width: auto;
+  }
 }
