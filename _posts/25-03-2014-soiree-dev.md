@@ -20,7 +20,7 @@ Voici un petit éventail de ce qui a été bricolé lors de la dernière soirée
  - Découverte d'[Elasticsearch](www.elasticsearch.org) autour de la conception d'une petite appli de recherche de films
  - Bricolage autour de [logstash](http://logstash.net/) pour avoir un moteur de recherche dans nos logs basé sur Elasticsearch et Kibana. Pour ceux que ça intéresse, voici un [point de départ possible](http://linuxfr.org/news/gestion-des-logs-avec-logstash-elasticsearch-kibana)
  - Découverte de [SailsJS](http://sailsjs.org/) via le bricolage d'une petit appli. SailsJS est un framework javascript MVC basé sur du nodeJS.
- - Essai de mise en corrélation de titres d'articles de journeaux, pour essayer de déterminer qui reprend ses informations chez les autres.
+ - Essai de mise en corrélation de titres d'articles de journaux, pour essayer de déterminer qui reprend ses informations chez les autres.
 
 Comme vous pouvez le voir, les mots qui reviennent sont "essai", "bricolage", "découverte"... On ne cherche pas à concevoir des applications finies, ce qui est plutôt difficile quand on ne connait pas une technologie. On cherche plutôt à découvrir la technologie en question, s'ouvrir l'esprit à de nouveaux outils, et expérimenter. Tout ne marche pas comme prévu, par exemple nous avons eu de nombreux problèmes de compatibilité avec le serveur OpenStreetMaps, j'ai pu voir que mettre en place et requêter Elasticsearch est loin d'être trivial en une soirée... En fait, cette phase de découverte permet de prendre conscience des possibilités et des limitations de nouveaux outils, que ce soit pour s'en servir, ou au contraire pour les rayer de la liste des possibles.
 
