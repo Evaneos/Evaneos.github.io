@@ -1,5 +1,7 @@
 - url: /
-  title: Blog technique Evaneos.com
+  label: Accueil
+  title: Le blog technique Evaneos.com
 
 - url: /about
-  title: A propos
+  label: A propos
+  title: Pour en savoir plus

@@ -1,39 +1,38 @@
 ---
 layout: default
-title: Home
+title: Bienvenue
 ---
 
-<section class="post-archive">
-{% for post in site.posts %}
-{% unless post.next %}
+<article class="page">
+    <header>
+        <h1>{{ page.title }}</h1>
+    </header>
 
-{% unless forloop.first %}</div></div>{% endunless %}
+    <section class="post-archive">
+    {% for post in site.posts %}
+    {% unless post.next %}
 
-  <div class="year-bundle row gutters fadeInDown animated">
-    <h2 class="post-year col span_2">{{ post.date | date: '%Y' }}</h2>
-    <div class="posts-by-year col span_10">
+    {% unless forloop.first %}</ul>{% endunless %}
+      <h2>{{ post.date | date: '%Y' }}</h2>
+      <ul>
+    {% else %}
+    {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+    {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+    {% if year != nyear %}
 
-{% else %}
-{% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-{% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-{% if year != nyear %}
+    {% unless forloop.first %}</div></div>{% endunless %}
 
-{% unless forloop.first %}</div></div>{% endunless %}
+      <h2>{{ post.date | date: '%Y' }}</h2>
+      <ul>
+    {% endif %}
+    {% endunless %}
 
-  <div class="year-bundle row gutters fadeInDown animated">
-    <h2 class="post-year col span_2">{{ post.date | date: '%Y' }}</h2>
-    <div class="posts-by-year col span_10">
-{% endif %}
-{% endunless %}
+        <li>
+            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %B" }}</time>
+            <a href="{{site.url}}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+      </li>
+    {% if forloop.last %}</ul>{% endif %}
+    {% endfor %}
+    </section>
+</article>
 
-  <div class="row gutters archive-entry">
-    <a href="{{site.url}}{{ post.url }}" title="{{ post.title }}" class="col span_8">{{ post.title }}</a>
-    <div class="archive-date col span_4">
-      <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %B" }}</time>
-    </div>
-  </div>
-
-{% if forloop.last %}</div></div>{% endif %}
-
-{% endfor %}
-</section>
