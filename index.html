@@ -28,7 +28,7 @@ title: Bienvenue
     {% endunless %}
 
         <li>
-            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %B" }}</time>
+            <time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | frdate: "%-d %B" }}</time>
             <a href="{{site.url}}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
       </li>
     {% if forloop.last %}</ul>{% endif %}
