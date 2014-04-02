@@ -16,7 +16,7 @@ Les informations nécessaires sont sur les sites officiels de [Ruby](https://www
 
 Sur Ubuntu et debian-like, cela revient à :
 
-    sudo apt-get install ruby1.9-dev && gem install jekyll
+    sudo apt-get install ruby1.9-dev && sudo gem install jekyll
 
 **Récupérer du blog vierge**
 
