@@ -1,6 +1,6 @@
 markdown: redcarpet
 pygments: true
-permalink: /:title
+permalink: /:title-:year-:month-:day/
 safe: false
 
 url:
