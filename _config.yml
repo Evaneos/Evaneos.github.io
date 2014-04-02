@@ -1,6 +1,7 @@
 markdown: redcarpet
 pygments: true
 permalink: /:title
+safe: false
 
 url:
 
