@@ -33,10 +33,11 @@ Tous les articles ont également une entête, qui contient ses méta données : 
 ## Tester les articles en local
 
 Pour tester les articles en local, il faut donc :
- * avoir installé Ruby et Jekyll
- * se placer dans le répertoire du blog
 
-Ensuite, on peut démarrer un serveu avec la commande suivante :
+- avoir installé Ruby et Jekyll
+- se placer dans le répertoire du blog
+
+Ensuite, on peut démarrer un serveur avec la commande suivante :
 
     jekyll serve --watch --drafts
 
