@@ -9,13 +9,13 @@ Nous utilisons [Jekyll](http://jekyllrb.com) pour faire tourner ce blog techniqu
 
 Voici quelques infos sur comment installer jekyll mettre en place un blog de ce genre, et commencer à écrire des articles.
 
-## Installer Ruby
+## Installer Ruby et Jekyll 
 
-Les infos nécessaires sont sur le [site officiel](https://www.ruby-lang.org/fr/downloads/)
+Les informations nécessaires sont sur les sites officiels de [Ruby](https://www.ruby-lang.org/fr/downloads/) et [Jekyll](http://jekyllrb.com/docs/installation/)
 
-## Installer Jekyll
+Sur Ubuntu, cela revient à :
 
-Les infos nécessaires sont sur le [site officiel](http://jekyllrb.com/docs/installation/)
+    sudo apt-get install ruby1.9-dev && gem install jekyll
 
 ## Récupérer du blog
 
