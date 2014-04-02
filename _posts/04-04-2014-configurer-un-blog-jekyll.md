@@ -10,15 +10,13 @@ Nous utilisons [Jekyll](http://jekyllrb.com) pour faire tourner ce blog techniqu
 
 Voici quelques infos sur comment installer *Jekyll* mettre en place un blog de ce genre, et commencer à écrire des articles.
 
-## Installation
+## Installer Ruby et Jekyll
 
-**Installer Ruby**
+Les informations nécessaires sont sur les sites officiels de [Ruby](https://www.ruby-lang.org/fr/downloads/) et [Jekyll](http://jekyllrb.com/docs/installation/)
 
-Les infos nécessaires sont sur le [site officiel](https://www.ruby-lang.org/fr/downloads/)
+Sur Ubuntu et debian-like, cela revient à :
 
-**Installer Jekyll**
-
-Les infos nécessaires sont sur le [site officiel](http://jekyllrb.com/docs/installation/)
+    sudo apt-get install ruby1.9-dev && gem install jekyll
 
 **Récupérer du blog vierge**
 
@@ -37,15 +35,15 @@ Tous les articles ont également une entête, qui contient ses méta données : 
 
 Pour tester les articles en local, il faut donc :
 
-* avoir installé Ruby et Jekyll
-* se placé dans le répertoire du blog
+- avoir installé Ruby et Jekyll
+- se placer dans le répertoire du blog
 
-Ensuite, on peut démarrer un server avec la commande suivante :
+Ensuite, on peut démarrer un serveur avec la commande suivante :
 
     jekyll serve --watch --drafts
 
 Cela démarre un serveur sur le port 4000, on peut donc visualiser le blog en [local](http://localhost:4000/)
-L'option --watch permet de ne pas avoir à redémarrer le server à chaque modification d'un article, et --drafts permet d'afficher les brouillons dans la liste des articles.
+L'option --watch permet de ne pas avoir à redémarrer le serveur à chaque modification d'un article, et --drafts permet d'afficher les brouillons dans la liste des articles.
 
 ## Hébergé par Github ?
 

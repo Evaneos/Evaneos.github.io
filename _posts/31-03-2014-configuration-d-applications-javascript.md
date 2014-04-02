@@ -45,8 +45,8 @@ Ce fichier est mangé par Grunt qui s'en sert pour connaître les dépendances l
 
 #### Compilation d'une application
 
-La compilation est relativement simple : on concatène tous les fichiers javascripts de l'application en un fichier, et on minifie le tout. On produit un fichier du type nom_de_lapplications.js (ou nom_de_lapplications.min.js si minifié).
-Pour les librairies, on concatène toutes les librairies en un fichier vendor_nom_de_lapplications.min.js.
+La compilation est relativement simple : on concatène tous les fichiers javascripts de l'application en un fichier, et on minifie le tout. On produit un fichier du type nom\_de\_lapplications.js (ou nom\_de\_lapplications.min.js si minifié).
+Pour les librairies, on concatène toutes les librairies en un fichier vendor\_nom\_de\_lapplications.min.js.
 
 Dans le contrôleur de l'application, quand on charge le fichier de configuration on sait dans quelle application on se trouve, et donc quels sont les fichiers javascript à inclure.
 
