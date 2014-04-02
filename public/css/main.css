@@ -187,6 +187,9 @@ a:hover {
 .wrapper .sidebar .in nav ul li a:hover {
   text-decoration: underline;
 }
+.wrapper .sidebar .in nav ul li a.current-page:before {
+  content: '> ';
+}
 .wrapper .sidebar p.legal {
   text-align: center;
   font-size: .85em;
@@ -346,12 +349,18 @@ article.page header .metas {
 }
 .post-archive ul li time {
   color: #a0a0a0;
+  display: inline-block;
+  width: 7em;
+  text-align: right;
+  margin-right: .5em;
 }
 .post-archive ul li a {
   color: #3575c0;
+  text-decoration: none;
 }
 .post-archive ul li a:hover {
   color: #c03575;
+  text-decoration: underline;
 }
 @media screen and (max-width: 1200px) and (min-width: 1020px) {
   .wrapper .sidebar {

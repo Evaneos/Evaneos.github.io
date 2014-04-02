@@ -77,6 +77,11 @@ a {
                             &:hover {
                                 text-decoration: underline;
                             }
+                            &.current-page{
+                                &:before{
+                                    content: '> ';
+                                }
+                            }
                         }
                     }
                 }
@@ -211,11 +216,17 @@ article {
             margin-bottom:.5em;
             time {
                 color:@COLOR-SUB;
+                display:inline-block;
+                width:7em;
+                text-align:right;
+                margin-right:.5em;
             }
             a {
                 color:@LINK;
+                text-decoration: none;
                 &:hover {
                     color:@LINK-HOVER;
+                    text-decoration: underline;
                 }
             }
         }
