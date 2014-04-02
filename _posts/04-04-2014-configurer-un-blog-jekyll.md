@@ -51,11 +51,3 @@ Une fois votre blog réalisé, vous pouvez l'héberger gratuitement sur un sous 
 
 Vous avez aussi la possibilité de mettre votre propre nom de domaine très facilement. Pour plus de renseignement, rendez vous sur [Github.io](http://github.io/).
 
-
-
-
-
-
-
-
-
