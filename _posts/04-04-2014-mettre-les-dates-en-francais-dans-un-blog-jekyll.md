@@ -5,7 +5,7 @@ category: Evaneos
 author: christophe
 comments: true
 ---
-Comme précédemment vu, ce [blog tourne sur Jekyll](/configurer-un-blog-jekyll/).
+Comme précédemment vu, ce [blog tourne sur Jekyll](/configurer-un-blog-jekyll-2014-04-04/).
 
 ## Jekyll et internationalisation
 
