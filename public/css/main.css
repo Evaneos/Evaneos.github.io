@@ -394,6 +394,7 @@ article.page header .metas {
   .wrapper .sidebar .in .site-title a {
     font-size: 1.4em!important;
     display: inline!important;
+    padding: 0;
   }
   .wrapper .sidebar .in .site-title a span {
     font-size: 1em;
@@ -408,11 +409,12 @@ article.page header .metas {
   .wrapper .sidebar .in nav ul li a {
     line-height: 1.3em;
     padding-right: 1em;
+    font-size: .9em;
   }
   .wrapper .sidebar p.legal {
     background: #eaeaea;
     text-align: center;
-    padding: 3px;
+    padding: 5px 3px;
   }
   .wrapper .content-wrapper {
     float: none;
@@ -422,5 +424,12 @@ article.page header .metas {
     height: auto;
     padding: 0 15px;
     width: auto;
+  }
+}
+@media (max-width: 599px) {
+  .post-archive ul li time {
+    display: none;
+    width: auto;
+    text-align: left;
   }
 }
