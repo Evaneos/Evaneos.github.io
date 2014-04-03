@@ -24,7 +24,7 @@ Le code est sur [Github](https://github.com/Evaneos/Evaneos.github.io), il suffi
 
 ## Fonctionnement des articles
 
-Comme indiqué, les articles sont au format markdown. La syntaxe est simple mais relativement riche, donc le plus simple est de se référer à la [documentation](http://daringfireball.net/projects/markdown/syntax). Pour les plus frileux, il existe des éditeurs en ligne tel que [Stackedit](https://stackedit.io/) permettent une édition WYSIWYG du markdown.
+Comme indiqué, les articles sont au format markdown. La syntaxe est simple mais relativement riche, donc n'hésitez pas à vous référer à la [documentation](http://daringfireball.net/projects/markdown/syntax). Pour les plus frileux, il existe des éditeurs en ligne tel que [Stackedit](https://stackedit.io/) permettant une édition WYSIWYG du markdown.
 
 Sur Jekyll, les articles publiés sont stockés dans le répertoire *_posts*, et les articles en cours d'écriture dans le répertoire *_drafts*.
 Dans un article publié, c'est le format du nom de fichier qui indique sa date de publication. Pour un brouillon, c'est la date de dernière modication du fichier. Un draft n'est affiché qu'en mode 'développement' et n'est donc visible qu'en local.
