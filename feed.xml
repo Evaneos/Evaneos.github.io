@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Sun, 06 Apr 2014 18:25:07 +0200</pubDate>
-    <lastBuildDate>Sun, 06 Apr 2014 18:25:07 +0200</lastBuildDate>
+    <pubDate>Sun, 06 Apr 2014 18:29:01 +0200</pubDate>
+    <lastBuildDate>Sun, 06 Apr 2014 18:29:01 +0200</lastBuildDate>
 
     
       <item>
@@ -61,6 +61,9 @@
 
 &lt;p&gt;Sur Ubuntu et debian-like, cela revient à :&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ruby1.9-dev &amp;amp;&amp;amp; sudo gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sur Fedora :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo yum install ruby-devel &amp;amp;&amp;amp; sudo gem install jekyll
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Récupérer du blog vierge&lt;/strong&gt;&lt;/p&gt;
 
