@@ -18,6 +18,10 @@ Sur Ubuntu et debian-like, cela revient à :
 
     sudo apt-get install ruby1.9-dev && sudo gem install jekyll
 
+Sur Fedora :
+
+    sudo yum install ruby-devel && sudo gem install jekyll
+
 **Récupérer du blog vierge**
 
 Le code est sur [Github](https://github.com/Evaneos/Evaneos.github.io), il suffit de cloner le repository dans un répertoire local.

@@ -14,6 +14,7 @@ git ls-files | xargs rm
 find . -depth -type d -empty -exec rmdir {} \;
 mv _site/* .
 rmdir _site
+touch .nojekyll
 
 git add -A
 git commit -m "auto commit"
