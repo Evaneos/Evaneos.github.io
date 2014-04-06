@@ -1,26 +1,244 @@
----
-layout: none
----
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.data.brume.name }}</title>
-    <link>{{ site.url }}</link>
-    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
-    <description>{{ site.data.brume.description }}</description>
+    <title>Blog technique Evaneos.com</title>
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-    <lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
+    <pubDate>Sun, 06 Apr 2014 18:25:07 +0200</pubDate>
+    <lastBuildDate>Sun, 06 Apr 2014 18:25:07 +0200</lastBuildDate>
 
-    {% for post in site.posts limit: 10 %}
+    
       <item>
-        <title>{{ post.title }}</title>
-        <link>{{ site.url }}{{ post.url }}</link>
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-        <author>{{ site.data.brume.author}}</author>
-        <description>{{ post.content | xml_escape }}</description>
+        <title>Mettre les dates en francais dans un blog Jekyll</title>
+        <link>/mettre-les-dates-en-francais-dans-un-blog-jekyll-2014-04-04/</link>
+        <pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Comme précédemment vu, ce &lt;a href=&quot;/configurer-un-blog-jekyll-2014-04-04/&quot;&gt;blog tourne sur Jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Jekyll et internationalisation&lt;/h2&gt;
+
+&lt;p&gt;L&amp;#39;internationalisation (ou i18n) n&amp;#39;est pas supportée nativement par Jekyll. Il existe &lt;a href=&quot;https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb&quot;&gt;un plugin&lt;/a&gt; qui permet de le faire en plusieurs langues mais en utilisant un filtre différent. La &lt;a href=&quot;https://gist.github.com/remiprev/2665712&quot;&gt;solution la plus simple&lt;/a&gt; est de modifier la fonction strftime:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;_plugins/frdate.rb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# encoding: utf-8&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;date&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;time&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MONTHNAMES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DAYNAMES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Dimanche&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Lundi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Mardi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Mercredi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Jeudi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Vendredi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Samedi&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Time&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:strftime_nolocale&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:strftime&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dup&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%a/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ABBR_DAYNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%A/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DAYNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%b/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ABBR_MONTHNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%B/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MONTHNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime_nolocale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Hébergé par GitHub ?&lt;/h2&gt;
+
+&lt;p&gt;Attention, Github compile par défaut avec l’option &lt;code&gt;--safe&lt;/code&gt; de Jekyll qui ignore tous les plugins. La solution est de créer un script qui génère le site statique et envoie ce site sur le dépôt GitHub, comme expliqué &lt;a href=&quot;http://arademaker.github.io/blog/2011/12/01/github-pages-jekyll-plugins.html&quot;&gt;sur ce blog&lt;/a&gt;. Il est même possible de gérer ce déploiement via l&amp;#39;intégration continue, par exemple &lt;a href=&quot;http://drone.io&quot;&gt;drone.io&lt;/a&gt;.&lt;/p&gt;
+</description>
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>Configurer un blog Jekyll</title>
+        <link>/configurer-un-blog-jekyll-2014-04-04/</link>
+        <pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Nous utilisons &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; pour faire tourner ce blog technique. Il s&amp;#39;agit d&amp;#39;un générateur de blog statiques : on écrit les articles au format markdown, qui sont ensuite généré en html. Il n&amp;#39;est donc pas nécessaire d&amp;#39;avoir de base de données, allégeant le serveur, et permettant un rendu rapide des pages pour le lecteur.&lt;/p&gt;
+
+&lt;p&gt;Voici quelques infos sur comment installer &lt;em&gt;Jekyll&lt;/em&gt; mettre en place un blog de ce genre, et commencer à écrire des articles.&lt;/p&gt;
+
+&lt;h2&gt;Installer Ruby et Jekyll&lt;/h2&gt;
+
+&lt;p&gt;Les informations nécessaires sont sur les sites officiels de &lt;a href=&quot;https://www.ruby-lang.org/fr/downloads/&quot;&gt;Ruby&lt;/a&gt; et &lt;a href=&quot;http://jekyllrb.com/docs/installation/&quot;&gt;Jekyll&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sur Ubuntu et debian-like, cela revient à :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ruby1.9-dev &amp;amp;&amp;amp; sudo gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Récupérer du blog vierge&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Le code est sur &lt;a href=&quot;https://github.com/Evaneos/Evaneos.github.io&quot;&gt;Github&lt;/a&gt;, il suffit de cloner le repository dans un répertoire local.&lt;/p&gt;
+
+&lt;h2&gt;Fonctionnement des articles&lt;/h2&gt;
+
+&lt;p&gt;Comme indiqué, les articles sont au format markdown. La syntaxe est simple mais relativement riche, donc n&amp;#39;hésitez pas à vous référer à la &lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;documentation&lt;/a&gt;. Pour les plus frileux, il existe des éditeurs en ligne tel que &lt;a href=&quot;https://stackedit.io/&quot;&gt;Stackedit&lt;/a&gt; permettant une édition WYSIWYG du markdown.&lt;/p&gt;
+
+&lt;p&gt;Sur Jekyll, les articles publiés sont stockés dans le répertoire &lt;em&gt;_posts&lt;/em&gt;, et les articles en cours d&amp;#39;écriture dans le répertoire &lt;em&gt;_drafts&lt;/em&gt;.
+Dans un article publié, c&amp;#39;est le format du nom de fichier qui indique sa date de publication. Pour un brouillon, c&amp;#39;est la date de dernière modication du fichier. Un draft n&amp;#39;est affiché qu&amp;#39;en mode &amp;#39;développement&amp;#39; et n&amp;#39;est donc visible qu&amp;#39;en local.&lt;/p&gt;
+
+&lt;p&gt;Tous les articles ont également une entête, qui contient ses méta données : auteur, tags, titre... Ce sont les fichiers du répertoire &lt;em&gt;_layout&lt;/em&gt; qui s&amp;#39;occupent de faire le lien entre ces meta données, et leur rendu dans la page. Au besoin, ces entêtes peuvent être enrichies et réutilisées pour des besoins plus spécifiques.&lt;/p&gt;
+
+&lt;h3&gt;Tester les articles en local&lt;/h3&gt;
+
+&lt;p&gt;Pour tester les articles en local, il faut donc :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;avoir installé Ruby et Jekyll&lt;/li&gt;
+&lt;li&gt;se placer dans le répertoire du blog&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ensuite, on peut démarrer un serveur avec la commande suivante :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;jekyll serve --watch --drafts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Cela démarre un serveur sur le port 4000, on peut donc visualiser le blog en &lt;a href=&quot;http://localhost:4000/&quot;&gt;local&lt;/a&gt;
+L&amp;#39;option --watch permet de ne pas avoir à redémarrer le serveur à chaque modification d&amp;#39;un article, et --drafts permet d&amp;#39;afficher les brouillons dans la liste des articles.&lt;/p&gt;
+
+&lt;h2&gt;Hébergé par Github ?&lt;/h2&gt;
+
+&lt;p&gt;Une fois votre blog réalisé, vous pouvez l&amp;#39;héberger gratuitement sur un sous domaine de &lt;a href=&quot;http://github.io/&quot;&gt;Github.io&lt;/a&gt; sous réserve d&amp;#39;héberger votre projet sur un repo Github. Il vous suffit pour cela de créer un repo username.github.io, et tout sera synchronisé en post hook de façon transparente.&lt;/p&gt;
+
+&lt;p&gt;Vous avez aussi la possibilité de mettre votre propre nom de domaine très facilement. Pour plus de renseignement, rendez vous sur &lt;a href=&quot;http://github.io/&quot;&gt;Github.io&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Configuration d'applications Javascript avec Grunt et Bower</title>
+        <link>/configuration-d-applications-javascript-2014-03-31/</link>
+        <pubDate>Mon, 31 Mar 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Dans cet article je vais vous présenter comment nous gérons les déploiements d&amp;#39;applications javascript. Notre backoffice est constitué d&amp;#39;un grand nombre d&amp;#39;applications ayant chacun un rôle propre. Il y a notamment plusieurs CRUD pour les différents rôles métiers et les différents aspects de notre travail, ainsi que des outils de statistiques pour les différents pôles. Bref pour répondre aux divers besoins métiers, pour être efficace, et pour éviter la duplication, l&amp;#39;utilisation de Grunt et Bower s&amp;#39;est avérée être un atout.&lt;/p&gt;
+
+&lt;h3&gt;Bower pour la gestion des dépendances&lt;/h3&gt;
+
+&lt;p&gt;Les librairies externes sont gérées via &lt;a href=&quot;http://bower.io/&quot;&gt;Bower&lt;/a&gt;, un gestionnaire de dépendances pour les librairies Javascript, qui tourne sous NodeJS. On lui fournit un fichier JSON de configuration, et les librairies sont téléchargées dans un répertoire local. C&amp;#39;est notamment dans ce fichier de configuration que l&amp;#39;on spécifie les numéros de version à utiliser.&lt;/p&gt;
+
+&lt;p&gt;L&amp;#39;utilisation de Bower a permis de centraliser les librairies externes, qui avant ne suivaient pas de véritable logique : quand on avait besoin d&amp;#39;une librairie, on la téléchargeait, et la mettait dans un répertoire public. Cela fonctionne bien à très court terme, mais devient vite compliqué dès qu&amp;#39;on veut mettre à jour une librairie, ou utiliser une librairie déjà présente car on ne sait pas qui s&amp;#39;en sert. Bref, cela n&amp;#39;était plus compatible avec nos besoins d&amp;#39;industrialisation.&lt;/p&gt;
+
+&lt;p&gt;Comme nous utilisons un seul fichier de configuration Bower, toutes les applications du backoffice doivent fonctionner avec des librairies dans la même version. Cette contrainte nous permet d&amp;#39;éviter de multiplier les différences de versions entre les applications, mais peut être source de régressions difficiles à anticiper lorsque les librairies utilisées introduisent des changements non-rétrocompatibles.&lt;/p&gt;
+
+&lt;h3&gt;Grunt comme chef d&amp;#39;orchestre&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gruntjs.com/&quot;&gt;Grunt&lt;/a&gt; sert à configurer et exécuter des tâches récurrentes. Nous utilisons Grunt pour gérer les tâches liées au développement ou au déploiement des différentes applications du backoffice. Chez nous cela signifie principalement :
+- la concaténation et la minification des différents fichiers JS
+- la compilation des fichiers LESS en CSS&lt;/p&gt;
+
+&lt;h4&gt;Gestion de la configuration d&amp;#39;une application&lt;/h4&gt;
+
+&lt;p&gt;Chaque application correspond à une Single Page Application (SPA) qui contient quelques écrans. Elle est associée à un contrôlleur PHP, et est configurée par un fichier Yaml, ce qui permet l&amp;#39;utilisation du fichier de configuration à la fois côté javascript et côté PHP.&lt;/p&gt;
+
+&lt;p&gt;Voici un exemple de ce que peut contenir un fichier de configuration d&amp;#39;une application :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;id: dashboard
+name: Dashboard
+acl:
+    - ROLE_ADMIN
+    - ROLE_DEVELOPPER
+    - ...
+dependencies:
+    - jquery
+    - underscore
+    - angular
+icon: icon-dashboard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ce fichier est mangé par Grunt qui s&amp;#39;en sert pour connaître les dépendances lorsqu&amp;#39;il faut générer le javascript compilé d&amp;#39;une application. Il est également utilisé par la partie PHP pour gérer le reste : affichage de la bonne icône dans un menu, gestion du contrôle d&amp;#39;accès pour les contrôleurs associés...&lt;/p&gt;
+
+&lt;h4&gt;Compilation d&amp;#39;une application&lt;/h4&gt;
+
+&lt;p&gt;La compilation est relativement simple : on concatène tous les fichiers javascripts de l&amp;#39;application en un fichier, et on minifie le tout. On produit un fichier du type nom_de_lapplications.js (ou nom_de_lapplications.min.js si minifié).
+Pour les librairies, on concatène toutes les librairies en un fichier vendor_nom_de_lapplications.min.js.&lt;/p&gt;
+
+&lt;p&gt;Dans le contrôleur de l&amp;#39;application, quand on charge le fichier de configuration on sait dans quelle application on se trouve, et donc quels sont les fichiers javascript à inclure.&lt;/p&gt;
+
+&lt;p&gt;Pour le CSS, c&amp;#39;est la même chose.&lt;/p&gt;
+
+&lt;h4&gt;Déploiement d&amp;#39;une application&lt;/h4&gt;
+
+&lt;p&gt;Comme dit précédemment, nous avons des tâches de compilation pour les fichiers Javascript et pour le CSS. Une fois compilé, les fichiers compilés ne sont pas inclus parmi les fichiers versionnés de Git. Cela n&amp;#39;a en effet pas de sens de versionner des fichiers compilés, qui n&amp;#39;ont pas grand chose à voir avec l&amp;#39;historique des tâches de développement.&lt;/p&gt;
+
+&lt;p&gt;On ne peut donc pas réaliser un déploiment classique (qui revient grossièrement à un git pull).&lt;/p&gt;
+
+&lt;p&gt;Au lieu de cela, la mise en ligne des fichiers compilés (javascript et css) se fait via un rsync dans le répertoire où les fichiers doivent arriver.&lt;/p&gt;
+
+&lt;h4&gt;Et la gestion d&amp;#39;environnement ?&lt;/h4&gt;
+
+&lt;p&gt;En développement, il est assez désagréable de devoir concaténer tous les fichiers javascripts à chaque modification, et c&amp;#39;est encore pire lorsque l&amp;#39;on travaille avec les fichiers less.&lt;/p&gt;
+
+&lt;p&gt;Afin de rendre le développement plus fluide, le fonctionnement est donc légèrement différent:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;côté CSS, une tâche grunt surveille les fichiers less, et les recompile à chaque modification&lt;/li&gt;
+&lt;li&gt;côté Javascript, ce n&amp;#39;est pas le fichier compilé qui est inclus dans la page, mais les différents fichiers, dans l&amp;#39;ordre où ils seront compilés. La seul véritable différence qu&amp;#39;il peut y avoir lors de la mise en production vient de la concaténation/minification, qui doit être testée avant un déploiement.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Evidemment, bien que Grunt et Bower nous ait apporté beaucoup, tout n&amp;#39;est pas rose. Configurer des tâches Grunt est particulièrement désagréable, car la syntaxe utilisée n&amp;#39;est pas pratique. De plus, la courbe d&amp;#39;apprentissage n&amp;#39;est pas aussi rapide que nous le pensions au départ. Mais une fois mis en place, cela nous a permis d&amp;#39;uniformiser la conception et le déploiement des applications.&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Les soirées Dev</title>
+        <link>/soiree-dev-2014-03-25/</link>
+        <pubDate>Tue, 25 Mar 2014 00:00:00 +0100</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Pour démarrer ce blog technique, quoi de mieux qu&amp;#39;un article qui ne parle pas de technique ? Je vais plutôt commencer par vous parler d&amp;#39;un des éléments de notre &lt;strong&gt;culture d&amp;#39;entreprise&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;La particularité de notre équipe chez Evaneos.com, est d&amp;#39;être constituée de &lt;em&gt;passionnés&lt;/em&gt;. Des passionnés par l&amp;#39;univers du web, et de tout ce qui gravite autour : qu&amp;#39;il s&amp;#39;agisse d&amp;#39;une librairie javascript intéressante, d&amp;#39;une nouveauté dans un language backend, des nouvelles idées en matière d&amp;#39;ergonomie grâce à la montée de web mobile, d&amp;#39;un point de détail de génie logiciel qui commence à trouver sa place dans le web... la liste pourrait continuer longtemps, mais tous les aspects de la technique et de ce que cela permet de réaliser sont, pour nous, très motivants.&lt;/p&gt;
+
+&lt;p&gt;Ainsi, nous faisons tous, chacun de notre côté, pas mal de veille pour nous tenir à jour (ou tenter de l&amp;#39;être), mais il n&amp;#39;est pas toujours facile de l&amp;#39;être. Le web étant en continuelle évolution, il est difficile de jouer avec tout ce que l&amp;#39;on souhaiterait. Notre temps étant limité, ce n&amp;#39;est pas non plus forcément souhaitable, alors on a cherché un compromis.&lt;/p&gt;
+
+&lt;p&gt;Une solution que nous avons trouvé, c&amp;#39;est d&amp;#39;organiser des &lt;strong&gt;soirées dev&lt;/strong&gt;. L&amp;#39;idée ? Rester tard un soir, commander des pizzas, et passer la soirée à bricoler un bout de code qu&amp;#39;on a envie de faire depuis un moment, mais qui, pour diverses raisons, n&amp;#39;a jamais pris réalité. Seul ou en groupe, en rapport avec ce qu&amp;#39;on fait au travail ou non, sur un langage, une librairie, un applicatif... l&amp;#39;important c&amp;#39;est de s&amp;#39;amuser.&lt;/p&gt;
+
+&lt;p&gt;Voici un petit éventail de ce qui a été bricolé lors de la dernière soirée dev :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Mise en place d&amp;#39;un serveur local &lt;a href=&quot;http://openstreetmap.fr/&quot;&gt;Open Street maps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Découverte d&amp;#39;&lt;a href=&quot;www.elasticsearch.org&quot;&gt;Elasticsearch&lt;/a&gt; autour de la conception d&amp;#39;une petite appli de recherche de films&lt;/li&gt;
+&lt;li&gt;Bricolage autour de &lt;a href=&quot;http://logstash.net/&quot;&gt;logstash&lt;/a&gt; pour avoir un moteur de recherche dans nos logs basé sur Elasticsearch et Kibana. Pour ceux que ça intéresse, voici un &lt;a href=&quot;http://linuxfr.org/news/gestion-des-logs-avec-logstash-elasticsearch-kibana&quot;&gt;point de départ possible&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Découverte de &lt;a href=&quot;http://sailsjs.org/&quot;&gt;SailsJS&lt;/a&gt; via le bricolage d&amp;#39;une petit appli. SailsJS est un framework javascript MVC basé sur du nodeJS.&lt;/li&gt;
+&lt;li&gt;Essai de mise en corrélation de titres d&amp;#39;articles de journaux, pour essayer de déterminer qui reprend ses informations chez les autres.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Comme vous pouvez le voir, les mots qui reviennent sont &amp;quot;essai&amp;quot;, &amp;quot;bricolage&amp;quot;, &amp;quot;découverte&amp;quot;... On ne cherche pas à concevoir des applications finies, ce qui est plutôt difficile quand on ne connait pas une technologie. On cherche plutôt à découvrir la technologie en question, s&amp;#39;ouvrir l&amp;#39;esprit à de nouveaux outils, et expérimenter. Tout ne marche pas comme prévu, par exemple nous avons eu de nombreux problèmes de compatibilité avec le serveur OpenStreetMaps, j&amp;#39;ai pu voir que mettre en place et requêter Elasticsearch est loin d&amp;#39;être trivial en une soirée... En fait, cette phase de découverte permet de prendre conscience des possibilités et des limitations de nouveaux outils, que ce soit pour s&amp;#39;en servir, ou au contraire pour les rayer de la liste des possibles.&lt;/p&gt;
+
+&lt;p&gt;Ha, et se réunir pour faire les geeks ajoute un côté ludique &lt;strong&gt;très&lt;/strong&gt; motivant.&lt;/p&gt;
+
+&lt;p&gt;Si vous n&amp;#39;organisez pas déjà des activités de ce genre avec votre équipe, pensez-y !&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Lancement du blog technique Evaneos.com</title>
+        <link>/lancement-du-blog-technique-evaneos-com-2014-03-24/</link>
+        <pubDate>Mon, 24 Mar 2014 00:00:00 +0100</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Bonjour et bienvenue sur le blog technique d&amp;#39;&lt;a href=&quot;http://www.evaneos.com&quot;&gt;Evaneos.com&lt;/a&gt; !&lt;/p&gt;
+
+&lt;p&gt;Dans ce blog, à une fréquence régulière, vous pourrez trouver des articles sur les différents problèmes techniques auxquels nous sommes confrontés, ainsi que des retours d&amp;#39;expériences sur les technologies que nous utilisons.&lt;/p&gt;
+
+&lt;h2&gt;Ce que nous faisons&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.evaneos.com&quot;&gt;Evaneos.com&lt;/a&gt; est une plateforme de mise en relation entre des personnes qui souhaitent partir en voyage, et des agents locaux de par le monde. Ces agents, tous experts sur leur destinationaident les futurs voyageurs à concevoir le voyage de leur rêve, entièrement sur mesure et adapté à leurs envies, besoins et contraintes.&lt;/p&gt;
+
+&lt;h3&gt;Les enjeux&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;pour les voyageurs&lt;/strong&gt; : leur permettre de trouver le plus facilement possible la destination, l&amp;#39;itinéraire et l&amp;#39;agent de leurs rêves. Apporter aux voyageurs des garanties fortes additionnelles (paiement, annulation, etc) ;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;pour les agents&lt;/strong&gt; : de trouver des voyageurs vraiment intéressés par un voyage, et de faciliter au maximum la communication et le suivi tout au long des différentes étapes des projets de voyage ;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;pour nos équipes&lt;/strong&gt; : de rendre la plus simple possible la gestion et le suivi des agents avec qui nous travaillons : recrutement d&amp;#39;un nouvel agent, ajout de nouvelles idées de voyage, suivi des performances, facturation, la présence sur plusieurs marchés (français, espagnol, allemand, italien à ce jour)...&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Techniquement&lt;/h3&gt;
+
+&lt;p&gt;D&amp;#39;un point de vue informatique, cela se traduit par la conception et la réalisation de nombreux outils pour chacune de ces phases de la vie du voyage ou d&amp;#39;une agence locale.&lt;/p&gt;
+
+&lt;p&gt;Ainsi, notre quotidien en plein de mots clés, c&amp;#39;est :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Côté &lt;strong&gt;backend&lt;/strong&gt; : php5, Zend, Symfony2/stackPHP selon les projets, postgresSQL&lt;/li&gt;
+&lt;li&gt;Côté &lt;strong&gt;front&lt;/strong&gt; : angularJS, grunt, less, responsive, ...&lt;/li&gt;
+&lt;li&gt;Côté &lt;strong&gt;applicatif&lt;/strong&gt; : nginx, redis, varnish, memcached, ...&lt;/li&gt;
+&lt;li&gt;Côté &lt;strong&gt;devops&lt;/strong&gt; : git, de l&amp;#39;intégration continue, des tests unitaires/fonctionnels&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nous sommes constamment poussés à expérimenter des outils récents et à découvrir de nouvelles choses que nous aimerions partager. Prêts pour l&amp;#39;aventure ?&lt;/p&gt;
+</description>
+      </item>
+    
 
   </channel>
 </rss>
