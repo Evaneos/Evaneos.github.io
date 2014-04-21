@@ -323,19 +323,20 @@ article.page header .metas {
 .content ol {
   list-style-type: decimal;
 }
-.content .highlight {
-  background: #efefef;
-}
 .content .highlight pre {
-  font-family: monospace;
-  padding: 10px 20px;
   margin-bottom: 0;
   overflow: auto;
 }
 .content .highlight pre code {
   display: block;
   font-size: .9em;
-  line-height: 1.8em;
+  line-height: 1.6em;
+}
+
+.content code {
+  font-family: monospace;
+  background: #efefef;
+  padding: 5px 10px;
 }
 .post-archive h2 {
   font-family: 'Raleway', Comic, serif;
