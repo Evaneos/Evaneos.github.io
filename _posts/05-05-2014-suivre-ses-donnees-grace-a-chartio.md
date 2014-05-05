@@ -18,7 +18,7 @@ Nous avons essayé deux d'entre eux :
 
 - **[BIME Analytics][1] :** cette start-up française, dont le siège se situe à Montpellier, a levé 3 millions d'euros en novembre 2013 pour se développer. Nous avons profité de l'offre d'essai gratuite, et avons ainsi pu mesurer les fonctionnalités proposées.
 BIME offre la possibilité de stocker directement ses données sur le *cloud*  grâce à *Déjà vu*, dans la limite de 250.000 lignes. Une fois les bases connectées, il est nécessaire de construire les jointures entre les bases et d'écrire une requête SQL pour ne sélectionner que les colonnes qui nous intéressent. Cette étape franchie, il est possible de faire à peu près tout ce que l'on souhaite : BIME met à disposition tous les formats graphiques imaginables (par exemple un planishpère, qui permet d'afficher nos données sur une carte Google Map), nous autorise de multiples filtres, le choix des couleurs, du format... Tout cela se fait par *drag-and-drop*. Par contre, il n'est plus possible à ce stade de retrouver le nom de la table de laquelle une colonne a été issue. Ainsi, deux encarts pourront s'appeler "id" sans que l'on sache à quoi ils font référence. (Nous avons signalé ce problème lors de l'essai, et il a été remonté aux ingénieurs de BIME)
-Les graphiques créés sont ensuite aposés sur des tableaux de bords. Ils sont très maléables, ont peut y ajouter du texte, des images... Il est possible de les partager publiquement, où au contraire d'en restreindre l'accès.
+Les graphiques créés sont ensuite aposés sur des tableaux de bords. Ils sont très maléables, ont peut y ajouter du texte, des images... Il est possible de les partager publiquement, ou au contraire d'en restreindre l'accès.
 Pour résumer : une "machine de guerre" qui demande un certain coût au démarrage, pour la mise en place et la prise en main.
 
 - **[Chartio][2] :** basé à San Franciso, Chartio est plus jeune que BIME et a levé 2,2 millions de dollars en janvier 2014. Leur jeunesse fait qu'ils sont très réactifs et à l'écoute de toute proposition d'amélioration.
@@ -26,11 +26,11 @@ Au niveau de la connexion, Chartio vient taper directement dans notre base de do
 Les possibilités d'affichage sont moins larges que BIME mais suffisantes (courbes, histogrammes, KPI...).
 
 
-**Pourquoi Chartio plutôt que BIME ?**
-Il faut savoir tout d'abord que les deux solutions nous étaient proposées à des tarifs à peu près équivalents (Chartio propose un tarif basé sur le nombre de comptes, tandis que BIME propose simplement un tarif mensuel). Si nous avons retenu Chartio, c'est essentiellement parce qu'il offre la possibilité à n'importe qui d'effectuer des requêtes SQL et de les mettre en page, à partir du moment où l'on connaît la signification des tables.
+**Pourquoi Chartio plutôt que BIME ?**  
+Il faut savoir tout d'abord que les deux solutions nous étaient proposées à des tarifs à peu près équivalents (Chartio propose un tarif basé sur le nombre de comptes, tandis que BIME propose simplement un abonnement mensuel). Si nous avons retenu Chartio, c'est essentiellement parce qu'il offre la possibilité à n'importe qui d'effectuer des requêtes SQL et de les mettre en page, à partir du moment où l'on connaît la signification des tables.
 De plus, leur réactivité et amélioration continue a fait pencher la balance en leur faveur.
 
-## Fonctionnement de Chartio
+## Fonctionnement de Chartio  
 
 ### Data Sources
 
@@ -38,7 +38,7 @@ Nous l'avons dit, Chartio se connecte directement à nos bases de données (MySQ
 
 ### Dashboards
 
-Chartio est organisé en tableaux de bords, sur lequel on peut ajouter graphiques et textes, et les disposer à notre guise. On peut programmer l'envoi de rapport au format pdf à heure fixe.
+Chartio est organisé en tableaux de bords, sur lequel on peut ajouter graphiques et textes, et les disposer à notre guise. On peut programmer l'envoi de rapports au format pdf à heure fixe.
 Il est possible d'ajouter des filtres globaux sur un dashboard, qui seront appliqués à l'ensemble des *charts* présents sur celui-ci. Ce peut être des filtres de date, qui sélectionneront entre quelles dates les données doivent être retenues.
 
 ### Charts
