@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Mon, 05 May 2014 11:05:26 +0200</pubDate>
-    <lastBuildDate>Mon, 05 May 2014 11:05:26 +0200</lastBuildDate>
+    <pubDate>Mon, 05 May 2014 11:17:00 +0200</pubDate>
+    <lastBuildDate>Mon, 05 May 2014 11:17:00 +0200</lastBuildDate>
 
     
       <item>
@@ -28,15 +28,15 @@ Nous avons essayé deux d&amp;#39;entre eux :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://fr.bimeanalytics.com/&quot;&gt;BIME Analytics&lt;/a&gt; :&lt;/strong&gt; cette start-up française, dont le siège se situe à Montpellier, a levé 3 millions d&amp;#39;euros en novembre 2013 pour se développer. Nous avons profité de l&amp;#39;offre d&amp;#39;essai gratuite, et avons ainsi pu mesurer les fonctionnalités proposées.
 BIME offre la possibilité de stocker directement ses données sur le &lt;em&gt;cloud&lt;/em&gt;  grâce à &lt;em&gt;Déjà vu&lt;/em&gt;, dans la limite de 250.000 lignes. Une fois les bases connectées, il est nécessaire de construire les jointures entre les bases et d&amp;#39;écrire une requête SQL pour ne sélectionner que les colonnes qui nous intéressent. Cette étape franchie, il est possible de faire à peu près tout ce que l&amp;#39;on souhaite : BIME met à disposition tous les formats graphiques imaginables (par exemple un planishpère, qui permet d&amp;#39;afficher nos données sur une carte Google Map), nous autorise de multiples filtres, le choix des couleurs, du format... Tout cela se fait par &lt;em&gt;drag-and-drop&lt;/em&gt;. Par contre, il n&amp;#39;est plus possible à ce stade de retrouver le nom de la table de laquelle une colonne a été issue. Ainsi, deux encarts pourront s&amp;#39;appeler &amp;quot;id&amp;quot; sans que l&amp;#39;on sache à quoi ils font référence. (Nous avons signalé ce problème lors de l&amp;#39;essai, et il a été remonté aux ingénieurs de BIME)
-Les graphiques créés sont ensuite aposés sur des tableaux de bords. Ils sont très maléables, ont peut y ajouter du texte, des images... Il est possible de les partager publiquement, où au contraire d&amp;#39;en restreindre l&amp;#39;accès.
+Les graphiques créés sont ensuite aposés sur des tableaux de bords. Ils sont très maléables, ont peut y ajouter du texte, des images... Il est possible de les partager publiquement, ou au contraire d&amp;#39;en restreindre l&amp;#39;accès.
 Pour résumer : une &amp;quot;machine de guerre&amp;quot; qui demande un certain coût au démarrage, pour la mise en place et la prise en main.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://chartio.com/&quot;&gt;Chartio&lt;/a&gt; :&lt;/strong&gt; basé à San Franciso, Chartio est plus jeune que BIME et a levé 2,2 millions de dollars en janvier 2014. Leur jeunesse fait qu&amp;#39;ils sont très réactifs et à l&amp;#39;écoute de toute proposition d&amp;#39;amélioration.
 Au niveau de la connexion, Chartio vient taper directement dans notre base de données via un tunnel SSH. Lors de la création d&amp;#39;un graphe, toutes les colonnes sont sélectionnables et l&amp;#39;on a la possibilité d&amp;#39;effectuer des requêtes soit en &lt;em&gt;drag-and-drop&lt;/em&gt;, soit en entrant directement son code SQL. L&amp;#39;inconvénient majeur est qu&amp;#39;on ne peut joindre deux bases de données différentes entre elles. On peut par contre, une fois les données sélectionnées, effectuer des calculs sur celles-ci (et ainsi par exemple sommer deux chiffres provenants de deux bases distinctes).
 Les possibilités d&amp;#39;affichage sont moins larges que BIME mais suffisantes (courbes, histogrammes, KPI...).&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;Pourquoi Chartio plutôt que BIME ?&lt;/strong&gt;
-Il faut savoir tout d&amp;#39;abord que les deux solutions nous étaient proposées à des tarifs à peu près équivalents (Chartio propose un tarif basé sur le nombre de comptes, tandis que BIME propose simplement un tarif mensuel). Si nous avons retenu Chartio, c&amp;#39;est essentiellement parce qu&amp;#39;il offre la possibilité à n&amp;#39;importe qui d&amp;#39;effectuer des requêtes SQL et de les mettre en page, à partir du moment où l&amp;#39;on connaît la signification des tables.
+&lt;p&gt;&lt;strong&gt;Pourquoi Chartio plutôt que BIME ?&lt;/strong&gt;&lt;br&gt;
+Il faut savoir tout d&amp;#39;abord que les deux solutions nous étaient proposées à des tarifs à peu près équivalents (Chartio propose un tarif basé sur le nombre de comptes, tandis que BIME propose simplement un abonnement mensuel). Si nous avons retenu Chartio, c&amp;#39;est essentiellement parce qu&amp;#39;il offre la possibilité à n&amp;#39;importe qui d&amp;#39;effectuer des requêtes SQL et de les mettre en page, à partir du moment où l&amp;#39;on connaît la signification des tables.
 De plus, leur réactivité et amélioration continue a fait pencher la balance en leur faveur.&lt;/p&gt;
 
 &lt;h2&gt;Fonctionnement de Chartio&lt;/h2&gt;
@@ -47,7 +47,7 @@ De plus, leur réactivité et amélioration continue a fait pencher la balance e
 
 &lt;h3&gt;Dashboards&lt;/h3&gt;
 
-&lt;p&gt;Chartio est organisé en tableaux de bords, sur lequel on peut ajouter graphiques et textes, et les disposer à notre guise. On peut programmer l&amp;#39;envoi de rapport au format pdf à heure fixe.
+&lt;p&gt;Chartio est organisé en tableaux de bords, sur lequel on peut ajouter graphiques et textes, et les disposer à notre guise. On peut programmer l&amp;#39;envoi de rapports au format pdf à heure fixe.
 Il est possible d&amp;#39;ajouter des filtres globaux sur un dashboard, qui seront appliqués à l&amp;#39;ensemble des &lt;em&gt;charts&lt;/em&gt; présents sur celui-ci. Ce peut être des filtres de date, qui sélectionneront entre quelles dates les données doivent être retenues.&lt;/p&gt;
 
 &lt;h3&gt;Charts&lt;/h3&gt;

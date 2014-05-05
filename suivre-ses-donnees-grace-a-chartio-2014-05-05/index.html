@@ -75,15 +75,15 @@ Nous avons essayé deux d&#39;entre eux :</p>
 <ul>
 <li><p><strong><a href="http://fr.bimeanalytics.com/">BIME Analytics</a> :</strong> cette start-up française, dont le siège se situe à Montpellier, a levé 3 millions d&#39;euros en novembre 2013 pour se développer. Nous avons profité de l&#39;offre d&#39;essai gratuite, et avons ainsi pu mesurer les fonctionnalités proposées.
 BIME offre la possibilité de stocker directement ses données sur le <em>cloud</em>  grâce à <em>Déjà vu</em>, dans la limite de 250.000 lignes. Une fois les bases connectées, il est nécessaire de construire les jointures entre les bases et d&#39;écrire une requête SQL pour ne sélectionner que les colonnes qui nous intéressent. Cette étape franchie, il est possible de faire à peu près tout ce que l&#39;on souhaite : BIME met à disposition tous les formats graphiques imaginables (par exemple un planishpère, qui permet d&#39;afficher nos données sur une carte Google Map), nous autorise de multiples filtres, le choix des couleurs, du format... Tout cela se fait par <em>drag-and-drop</em>. Par contre, il n&#39;est plus possible à ce stade de retrouver le nom de la table de laquelle une colonne a été issue. Ainsi, deux encarts pourront s&#39;appeler &quot;id&quot; sans que l&#39;on sache à quoi ils font référence. (Nous avons signalé ce problème lors de l&#39;essai, et il a été remonté aux ingénieurs de BIME)
-Les graphiques créés sont ensuite aposés sur des tableaux de bords. Ils sont très maléables, ont peut y ajouter du texte, des images... Il est possible de les partager publiquement, où au contraire d&#39;en restreindre l&#39;accès.
+Les graphiques créés sont ensuite aposés sur des tableaux de bords. Ils sont très maléables, ont peut y ajouter du texte, des images... Il est possible de les partager publiquement, ou au contraire d&#39;en restreindre l&#39;accès.
 Pour résumer : une &quot;machine de guerre&quot; qui demande un certain coût au démarrage, pour la mise en place et la prise en main.</p></li>
 <li><p><strong><a href="https://chartio.com/">Chartio</a> :</strong> basé à San Franciso, Chartio est plus jeune que BIME et a levé 2,2 millions de dollars en janvier 2014. Leur jeunesse fait qu&#39;ils sont très réactifs et à l&#39;écoute de toute proposition d&#39;amélioration.
 Au niveau de la connexion, Chartio vient taper directement dans notre base de données via un tunnel SSH. Lors de la création d&#39;un graphe, toutes les colonnes sont sélectionnables et l&#39;on a la possibilité d&#39;effectuer des requêtes soit en <em>drag-and-drop</em>, soit en entrant directement son code SQL. L&#39;inconvénient majeur est qu&#39;on ne peut joindre deux bases de données différentes entre elles. On peut par contre, une fois les données sélectionnées, effectuer des calculs sur celles-ci (et ainsi par exemple sommer deux chiffres provenants de deux bases distinctes).
 Les possibilités d&#39;affichage sont moins larges que BIME mais suffisantes (courbes, histogrammes, KPI...).</p></li>
 </ul>
 
-<p><strong>Pourquoi Chartio plutôt que BIME ?</strong>
-Il faut savoir tout d&#39;abord que les deux solutions nous étaient proposées à des tarifs à peu près équivalents (Chartio propose un tarif basé sur le nombre de comptes, tandis que BIME propose simplement un tarif mensuel). Si nous avons retenu Chartio, c&#39;est essentiellement parce qu&#39;il offre la possibilité à n&#39;importe qui d&#39;effectuer des requêtes SQL et de les mettre en page, à partir du moment où l&#39;on connaît la signification des tables.
+<p><strong>Pourquoi Chartio plutôt que BIME ?</strong><br>
+Il faut savoir tout d&#39;abord que les deux solutions nous étaient proposées à des tarifs à peu près équivalents (Chartio propose un tarif basé sur le nombre de comptes, tandis que BIME propose simplement un abonnement mensuel). Si nous avons retenu Chartio, c&#39;est essentiellement parce qu&#39;il offre la possibilité à n&#39;importe qui d&#39;effectuer des requêtes SQL et de les mettre en page, à partir du moment où l&#39;on connaît la signification des tables.
 De plus, leur réactivité et amélioration continue a fait pencher la balance en leur faveur.</p>
 
 <h2>Fonctionnement de Chartio</h2>
@@ -94,7 +94,7 @@ De plus, leur réactivité et amélioration continue a fait pencher la balance e
 
 <h3>Dashboards</h3>
 
-<p>Chartio est organisé en tableaux de bords, sur lequel on peut ajouter graphiques et textes, et les disposer à notre guise. On peut programmer l&#39;envoi de rapport au format pdf à heure fixe.
+<p>Chartio est organisé en tableaux de bords, sur lequel on peut ajouter graphiques et textes, et les disposer à notre guise. On peut programmer l&#39;envoi de rapports au format pdf à heure fixe.
 Il est possible d&#39;ajouter des filtres globaux sur un dashboard, qui seront appliqués à l&#39;ensemble des <em>charts</em> présents sur celui-ci. Ce peut être des filtres de date, qui sélectionneront entre quelles dates les données doivent être retenues.</p>
 
 <h3>Charts</h3>
