@@ -169,7 +169,7 @@ Puis rajouter dans la configuration de karma:
         ]
 ```
 
-A noter: Karma utiliser socket.io, et sur les anciens navigateurs il vaut mieux avoir flash installé.
+A noter: Karma utilise socket.io, et sur les anciens navigateurs il vaut mieux avoir flash installé.
 
 ## Testling
 
