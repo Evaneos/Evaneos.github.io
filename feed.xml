@@ -1,0 +1,463 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog technique Evaneos.com</title>
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
+    <language>en-us</language>
+    <pubDate>Mon, 05 May 2014 11:17:00 +0200</pubDate>
+    <lastBuildDate>Mon, 05 May 2014 11:17:00 +0200</lastBuildDate>
+
+    
+      <item>
+        <title>Suivre ses données grâce à Chart.io</title>
+        <link>/suivre-ses-donnees-grace-a-chartio-2014-05-05/</link>
+        <pubDate>Mon, 05 May 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;h2&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Chart.io, ou Chartio, est un site permettant d&amp;#39;effectuer des requêtes sur diverses bases de données de façon simplifiée, et de les afficher sous forme graphique.
+Nous avons choisi cet outil afin de suivre l&amp;#39;évolution de nos données. Nous allons dans cet article vous en expliquer les raisons ainsi que le fonctionnement de Chartio.&lt;/p&gt;
+
+&lt;h2&gt;Concurrence&lt;/h2&gt;
+
+&lt;p&gt;Ces derniers mois plusieurs outils de &lt;em&gt;Data Analysis&lt;/em&gt; ont émergé et levé des fonds pour se développer. On peut citer notamment : &lt;strong&gt;BIME Analytics, Birst, DataHero, Datameer&lt;/strong&gt; ou &lt;strong&gt;Chartio&lt;/strong&gt;.
+Nous avons essayé deux d&amp;#39;entre eux :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://fr.bimeanalytics.com/&quot;&gt;BIME Analytics&lt;/a&gt; :&lt;/strong&gt; cette start-up française, dont le siège se situe à Montpellier, a levé 3 millions d&amp;#39;euros en novembre 2013 pour se développer. Nous avons profité de l&amp;#39;offre d&amp;#39;essai gratuite, et avons ainsi pu mesurer les fonctionnalités proposées.
+BIME offre la possibilité de stocker directement ses données sur le &lt;em&gt;cloud&lt;/em&gt;  grâce à &lt;em&gt;Déjà vu&lt;/em&gt;, dans la limite de 250.000 lignes. Une fois les bases connectées, il est nécessaire de construire les jointures entre les bases et d&amp;#39;écrire une requête SQL pour ne sélectionner que les colonnes qui nous intéressent. Cette étape franchie, il est possible de faire à peu près tout ce que l&amp;#39;on souhaite : BIME met à disposition tous les formats graphiques imaginables (par exemple un planishpère, qui permet d&amp;#39;afficher nos données sur une carte Google Map), nous autorise de multiples filtres, le choix des couleurs, du format... Tout cela se fait par &lt;em&gt;drag-and-drop&lt;/em&gt;. Par contre, il n&amp;#39;est plus possible à ce stade de retrouver le nom de la table de laquelle une colonne a été issue. Ainsi, deux encarts pourront s&amp;#39;appeler &amp;quot;id&amp;quot; sans que l&amp;#39;on sache à quoi ils font référence. (Nous avons signalé ce problème lors de l&amp;#39;essai, et il a été remonté aux ingénieurs de BIME)
+Les graphiques créés sont ensuite aposés sur des tableaux de bords. Ils sont très maléables, ont peut y ajouter du texte, des images... Il est possible de les partager publiquement, ou au contraire d&amp;#39;en restreindre l&amp;#39;accès.
+Pour résumer : une &amp;quot;machine de guerre&amp;quot; qui demande un certain coût au démarrage, pour la mise en place et la prise en main.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://chartio.com/&quot;&gt;Chartio&lt;/a&gt; :&lt;/strong&gt; basé à San Franciso, Chartio est plus jeune que BIME et a levé 2,2 millions de dollars en janvier 2014. Leur jeunesse fait qu&amp;#39;ils sont très réactifs et à l&amp;#39;écoute de toute proposition d&amp;#39;amélioration.
+Au niveau de la connexion, Chartio vient taper directement dans notre base de données via un tunnel SSH. Lors de la création d&amp;#39;un graphe, toutes les colonnes sont sélectionnables et l&amp;#39;on a la possibilité d&amp;#39;effectuer des requêtes soit en &lt;em&gt;drag-and-drop&lt;/em&gt;, soit en entrant directement son code SQL. L&amp;#39;inconvénient majeur est qu&amp;#39;on ne peut joindre deux bases de données différentes entre elles. On peut par contre, une fois les données sélectionnées, effectuer des calculs sur celles-ci (et ainsi par exemple sommer deux chiffres provenants de deux bases distinctes).
+Les possibilités d&amp;#39;affichage sont moins larges que BIME mais suffisantes (courbes, histogrammes, KPI...).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Pourquoi Chartio plutôt que BIME ?&lt;/strong&gt;&lt;br&gt;
+Il faut savoir tout d&amp;#39;abord que les deux solutions nous étaient proposées à des tarifs à peu près équivalents (Chartio propose un tarif basé sur le nombre de comptes, tandis que BIME propose simplement un abonnement mensuel). Si nous avons retenu Chartio, c&amp;#39;est essentiellement parce qu&amp;#39;il offre la possibilité à n&amp;#39;importe qui d&amp;#39;effectuer des requêtes SQL et de les mettre en page, à partir du moment où l&amp;#39;on connaît la signification des tables.
+De plus, leur réactivité et amélioration continue a fait pencher la balance en leur faveur.&lt;/p&gt;
+
+&lt;h2&gt;Fonctionnement de Chartio&lt;/h2&gt;
+
+&lt;h3&gt;Data Sources&lt;/h3&gt;
+
+&lt;p&gt;Nous l&amp;#39;avons dit, Chartio se connecte directement à nos bases de données (MySQL, PostgreSQL, Oracle...). Mais ce n&amp;#39;est pas tout : il est aussi possible de connecter ses données Google Analytics, ou encore ses clouds Amazon. On peut également ajouter directement nos données Excel au format .CSV.&lt;/p&gt;
+
+&lt;h3&gt;Dashboards&lt;/h3&gt;
+
+&lt;p&gt;Chartio est organisé en tableaux de bords, sur lequel on peut ajouter graphiques et textes, et les disposer à notre guise. On peut programmer l&amp;#39;envoi de rapports au format pdf à heure fixe.
+Il est possible d&amp;#39;ajouter des filtres globaux sur un dashboard, qui seront appliqués à l&amp;#39;ensemble des &lt;em&gt;charts&lt;/em&gt; présents sur celui-ci. Ce peut être des filtres de date, qui sélectionneront entre quelles dates les données doivent être retenues.&lt;/p&gt;
+
+&lt;h3&gt;Charts&lt;/h3&gt;
+
+&lt;p&gt;Les &lt;em&gt;charts&lt;/em&gt; sont les éléments présents sur les &lt;em&gt;dahsboards&lt;/em&gt; : tableaux, courbes, histogrammes... 
+La création d&amp;#39;un &lt;em&gt;chart&lt;/em&gt; peut se faire de deux manières : en &lt;em&gt;drag-and-drop&lt;/em&gt; ou bien en tapant directement sa requête SQL. La méthode &lt;em&gt;drag-and-drop&lt;/em&gt; est très intuitive : on sélectionne ce que l&amp;#39;on mesure (&amp;quot;l&amp;#39;ordonnée&amp;quot;), selon quoi (&amp;quot;l&amp;#39;abscisse&amp;quot;, bien souvent la date), et selon quels filtres.
+Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérations sur elles avant de les afficher. Il est possible d&amp;#39;exporter les résultats au format .CSV.&lt;/p&gt;
+
+&lt;h2&gt;Le mot de la fin&lt;/h2&gt;
+
+&lt;p&gt;En conclusion, Chartio nous est utile pour suivre nos données quotidiennement et croiser les données de nos bases avec Analytics. Les filtres globaux nous sont particulièrement utiles pour sélectionner notamment le marché concerné. Nous avons soumis plusieurs requêtes d&amp;#39;amélioration au support, toujours prompt à répondre et réceptif à nos propositions.&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Premiers pas dans les tests en javascript</title>
+        <link>/premiers-pas-dans-les-tests-javascript-2014-04-22/</link>
+        <pubDate>Tue, 22 Apr 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;h2&gt;Contexte&lt;/h2&gt;
+
+&lt;p&gt;Les tests sont importants pour s&amp;#39;assurer que l&amp;#39;application est toujours en état de fonctionner. C&amp;#39;est aussi rassurant pour le développeur avant de faire sa mise en prod de vérifier que les fonctionnalités marchent encore. L&amp;#39;objectif de ce billet et d&amp;#39;avoir un apercu de quelques outils permettant de tester du javascript coté navigateur, jusqu&amp;#39;au tests sur IE dans une machine virtuelle.&lt;/p&gt;
+
+&lt;h2&gt;Le fichier de test&lt;/h2&gt;
+
+&lt;p&gt;Il existe de nombreuses libraries pour faire des tests unitaires en javascript, à commencer par la &lt;a href=&quot;http://nodejs.org/api/assert.html&quot;&gt;librarie native de nodejs&lt;/a&gt;. Mon choix s&amp;#39;est d&amp;#39;abord porté sur &lt;a href=&quot;http://chaijs.com/&quot;&gt;Chai&lt;/a&gt;, style TDD assert, avant de me rendre compte qu&amp;#39;il n&amp;#39;était pas compatible avec les anciennes versions d&amp;#39;IE et j&amp;#39;ai donc exploré &lt;a href=&quot;https://github.com/rowanmanning/proclaim&quot;&gt;Proclaim&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Installation :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev proclaim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Voici donc ci-dessous un test tout simple :&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;tests/test.js&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;proclaim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;basic DOM test&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;div&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;myDiv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;myEl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;myDiv&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;myEl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;removeChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;myEl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Mocha&lt;/h3&gt;
+
+&lt;p&gt;Ensuite, nous avons besoin d&amp;#39;une librairie qui encapsule ces tests et les lancent. &lt;a href=&quot;http://visionmedia.github.io/mocha/&quot;&gt;Mocha&lt;/a&gt; est l&amp;#39;une des plus connues.&lt;/p&gt;
+
+&lt;p&gt;Installation :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev mocha
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On peut lancer nos tests avec un fichier html:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;tests.html&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Mocha Tests&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;node_modules/mocha/mocha.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;mocha&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;node_modules/mocha/mocha.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;node_modules/proclaim/lib/proclaim.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;proclaim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ui&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tdd&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tests/test.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;checkLeaks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Karma&lt;/h3&gt;
+
+&lt;p&gt;Karma permet de lancer les tests simultanément dans plusieurs navigateurs. Il faut installer les plugins correspondant aux navigateurs, créer un fichier de configuration, et on a le résultat dans la console.&lt;/p&gt;
+
+&lt;p&gt;Installation :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo npm install -g karma-cli &amp;amp;&amp;amp; npm install --save-dev karma karma-mocha karma-proclaim karma-chrome-launcher karma-firefox-launcher
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;karam.conf.js&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// base path, that will be used to resolve files and exclude&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;basePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+        &lt;span class=&quot;nx&quot;&gt;frameworks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;mocha&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;proclaim&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+        &lt;span class=&quot;nx&quot;&gt;browsers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;Firefox&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;Chrome&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+        &lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;mocha.conf.js&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;tests/test.js&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// test results reporter to use&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// possible values: &amp;#39;dots&amp;#39;, &amp;#39;progress&amp;#39;, &amp;#39;junit&amp;#39;, &amp;#39;growl&amp;#39;, &amp;#39;coverage&amp;#39;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;reporters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;progress&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+
+
+        &lt;span class=&quot;c1&quot;&gt;// enable / disable colors in the output (reporters and logs)&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;colors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+
+        &lt;span class=&quot;c1&quot;&gt;// level of logging&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;logLevel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LOG_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+
+        &lt;span class=&quot;c1&quot;&gt;// enable / disable watching file and executing tests whenever any file changes&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;autoWatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;mocha.conf.js&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ui&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tdd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;checkLeaks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis lancer avec &lt;code&gt;karma start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Karma et IE&lt;/h2&gt;
+
+&lt;p&gt;Il est possible de lancer ces tests sur IE via une machine virtuelle. Pour ca, il faut d&amp;#39;abord installer &lt;a href=&quot;https://github.com/xdissent/ievms&quot;&gt;ievms&lt;/a&gt; qui se charge de créer des marchines virtuelles dans VirtualBox.&lt;/p&gt;
+
+&lt;p&gt;De retour sur le projet, il faut installer un nouveau plugin:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev karma-ievms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Puis rajouter dans la configuration de karma:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;//...
+
+        browsers: [
+            &amp;#39;Firefox&amp;#39;,
+            &amp;#39;Chrome&amp;#39;,
+            &amp;#39;IE6 - WinXP&amp;#39;,
+            &amp;#39;IE7 - WinXP&amp;#39;,
+            &amp;#39;IE8 - WinXP&amp;#39;,
+            &amp;#39;IE9 - Win7&amp;#39;,
+            &amp;#39;IE10 - Win7&amp;#39;,
+            &amp;#39;IE11 - Win7&amp;#39;
+        ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A noter: Karma utiliser socket.io, et sur les anciens navigateurs il vaut mieux avoir flash installé.&lt;/p&gt;
+
+&lt;h2&gt;Testling&lt;/h2&gt;
+
+&lt;p&gt;Pour terminer, on peut utiliser &lt;a href=&quot;https://ci.testling.com/&quot;&gt;Testling&lt;/a&gt; pour mettre en place ces tests à chaque push dans github et avoir un badge indiquant les navigateurs testés.&lt;/p&gt;
+
+&lt;p&gt;Il suffit de &lt;a href=&quot;https://ci.testling.com/guide/quick_start#configuring-the-web-hook&quot;&gt;configurer le web hook&lt;/a&gt; puis de modifier le fichier &lt;code&gt;package.json&lt;/code&gt; :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;json language-json&quot; data-lang=&quot;json&quot;&gt;  &lt;span class=&quot;s2&quot;&gt;&amp;quot;testling&amp;quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;quot;html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tests.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;quot;files&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;test/*.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;quot;browsers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;ie/6..latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;chrome/latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;chrome/canary&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;firefox/3..3.6&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;firefox/latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;firefox/nightly&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;safari/latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;opera/11.0..latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;iphone/6&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;ipad/6&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;android-browser/latest&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+      </item>
+    
+      <item>
+        <title>Mettre les dates en francais dans un blog Jekyll</title>
+        <link>/mettre-les-dates-en-francais-dans-un-blog-jekyll-2014-04-04/</link>
+        <pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Comme précédemment vu, ce &lt;a href=&quot;/configurer-un-blog-jekyll-2014-04-04/&quot;&gt;blog tourne sur Jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Jekyll et internationalisation&lt;/h2&gt;
+
+&lt;p&gt;L&amp;#39;internationalisation (ou i18n) n&amp;#39;est pas supportée nativement par Jekyll. Il existe &lt;a href=&quot;https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb&quot;&gt;un plugin&lt;/a&gt; qui permet de le faire en plusieurs langues mais en utilisant un filtre différent. La &lt;a href=&quot;https://gist.github.com/remiprev/2665712&quot;&gt;solution la plus simple&lt;/a&gt; est de modifier la fonction strftime:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;_plugins/frdate.rb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# encoding: utf-8&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;date&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;time&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MONTHNAMES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DAYNAMES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Dimanche&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Lundi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Mardi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Mercredi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Jeudi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Vendredi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Samedi&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Time&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:strftime_nolocale&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:strftime&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dup&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%a/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ABBR_DAYNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%A/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DAYNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%b/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ABBR_MONTHNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%B/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MONTHNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime_nolocale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Hébergé par GitHub ?&lt;/h2&gt;
+
+&lt;p&gt;Attention, Github compile par défaut avec l’option &lt;code&gt;--safe&lt;/code&gt; de Jekyll qui ignore tous les plugins. La solution est de créer un script qui génère le site statique et envoie ce site sur le dépôt GitHub, comme expliqué &lt;a href=&quot;http://arademaker.github.io/blog/2011/12/01/github-pages-jekyll-plugins.html&quot;&gt;sur ce blog&lt;/a&gt;. Il est même possible de gérer ce déploiement via l&amp;#39;intégration continue, par exemple &lt;a href=&quot;http://drone.io&quot;&gt;drone.io&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Configurer un blog Jekyll</title>
+        <link>/configurer-un-blog-jekyll-2014-04-04/</link>
+        <pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Nous utilisons &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; pour faire tourner ce blog technique. Il s&amp;#39;agit d&amp;#39;un générateur de blog statiques : on écrit les articles au format markdown, qui sont ensuite généré en html. Il n&amp;#39;est donc pas nécessaire d&amp;#39;avoir de base de données, allégeant le serveur, et permettant un rendu rapide des pages pour le lecteur.&lt;/p&gt;
+
+&lt;p&gt;Voici quelques infos sur comment installer &lt;em&gt;Jekyll&lt;/em&gt; mettre en place un blog de ce genre, et commencer à écrire des articles.&lt;/p&gt;
+
+&lt;h2&gt;Installer Ruby et Jekyll&lt;/h2&gt;
+
+&lt;p&gt;Les informations nécessaires sont sur les sites officiels de &lt;a href=&quot;https://www.ruby-lang.org/fr/downloads/&quot;&gt;Ruby&lt;/a&gt; et &lt;a href=&quot;http://jekyllrb.com/docs/installation/&quot;&gt;Jekyll&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Sur Ubuntu et debian-like, cela revient à :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ruby1.9-dev &amp;amp;&amp;amp; sudo gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sur Fedora :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo yum install ruby-devel &amp;amp;&amp;amp; sudo gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Récupérer du blog vierge&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Le code est sur &lt;a href=&quot;https://github.com/Evaneos/Evaneos.github.io&quot;&gt;Github&lt;/a&gt;, il suffit de cloner le repository dans un répertoire local.&lt;/p&gt;
+
+&lt;h2&gt;Fonctionnement des articles&lt;/h2&gt;
+
+&lt;p&gt;Comme indiqué, les articles sont au format markdown. La syntaxe est simple mais relativement riche, donc n&amp;#39;hésitez pas à vous référer à la &lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;documentation&lt;/a&gt;. Pour les plus frileux, il existe des éditeurs en ligne tel que &lt;a href=&quot;https://stackedit.io/&quot;&gt;Stackedit&lt;/a&gt; permettant une édition WYSIWYG du markdown.&lt;/p&gt;
+
+&lt;p&gt;Sur Jekyll, les articles publiés sont stockés dans le répertoire &lt;em&gt;_posts&lt;/em&gt;, et les articles en cours d&amp;#39;écriture dans le répertoire &lt;em&gt;_drafts&lt;/em&gt;.
+Dans un article publié, c&amp;#39;est le format du nom de fichier qui indique sa date de publication. Pour un brouillon, c&amp;#39;est la date de dernière modication du fichier. Un draft n&amp;#39;est affiché qu&amp;#39;en mode &amp;#39;développement&amp;#39; et n&amp;#39;est donc visible qu&amp;#39;en local.&lt;/p&gt;
+
+&lt;p&gt;Tous les articles ont également une entête, qui contient ses méta données : auteur, tags, titre... Ce sont les fichiers du répertoire &lt;em&gt;_layout&lt;/em&gt; qui s&amp;#39;occupent de faire le lien entre ces meta données, et leur rendu dans la page. Au besoin, ces entêtes peuvent être enrichies et réutilisées pour des besoins plus spécifiques.&lt;/p&gt;
+
+&lt;h3&gt;Tester les articles en local&lt;/h3&gt;
+
+&lt;p&gt;Pour tester les articles en local, il faut donc :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;avoir installé Ruby et Jekyll&lt;/li&gt;
+&lt;li&gt;se placer dans le répertoire du blog&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ensuite, on peut démarrer un serveur avec la commande suivante :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;jekyll serve --watch --drafts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Cela démarre un serveur sur le port 4000, on peut donc visualiser le blog en &lt;a href=&quot;http://localhost:4000/&quot;&gt;local&lt;/a&gt;
+L&amp;#39;option --watch permet de ne pas avoir à redémarrer le serveur à chaque modification d&amp;#39;un article, et --drafts permet d&amp;#39;afficher les brouillons dans la liste des articles.&lt;/p&gt;
+
+&lt;h2&gt;Hébergé par Github ?&lt;/h2&gt;
+
+&lt;p&gt;Une fois votre blog réalisé, vous pouvez l&amp;#39;héberger gratuitement sur un sous domaine de &lt;a href=&quot;http://github.io/&quot;&gt;Github.io&lt;/a&gt; sous réserve d&amp;#39;héberger votre projet sur un repo Github. Il vous suffit pour cela de créer un repo username.github.io, et tout sera synchronisé en post hook de façon transparente.&lt;/p&gt;
+
+&lt;p&gt;Vous avez aussi la possibilité de mettre votre propre nom de domaine très facilement. Pour plus de renseignement, rendez vous sur &lt;a href=&quot;http://github.io/&quot;&gt;Github.io&lt;/a&gt;.&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Configuration d'applications Javascript avec Grunt et Bower</title>
+        <link>/configuration-d-applications-javascript-2014-03-31/</link>
+        <pubDate>Mon, 31 Mar 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Dans cet article je vais vous présenter comment nous gérons les déploiements d&amp;#39;applications javascript. Notre backoffice est constitué d&amp;#39;un grand nombre d&amp;#39;applications ayant chacun un rôle propre. Il y a notamment plusieurs CRUD pour les différents rôles métiers et les différents aspects de notre travail, ainsi que des outils de statistiques pour les différents pôles. Bref pour répondre aux divers besoins métiers, pour être efficace, et pour éviter la duplication, l&amp;#39;utilisation de Grunt et Bower s&amp;#39;est avérée être un atout.&lt;/p&gt;
+
+&lt;h3&gt;Bower pour la gestion des dépendances&lt;/h3&gt;
+
+&lt;p&gt;Les librairies externes sont gérées via &lt;a href=&quot;http://bower.io/&quot;&gt;Bower&lt;/a&gt;, un gestionnaire de dépendances pour les librairies Javascript, qui tourne sous NodeJS. On lui fournit un fichier JSON de configuration, et les librairies sont téléchargées dans un répertoire local. C&amp;#39;est notamment dans ce fichier de configuration que l&amp;#39;on spécifie les numéros de version à utiliser.&lt;/p&gt;
+
+&lt;p&gt;L&amp;#39;utilisation de Bower a permis de centraliser les librairies externes, qui avant ne suivaient pas de véritable logique : quand on avait besoin d&amp;#39;une librairie, on la téléchargeait, et la mettait dans un répertoire public. Cela fonctionne bien à très court terme, mais devient vite compliqué dès qu&amp;#39;on veut mettre à jour une librairie, ou utiliser une librairie déjà présente car on ne sait pas qui s&amp;#39;en sert. Bref, cela n&amp;#39;était plus compatible avec nos besoins d&amp;#39;industrialisation.&lt;/p&gt;
+
+&lt;p&gt;Comme nous utilisons un seul fichier de configuration Bower, toutes les applications du backoffice doivent fonctionner avec des librairies dans la même version. Cette contrainte nous permet d&amp;#39;éviter de multiplier les différences de versions entre les applications, mais peut être source de régressions difficiles à anticiper lorsque les librairies utilisées introduisent des changements non-rétrocompatibles.&lt;/p&gt;
+
+&lt;h3&gt;Grunt comme chef d&amp;#39;orchestre&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gruntjs.com/&quot;&gt;Grunt&lt;/a&gt; sert à configurer et exécuter des tâches récurrentes. Nous utilisons Grunt pour gérer les tâches liées au développement ou au déploiement des différentes applications du backoffice. Chez nous cela signifie principalement :
+- la concaténation et la minification des différents fichiers JS
+- la compilation des fichiers LESS en CSS&lt;/p&gt;
+
+&lt;h4&gt;Gestion de la configuration d&amp;#39;une application&lt;/h4&gt;
+
+&lt;p&gt;Chaque application correspond à une Single Page Application (SPA) qui contient quelques écrans. Elle est associée à un contrôlleur PHP, et est configurée par un fichier Yaml, ce qui permet l&amp;#39;utilisation du fichier de configuration à la fois côté javascript et côté PHP.&lt;/p&gt;
+
+&lt;p&gt;Voici un exemple de ce que peut contenir un fichier de configuration d&amp;#39;une application :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;id: dashboard
+name: Dashboard
+acl:
+    - ROLE_ADMIN
+    - ROLE_DEVELOPPER
+    - ...
+dependencies:
+    - jquery
+    - underscore
+    - angular
+icon: icon-dashboard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ce fichier est mangé par Grunt qui s&amp;#39;en sert pour connaître les dépendances lorsqu&amp;#39;il faut générer le javascript compilé d&amp;#39;une application. Il est également utilisé par la partie PHP pour gérer le reste : affichage de la bonne icône dans un menu, gestion du contrôle d&amp;#39;accès pour les contrôleurs associés...&lt;/p&gt;
+
+&lt;h4&gt;Compilation d&amp;#39;une application&lt;/h4&gt;
+
+&lt;p&gt;La compilation est relativement simple : on concatène tous les fichiers javascripts de l&amp;#39;application en un fichier, et on minifie le tout. On produit un fichier du type nom_de_lapplications.js (ou nom_de_lapplications.min.js si minifié).
+Pour les librairies, on concatène toutes les librairies en un fichier vendor_nom_de_lapplications.min.js.&lt;/p&gt;
+
+&lt;p&gt;Dans le contrôleur de l&amp;#39;application, quand on charge le fichier de configuration on sait dans quelle application on se trouve, et donc quels sont les fichiers javascript à inclure.&lt;/p&gt;
+
+&lt;p&gt;Pour le CSS, c&amp;#39;est la même chose.&lt;/p&gt;
+
+&lt;h4&gt;Déploiement d&amp;#39;une application&lt;/h4&gt;
+
+&lt;p&gt;Comme dit précédemment, nous avons des tâches de compilation pour les fichiers Javascript et pour le CSS. Une fois compilé, les fichiers compilés ne sont pas inclus parmi les fichiers versionnés de Git. Cela n&amp;#39;a en effet pas de sens de versionner des fichiers compilés, qui n&amp;#39;ont pas grand chose à voir avec l&amp;#39;historique des tâches de développement.&lt;/p&gt;
+
+&lt;p&gt;On ne peut donc pas réaliser un déploiment classique (qui revient grossièrement à un git pull).&lt;/p&gt;
+
+&lt;p&gt;Au lieu de cela, la mise en ligne des fichiers compilés (javascript et css) se fait via un rsync dans le répertoire où les fichiers doivent arriver.&lt;/p&gt;
+
+&lt;h4&gt;Et la gestion d&amp;#39;environnement ?&lt;/h4&gt;
+
+&lt;p&gt;En développement, il est assez désagréable de devoir concaténer tous les fichiers javascripts à chaque modification, et c&amp;#39;est encore pire lorsque l&amp;#39;on travaille avec les fichiers less.&lt;/p&gt;
+
+&lt;p&gt;Afin de rendre le développement plus fluide, le fonctionnement est donc légèrement différent:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;côté CSS, une tâche grunt surveille les fichiers less, et les recompile à chaque modification&lt;/li&gt;
+&lt;li&gt;côté Javascript, ce n&amp;#39;est pas le fichier compilé qui est inclus dans la page, mais les différents fichiers, dans l&amp;#39;ordre où ils seront compilés. La seul véritable différence qu&amp;#39;il peut y avoir lors de la mise en production vient de la concaténation/minification, qui doit être testée avant un déploiement.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Evidemment, bien que Grunt et Bower nous ait apporté beaucoup, tout n&amp;#39;est pas rose. Configurer des tâches Grunt est particulièrement désagréable, car la syntaxe utilisée n&amp;#39;est pas pratique. De plus, la courbe d&amp;#39;apprentissage n&amp;#39;est pas aussi rapide que nous le pensions au départ. Mais une fois mis en place, cela nous a permis d&amp;#39;uniformiser la conception et le déploiement des applications.&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Les soirées Dev</title>
+        <link>/soiree-dev-2014-03-25/</link>
+        <pubDate>Tue, 25 Mar 2014 00:00:00 +0100</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Pour démarrer ce blog technique, quoi de mieux qu&amp;#39;un article qui ne parle pas de technique ? Je vais plutôt commencer par vous parler d&amp;#39;un des éléments de notre &lt;strong&gt;culture d&amp;#39;entreprise&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;La particularité de notre équipe chez Evaneos.com, est d&amp;#39;être constituée de &lt;em&gt;passionnés&lt;/em&gt;. Des passionnés par l&amp;#39;univers du web, et de tout ce qui gravite autour : qu&amp;#39;il s&amp;#39;agisse d&amp;#39;une librairie javascript intéressante, d&amp;#39;une nouveauté dans un language backend, des nouvelles idées en matière d&amp;#39;ergonomie grâce à la montée de web mobile, d&amp;#39;un point de détail de génie logiciel qui commence à trouver sa place dans le web... la liste pourrait continuer longtemps, mais tous les aspects de la technique et de ce que cela permet de réaliser sont, pour nous, très motivants.&lt;/p&gt;
+
+&lt;p&gt;Ainsi, nous faisons tous, chacun de notre côté, pas mal de veille pour nous tenir à jour (ou tenter de l&amp;#39;être), mais il n&amp;#39;est pas toujours facile de l&amp;#39;être. Le web étant en continuelle évolution, il est difficile de jouer avec tout ce que l&amp;#39;on souhaiterait. Notre temps étant limité, ce n&amp;#39;est pas non plus forcément souhaitable, alors on a cherché un compromis.&lt;/p&gt;
+
+&lt;p&gt;Une solution que nous avons trouvé, c&amp;#39;est d&amp;#39;organiser des &lt;strong&gt;soirées dev&lt;/strong&gt;. L&amp;#39;idée ? Rester tard un soir, commander des pizzas, et passer la soirée à bricoler un bout de code qu&amp;#39;on a envie de faire depuis un moment, mais qui, pour diverses raisons, n&amp;#39;a jamais pris réalité. Seul ou en groupe, en rapport avec ce qu&amp;#39;on fait au travail ou non, sur un langage, une librairie, un applicatif... l&amp;#39;important c&amp;#39;est de s&amp;#39;amuser.&lt;/p&gt;
+
+&lt;p&gt;Voici un petit éventail de ce qui a été bricolé lors de la dernière soirée dev :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Mise en place d&amp;#39;un serveur local &lt;a href=&quot;http://openstreetmap.fr/&quot;&gt;Open Street maps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Découverte d&amp;#39;&lt;a href=&quot;www.elasticsearch.org&quot;&gt;Elasticsearch&lt;/a&gt; autour de la conception d&amp;#39;une petite appli de recherche de films&lt;/li&gt;
+&lt;li&gt;Bricolage autour de &lt;a href=&quot;http://logstash.net/&quot;&gt;logstash&lt;/a&gt; pour avoir un moteur de recherche dans nos logs basé sur Elasticsearch et Kibana. Pour ceux que ça intéresse, voici un &lt;a href=&quot;http://linuxfr.org/news/gestion-des-logs-avec-logstash-elasticsearch-kibana&quot;&gt;point de départ possible&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Découverte de &lt;a href=&quot;http://sailsjs.org/&quot;&gt;SailsJS&lt;/a&gt; via le bricolage d&amp;#39;une petit appli. SailsJS est un framework javascript MVC basé sur du nodeJS.&lt;/li&gt;
+&lt;li&gt;Essai de mise en corrélation de titres d&amp;#39;articles de journaux, pour essayer de déterminer qui reprend ses informations chez les autres.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Comme vous pouvez le voir, les mots qui reviennent sont &amp;quot;essai&amp;quot;, &amp;quot;bricolage&amp;quot;, &amp;quot;découverte&amp;quot;... On ne cherche pas à concevoir des applications finies, ce qui est plutôt difficile quand on ne connait pas une technologie. On cherche plutôt à découvrir la technologie en question, s&amp;#39;ouvrir l&amp;#39;esprit à de nouveaux outils, et expérimenter. Tout ne marche pas comme prévu, par exemple nous avons eu de nombreux problèmes de compatibilité avec le serveur OpenStreetMaps, j&amp;#39;ai pu voir que mettre en place et requêter Elasticsearch est loin d&amp;#39;être trivial en une soirée... En fait, cette phase de découverte permet de prendre conscience des possibilités et des limitations de nouveaux outils, que ce soit pour s&amp;#39;en servir, ou au contraire pour les rayer de la liste des possibles.&lt;/p&gt;
+
+&lt;p&gt;Ha, et se réunir pour faire les geeks ajoute un côté ludique &lt;strong&gt;très&lt;/strong&gt; motivant.&lt;/p&gt;
+
+&lt;p&gt;Si vous n&amp;#39;organisez pas déjà des activités de ce genre avec votre équipe, pensez-y !&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Lancement du blog technique Evaneos.com</title>
+        <link>/lancement-du-blog-technique-evaneos-com-2014-03-24/</link>
+        <pubDate>Mon, 24 Mar 2014 00:00:00 +0100</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Bonjour et bienvenue sur le blog technique d&amp;#39;&lt;a href=&quot;http://www.evaneos.com&quot;&gt;Evaneos.com&lt;/a&gt; !&lt;/p&gt;
+
+&lt;p&gt;Dans ce blog, à une fréquence régulière, vous pourrez trouver des articles sur les différents problèmes techniques auxquels nous sommes confrontés, ainsi que des retours d&amp;#39;expériences sur les technologies que nous utilisons.&lt;/p&gt;
+
+&lt;h2&gt;Ce que nous faisons&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.evaneos.com&quot;&gt;Evaneos.com&lt;/a&gt; est une plateforme de mise en relation entre des personnes qui souhaitent partir en voyage, et des agents locaux de par le monde. Ces agents, tous experts sur leur destinationaident les futurs voyageurs à concevoir le voyage de leur rêve, entièrement sur mesure et adapté à leurs envies, besoins et contraintes.&lt;/p&gt;
+
+&lt;h3&gt;Les enjeux&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;pour les voyageurs&lt;/strong&gt; : leur permettre de trouver le plus facilement possible la destination, l&amp;#39;itinéraire et l&amp;#39;agent de leurs rêves. Apporter aux voyageurs des garanties fortes additionnelles (paiement, annulation, etc) ;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;pour les agents&lt;/strong&gt; : de trouver des voyageurs vraiment intéressés par un voyage, et de faciliter au maximum la communication et le suivi tout au long des différentes étapes des projets de voyage ;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;pour nos équipes&lt;/strong&gt; : de rendre la plus simple possible la gestion et le suivi des agents avec qui nous travaillons : recrutement d&amp;#39;un nouvel agent, ajout de nouvelles idées de voyage, suivi des performances, facturation, la présence sur plusieurs marchés (français, espagnol, allemand, italien à ce jour)...&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Techniquement&lt;/h3&gt;
+
+&lt;p&gt;D&amp;#39;un point de vue informatique, cela se traduit par la conception et la réalisation de nombreux outils pour chacune de ces phases de la vie du voyage ou d&amp;#39;une agence locale.&lt;/p&gt;
+
+&lt;p&gt;Ainsi, notre quotidien en plein de mots clés, c&amp;#39;est :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Côté &lt;strong&gt;backend&lt;/strong&gt; : php5, Zend, Symfony2/stackPHP selon les projets, postgresSQL&lt;/li&gt;
+&lt;li&gt;Côté &lt;strong&gt;front&lt;/strong&gt; : angularJS, grunt, less, responsive, ...&lt;/li&gt;
+&lt;li&gt;Côté &lt;strong&gt;applicatif&lt;/strong&gt; : nginx, redis, varnish, memcached, ...&lt;/li&gt;
+&lt;li&gt;Côté &lt;strong&gt;devops&lt;/strong&gt; : git, de l&amp;#39;intégration continue, des tests unitaires/fonctionnels&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nous sommes constamment poussés à expérimenter des outils récents et à découvrir de nouvelles choses que nous aimerions partager. Prêts pour l&amp;#39;aventure ?&lt;/p&gt;
+</description>
+      </item>
+    
+
+  </channel>
+</rss>
