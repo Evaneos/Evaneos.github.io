@@ -6,9 +6,59 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Mon, 05 May 2014 11:17:00 +0200</pubDate>
-    <lastBuildDate>Mon, 05 May 2014 11:17:00 +0200</lastBuildDate>
+    <pubDate>Wed, 20 Aug 2014 07:40:35 +0200</pubDate>
+    <lastBuildDate>Wed, 20 Aug 2014 07:40:35 +0200</lastBuildDate>
 
+    
+      <item>
+        <title>Soirées dev été 2014</title>
+        <link>/soiree-dev-ete-2014-2014-08-20/</link>
+        <pubDate>Wed, 20 Aug 2014 00:00:00 +0200</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Cet été, quand certains partaient en vacances, d&amp;#39;autres profitaient du calme estival pour se plogner dans du code à l&amp;#39;occasion de &lt;a href=&quot;/soiree-dev-2014-03-25/&quot;&gt;soirées dév&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Découverte&lt;/h2&gt;
+
+&lt;h3&gt;Ember.js&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Johan&lt;/em&gt; a fait ses premiers pas en &lt;strong&gt;Ember.js&lt;/strong&gt; en comparant de près avec &lt;strong&gt;Angular.js&lt;/strong&gt; qu&amp;#39;il utilise au quotidien dans les projets Evaneos.&lt;/p&gt;
+
+&lt;h3&gt;Go&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Christophe&lt;/em&gt; et &lt;em&gt;Steven&lt;/em&gt; se sont retrouvés autour du langage &lt;strong&gt;go&lt;/strong&gt; pour se lancer de façon pragmatique à sa découverte :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Création d&amp;#39;un serveur web simple;&lt;/li&gt;
+&lt;li&gt;Utilisation de sessions et de cookies;&lt;/li&gt;
+&lt;li&gt;Récupérer les tweets de chaque utilisateur via l&amp;#39;api twitter;&lt;/li&gt;
+&lt;li&gt;Composant react permettant d&amp;#39;afficher les tweets d&amp;#39;un utilisateur.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Test et mise en place de solutions&lt;/h2&gt;
+
+&lt;h3&gt;Des logs lisibles&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Clément&lt;/em&gt; a tenté l&amp;#39;installation d&amp;#39;&lt;strong&gt;ElasticSearch&lt;/strong&gt;, &lt;strong&gt;Logstash&lt;/strong&gt; et &lt;strong&gt;Kibana&lt;/strong&gt; pour le suivi des logs d&amp;#39;erreur. &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Après une soirée, je ne suis pas allé aussi loin que je voulais, mais j&amp;#39;ai réussi à faire l&amp;#39;installation et la configuration (basique) des 3 outils. J&amp;#39;arrive à faire manger des fichers logs à logstash, les stocker dans ElasticSearch, et à commencer à afficher des dashboard dans Kibana. C&amp;#39;est cool parce que ça marche, mais c&amp;#39;est encore loin d&amp;#39;être utilisable. Mais en tout cas, c&amp;#39;est une base de départ pour arriver à gérer nos logs sans avoir à parser manuellement les logs lorsque c&amp;#39;est nécessaire.&amp;quot;   non, trop basique&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3&gt;Docker&lt;/h3&gt;
+
+&lt;p&gt;Chez Evaneos, les environnements de dev tournent sous &lt;strong&gt;docker&lt;/strong&gt;. Fan de cette solution, &lt;em&gt;Jonathan&lt;/em&gt; a construit son propre &lt;strong&gt;docker&lt;/strong&gt; pour accélérer ses projets persos, sur une stack &lt;strong&gt;Supervisord&lt;/strong&gt; + &lt;strong&gt;php5-fpm&lt;/strong&gt; + &lt;strong&gt;MySQL&lt;/strong&gt; + &lt;strong&gt;Nginx&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Optimisation&lt;/h2&gt;
+
+&lt;h3&gt;Front&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;Tilap&lt;/em&gt; a décortiqué ce bon vieux tinyMCE.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Après 3 soirées dev, j&amp;#39;ai réussi sur une stack perso à en optimiser son intégration technique et fonctionnelle: customisation du rendu &amp;quot;au pixel près&amp;quot;, réalisation d&amp;#39;un plugin maison, et optimisation des perfs (plus léger, pas de chargement asynchrone client de fichiers js et css mais un package tout optimisé).&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+      </item>
     
       <item>
         <title>Suivre ses données grâce à Chart.io</title>
@@ -199,7 +249,7 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
             &amp;#39;IE11 - Win7&amp;#39;
         ]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A noter: Karma utiliser socket.io, et sur les anciens navigateurs il vaut mieux avoir flash installé.&lt;/p&gt;
+&lt;p&gt;A noter: Karma utilise socket.io, et sur les anciens navigateurs il vaut mieux avoir flash installé.&lt;/p&gt;
 
 &lt;h2&gt;Testling&lt;/h2&gt;
 
