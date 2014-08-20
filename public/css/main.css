@@ -169,7 +169,7 @@ a:hover {
   display: block;
   clear: both;
   line-height: 1.15em;
-  padding-bottom: 8.333333333333334px;
+  padding-bottom: 8.33333333px;
 }
 .wrapper .sidebar .in nav {
   padding-left: 35px;
@@ -301,6 +301,7 @@ article.page header .metas {
 }
 .content h3 {
   font-size: 1.5em;
+  padding-top: 0.3em;
 }
 .content h4 {
   font-size: 1.2em;
@@ -323,6 +324,11 @@ article.page header .metas {
 .content ol {
   list-style-type: decimal;
 }
+.content code {
+  font-family: "Oxygen Mono", "Ubuntu Mono", monospace;
+  background: #efefef;
+  padding: 5px 10px;
+}
 .content .highlight pre {
   margin-bottom: 0;
   overflow: auto;
@@ -332,11 +338,23 @@ article.page header .metas {
   font-size: .9em;
   line-height: 1.6em;
 }
-
-.content code {
-  font-family: monospace;
-  background: #efefef;
-  padding: 5px 10px;
+.content blockquote {
+  margin-left: 30px;
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 0 0 1em 30px;
+  padding: 0.5em 10px;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+.content blockquote p,
+.content blockquote ul,
+.content blockquote ol {
+  margin-left: 1em;
+}
+.content blockquote p:last-child,
+.content blockquote ul:last-child,
+.content blockquote ol:last-child {
+  margin-bottom: 0;
 }
 .post-archive h2 {
   font-family: 'Raleway', Comic, serif;
@@ -430,7 +448,5 @@ article.page header .metas {
 @media (max-width: 599px) {
   .post-archive ul li time {
     display: none;
-    width: auto;
-    text-align: left;
   }
 }
