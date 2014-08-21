@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Wed, 20 Aug 2014 10:19:23 +0200</pubDate>
-    <lastBuildDate>Wed, 20 Aug 2014 10:19:23 +0200</lastBuildDate>
+    <pubDate>Thu, 21 Aug 2014 09:17:17 +0200</pubDate>
+    <lastBuildDate>Thu, 21 Aug 2014 09:17:17 +0200</lastBuildDate>
 
     
       <item>
@@ -15,38 +15,38 @@
         <link>/soiree-dev-ete-2014-2014-08-20/</link>
         <pubDate>Wed, 20 Aug 2014 00:00:00 +0200</pubDate>
         <author>L'équipe Evaneos.com</author>
-        <description>&lt;p&gt;Cet été, quand certains partaient en vacances, d&amp;#39;autres profitaient du calme estival pour se plogner dans du code à l&amp;#39;occasion de &lt;a href=&quot;/soiree-dev-2014-03-25/&quot;&gt;soirées dév&lt;/a&gt;.&lt;/p&gt;
+        <description>&lt;p&gt;Cet été, quand certains partaient en vacances, les dévs d&amp;#39;Evaneos.com profitaient du calme estival pour se plogner dans du code à l&amp;#39;occasion de &lt;a href=&quot;/soiree-dev-2014-03-25/&quot;&gt;soirées dév&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2&gt;Découverte&lt;/h2&gt;
+&lt;h2&gt;A la découverte de...&lt;/h2&gt;
 
 &lt;h3&gt;Ember.js&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Johan&lt;/em&gt; a fait ses premiers pas en &lt;strong&gt;Ember.js&lt;/strong&gt; en comparant de près avec &lt;strong&gt;Angular.js&lt;/strong&gt; qu&amp;#39;il utilise au quotidien dans les projets Evaneos.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Johan&lt;/em&gt; a fait ses premiers pas en &lt;a href=&quot;http://emberjs.com/&quot;&gt;Ember.js&lt;/a&gt; en comparant de près avec &lt;a href=&quot;https://angularjs.org/&quot;&gt;Angular.js&lt;/a&gt; qu&amp;#39;il utilise au quotidien sur des projets Evaneos.&lt;/p&gt;
 
 &lt;h3&gt;Go&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Christophe&lt;/em&gt; et &lt;em&gt;Steven&lt;/em&gt; se sont retrouvés autour du langage &lt;strong&gt;go&lt;/strong&gt; pour se lancer de façon pragmatique à sa découverte :&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Christophe&lt;/em&gt; et &lt;em&gt;Steven&lt;/em&gt; se sont retrouvés autour du langage &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; pour se lancer à sa découverte de façon pragmatique :&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Création d&amp;#39;un serveur web simple;&lt;/li&gt;
-&lt;li&gt;Utilisation de sessions et de cookies;&lt;/li&gt;
-&lt;li&gt;Récupérer les tweets de chaque utilisateur via l&amp;#39;api twitter;&lt;/li&gt;
+&lt;li&gt;Création d&amp;#39;un serveur web simple ;&lt;/li&gt;
+&lt;li&gt;Utilisation de sessions et de cookies ;&lt;/li&gt;
+&lt;li&gt;Récupérer les tweets de chaque utilisateur via l&amp;#39;api twitter ;&lt;/li&gt;
 &lt;li&gt;Composant react permettant d&amp;#39;afficher les tweets d&amp;#39;un utilisateur.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Test et mise en place de solutions&lt;/h2&gt;
+&lt;h2&gt;Tests et mises en place de solutions&lt;/h2&gt;
 
 &lt;h3&gt;Des logs lisibles&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Clément&lt;/em&gt; a tenté l&amp;#39;installation d&amp;#39;&lt;strong&gt;ElasticSearch&lt;/strong&gt;, &lt;strong&gt;Logstash&lt;/strong&gt; et &lt;strong&gt;Kibana&lt;/strong&gt; pour le suivi des logs d&amp;#39;erreur. &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Clément&lt;/em&gt; a tenté l&amp;#39;installation d&amp;#39;une stack &lt;a href=&quot;http://www.elasticsearch.org/&quot;&gt;ElasticSearch&lt;/a&gt;, &lt;a href=&quot;http://logstash.net/&quot;&gt;Logstash&lt;/a&gt; et &lt;a href=&quot;http://www.elasticsearch.org/overview/kibana/&quot;&gt;Kibana&lt;/a&gt; pour le suivi des logs d&amp;#39;erreur. &lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;Après une soirée, je ne suis pas allé aussi loin que je voulais, mais j&amp;#39;ai réussi à faire l&amp;#39;installation et la configuration (basique) des 3 outils. J&amp;#39;arrive à faire manger des fichers logs à logstash, les stocker dans ElasticSearch, et à commencer à afficher des dashboard dans Kibana. C&amp;#39;est cool parce que ça marche, mais c&amp;#39;est encore loin d&amp;#39;être utilisable. Mais en tout cas, c&amp;#39;est une base de départ pour arriver à gérer nos logs sans avoir à parser manuellement les logs lorsque c&amp;#39;est nécessaire.&amp;quot;   non, trop basique&lt;/p&gt;
+&lt;p&gt;Après une soirée, je ne suis pas allé aussi loin que je voulais, mais j&amp;#39;ai réussi à faire l&amp;#39;installation et la configuration (basique) des 3 outils. J&amp;#39;arrive à faire manger des fichers logs à logstash, les stocker dans ElasticSearch, et à commencer à afficher des dashboards dans Kibana. C&amp;#39;est cool parce que ça marche, mais c&amp;#39;est encore loin d&amp;#39;être utilisable. En tout cas, c&amp;#39;est une base de départ pour arriver à gérer des logs sans avoir à les parser manuellement.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3&gt;Docker&lt;/h3&gt;
 
-&lt;p&gt;Chez Evaneos, les environnements de dev tournent sous &lt;strong&gt;docker&lt;/strong&gt;. Fan de cette solution, &lt;em&gt;Jonathan&lt;/em&gt; a construit son propre &lt;strong&gt;docker&lt;/strong&gt; pour accélérer ses projets persos, sur une stack &lt;strong&gt;Supervisord&lt;/strong&gt; + &lt;strong&gt;php5-fpm&lt;/strong&gt; + &lt;strong&gt;MySQL&lt;/strong&gt; + &lt;strong&gt;Nginx&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Chez Evaneos, les environnements de dev tournent sous &lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt;. Fan de cette solution, &lt;em&gt;Jonathan&lt;/em&gt; a construit son propre docker pour accélérer ses projets persos, sur une stack &lt;strong&gt;Supervisord&lt;/strong&gt; + &lt;strong&gt;php5-fpm&lt;/strong&gt; + &lt;strong&gt;MySQL&lt;/strong&gt; + &lt;strong&gt;Nginx&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h2&gt;Optimisation&lt;/h2&gt;
 
