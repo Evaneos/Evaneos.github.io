@@ -75,6 +75,6 @@ comments: true
 ## Authors
 
 To add/update an author, edit the /_config.yml file.
-You can optionnaly add user twitter account.
+You can optionally add user twitter account.
 
-For any question, feel free to contact us (yvan[]atevaneos[dot]com) and do not hesitate to open issue, we like to solve them :)
+For any question, feel free to contact us (yvan[at]evaneos[dot]com) and do not hesitate to open issue, we like to solve them :)
