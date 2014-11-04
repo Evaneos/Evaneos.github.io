@@ -7,7 +7,7 @@ Here are some [article ideas (fr)](https://github.com/Evaneos/Evaneos.github.io/
 
 ## How to contribute
 
-All the source blog is on github, and **you're welcome to contribute**.
+All the source blog is on github, and **you're welcome to contribute**. You can make it run on your computer with [docker](https://www.docker.com/) **in a minute** (six at least).
 
 ### Get the website on your local computer
 
@@ -22,7 +22,7 @@ docker run --rm -v "$PWD:/src" -p 4000:4000 grahamc/jekyll serve
 ```
 You can then access the website on http://localhost:4000/
 
-If you want to see the drats posts, add --drafts to the docker run command:
+If you want to see the draft posts, add --drafts to the docker run command:
 
 ```
 docker run --rm -v "$PWD:/src" -p 4000:4000 grahamc/jekyll serve --drafts
