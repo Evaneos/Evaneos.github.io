@@ -40,7 +40,7 @@ docker run --rm -v "$PWD:/src" -p 4000:4000 grahamc/jekyll serve --drafts
 - Commit and push your changes on the forked repository, on the **sources** branch.
 - Create a pull request to the Evaneos/Evaneos.github.io **sources** branch
 
-### If you DO HAVE the write access to Evaneos/Evaneos.github.io repo (non Evaneos.com staff)
+### If you DO HAVE the write access to Evaneos/Evaneos.github.io repo (ie for Evaneos.com staff)
 
 **Create your content**
 
