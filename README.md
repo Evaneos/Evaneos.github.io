@@ -18,7 +18,7 @@ docker pull grahamc/jekyll
 cd Evaneos.github.io
 git fetch -v
 git checkout sources
-docker run --rm -v "$PWD:/src" -p 4000:4000 grahamc/jekyll serve
+docker run --rm -v "$PWD:/src" -p 4000:4000 grahamc/jekyll serve -H 0.0.0.0
 ```
 You can then access the website on http://localhost:4000/
 
