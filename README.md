@@ -6,3 +6,12 @@ Si nécessaire, voici la référence sur [la syntaxe markdown](http://daringfire
 
 Voici des [idées de futurs articles](https://github.com/Evaneos/Evaneos.github.io/blob/master/idees_articles.md).
 
+
+# Publier des articles 
+
+    git clone git@github.com:Evaneos/Evaneos.github.io
+    docker pull grahamc/jekyll
+    cd Evaneos.github.io
+    git fetch -v 
+    git checkout sources 
+    docker run --rm -v "$PWD:/src" -p 4123:4000 grahamc/jekyll serve -H 0.0.0.0

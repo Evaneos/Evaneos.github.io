@@ -6,9 +6,82 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Mon, 02 Feb 2015 12:36:45 +0100</pubDate>
-    <lastBuildDate>Mon, 02 Feb 2015 12:36:45 +0100</lastBuildDate>
+    <pubDate>Mon, 02 Feb 2015 13:58:00 +0100</pubDate>
+    <lastBuildDate>Mon, 02 Feb 2015 13:58:00 +0100</lastBuildDate>
 
+    
+      <item>
+        <title>Retours sur le déploiement chez Evaneos</title>
+        <link>/deploiement-avant-2015-02-02/</link>
+        <pubDate>Mon, 02 Feb 2015 00:00:00 +0100</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;La gestion du déploiement est un problème complexe, il nous fallu du temps pour mettre en place une solution industrialisée. Le besoin est arrivé lorsque tout s&amp;#39;est mis à grossir : la pile applicative, les projets et leurs besoins, et le nombre de personnes dans l&amp;#39;équipe.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Cet article est le premier d&amp;#39;une série de trois, où nous verrons :&lt;/em&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Avant : Comment nous avons géré les déploiement lorsque l&amp;#39;équipe et le projet était réduit&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Aujourd&amp;#39;hui : Comment nous faisons actuellement&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Demain : Quels sont les problèmes auxquels nous sommes confrontés aujourd&amp;#39;hui, et vers où nous nous dirigeons&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Anciennement&lt;/h2&gt;
+
+&lt;p&gt;Dans ce premier article, nous allons revenir sur la méthode utilisée pour déployer lorsque l&amp;#39;équipe était réduite et que l&amp;#39;application était &amp;quot;simple&amp;quot;.&lt;/p&gt;
+
+&lt;p&gt;Comme l&amp;#39;application était simple, longtemps, le déploiement du code en production s&amp;#39;est fait de manière très simple également . Nous n&amp;#39;avions qu&amp;#39;un seul gros projet en PHP, contenant le site public et son backoffice. A ce moment là du projet, lorsque l&amp;#39;équipe était réduite, diverses astuces ont permis de ne pas avoir à mettre en place un processus compliqué de développement et de déploiement.&lt;/p&gt;
+
+&lt;h2&gt;Les ressources externes&lt;/h2&gt;
+
+&lt;p&gt;Les ressources externes, par exemple. Nous n&amp;#39;avions pas besoin de précompiler les ressources. Grâce à divers bricolages, un script listait les fichiers javascripts nécessaires sur une page, et les aggrégait à la volée avant de les servir. Ca coute un peu plus cher côté serveur au moment de la première visite, mais une fois le fichier généré mis en cache, le problème ne se pose plus jusqu&amp;#39;à la fois suivante. Nous faisions pareil avec les fichiers Less, qui étaient de plus compilés à la volée en CSS.&lt;/p&gt;
+
+&lt;p&gt;Lorsque nous n&amp;#39;avions pas de serveur d&amp;#39;intégration, chacun développait sur sa machine, on vérifiait que tout marchait bien en déployant sur la machine de préproduction (identique à la machine de prod), et une fois le feu vert reçu par les personnes responsables du projet en question, on déployait en prod.&lt;/p&gt;
+
+&lt;h2&gt;Déployer le code&lt;/h2&gt;
+
+&lt;p&gt;Pour déployer en préproduction, à cette époque on ne s&amp;#39;embétait pas trop. On se connecte en SSH sur la machine de préproduction, on va dans le répertoire du projet, git pull origin master et roulez jeunesse.
+De toute façons, à partir du moment où la fonctionnalité était dans master elle devait être déployée. S&amp;#39;il y avait des problèmes, il fallait les corriger, le passage en préprod était un bon moyen d&amp;#39;identifier les problèmes éventuels dans un environnement au plus proche de la production.&lt;/p&gt;
+
+&lt;p&gt;Pour deployer en production, on prenait un peu plus de gants et on s&amp;#39;accordait le moyen de 
+Un simple script bash a longtemps fait le travail. On se connectait sur le serveur en SSH, puis executait le script de déploiement :&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$ ev_create_branch nom_de_la_fonctionnalite
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Le nom du script n&amp;#39;était pas forcément très clair, mais comme nous étions 4 dans l&amp;#39;équipe, tout le monde savait ce qu&amp;#39;il se passait. Ce script  :
+- crée une nouvelle branche git avec la date courante et le nom du déploiement 
+- récupére le code de la branche master via git dans cette nouvelle branche.
+Une mise à jour manuelle d&amp;#39;une clé dans fichier de configuration permettait d&amp;#39;invalider le cache pour certaines ressources (les assets javascripts et css).&lt;/p&gt;
+
+&lt;p&gt;Ainsi, quand tout va bien, il n&amp;#39;y a rien à faire; quand il y a un problème, il suffit de lister les branche (avec git branch) de faire un checkout sur la branche précédente pour revenir au déploiement précédent.&lt;/p&gt;
+
+&lt;p&gt;En bonus, le script envoyait une requête sur NewRelic, pour ajouter un évènement de suivi. Sur les divers graphes s&amp;#39;ajoutait une barre à la date du déploiement. Lors de chutes de performances après un déploiement, cela permet de comprendre rapidement quelle peut en être l&amp;#39;origine.&lt;/p&gt;
+
+&lt;p&gt;Bref, un process très simple et qui a longtemps fait correctement son travail.&lt;/p&gt;
+
+&lt;h2&gt;La gestion de la base de donnée&lt;/h2&gt;
+
+&lt;p&gt;Petit à petit, un ou deux outils annexes se sont greffés par dessus.
+On a notamment &amp;quot;industrialisé&amp;quot; les mises à jour de base de donnée. Lorsqu&amp;#39;une table devait être créée, ou qu&amp;#39;il fallait ajouter une colonne, ou pour toute opération sur la base, on a mis en place un outil.&lt;/p&gt;
+
+&lt;p&gt;Pour que tout le monde puisse en profiter de la même manière, et que l&amp;#39;on exécute en production le même script que sur les bases de développement, on écrivait les scripts dans un fichier d&amp;#39;un répertoire dédié.
+Lors de la mise en production, un outil récupérait les nouveaux scripts, et les jouait.&lt;/p&gt;
+
+&lt;p&gt;Comme tout se fait de manière manuelle avec ce fonctionnement, il faut d&amp;#39;abord jouer le script de déploiement puis le script de mise à jour de base : il pouvait y avoir un léger downtime sur certaines page. Pour les pages publiques, c&amp;#39;était masqué par notre reverse proxy. Pour les outils de backoffice, il pouvait y avoir des problèmes pendant quelques instants. Entre l&amp;#39;exécution des deux scripts, le code utilisait des tables qui n&amp;#39;existait pas encore, ou qui avait été modifiées. Ca n&amp;#39;a jamais été un problème suffisament grave pour qu&amp;#39;une meilleure solution soit nécessaire.&lt;/p&gt;
+
+&lt;h2&gt;Validation&lt;/h2&gt;
+
+&lt;p&gt;Niveau validation, ce fonctionnement marchait pour une petite équipe et sur des projets courts, mais dès que nous avons voulu avoir une gestion de projet plus rigoureuse nous nous sommes heurtés à des problèmes pratique : il n&amp;#39;y avait pas d&amp;#39;environnement dédié à la validation.&lt;/p&gt;
+
+&lt;p&gt;Les développeurs développent sur leur propre machine, dans une machine virtuelle qu&amp;#39;ils ont monté eux même, soit à partir des spécifications de la machine de prod, soit à partir d&amp;#39;un fichier ISO partagé par un des collègues.&lt;/p&gt;
+
+&lt;p&gt;Avant de déployer en production, on déploie en préproduction. On y vérifie que tout se passe bien, que la fonctionnalité marche comme prévue et qu&amp;#39;elle n&amp;#39;a rien cassée. C&amp;#39;est la grande époque de la validation manuelle.&lt;/p&gt;
+
+&lt;p&gt;Comme on déployait régulièrement des petites fonctionnalités, souvent réalisées individuellement et de manière autonome, cela ne posait pas trop de problèmes. Dès qu&amp;#39;il était question de gros projets, de développement à plusieurs pendant de plus grandes périodes de temps, nous avons dû changer des choses.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;On a vu le fonctionnement du déploiement lors des premiers âges d&amp;#39;Evaneos. Des outils simples, pour une application qui l&amp;#39;était également. Dans le prochain article nous verrons les solutions que nous avons mises en place lorsque les besoins ont évolué. L&amp;#39;application s&amp;#39;est découpée en plusieurs plus petits projets et la pile applicative a grossi. Au même moment, passer de 4 à environ 15 dans l&amp;#39;équipe nous a poussé à changer pas mal de choses. &lt;/p&gt;
+</description>
+      </item>
     
       <item>
         <title>Soirées dev été 2014</title>
