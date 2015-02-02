@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Thu, 21 Aug 2014 09:17:17 +0200</pubDate>
-    <lastBuildDate>Thu, 21 Aug 2014 09:17:17 +0200</lastBuildDate>
+    <pubDate>Mon, 02 Feb 2015 12:36:20 +0100</pubDate>
+    <lastBuildDate>Mon, 02 Feb 2015 12:36:20 +0100</lastBuildDate>
 
     
       <item>
@@ -126,12 +126,12 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;p&gt;Il existe de nombreuses libraries pour faire des tests unitaires en javascript, à commencer par la &lt;a href=&quot;http://nodejs.org/api/assert.html&quot;&gt;librarie native de nodejs&lt;/a&gt;. Mon choix s&amp;#39;est d&amp;#39;abord porté sur &lt;a href=&quot;http://chaijs.com/&quot;&gt;Chai&lt;/a&gt;, style TDD assert, avant de me rendre compte qu&amp;#39;il n&amp;#39;était pas compatible avec les anciennes versions d&amp;#39;IE et j&amp;#39;ai donc exploré &lt;a href=&quot;https://github.com/rowanmanning/proclaim&quot;&gt;Proclaim&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Installation :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev proclaim
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev proclaim
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Voici donc ci-dessous un test tout simple :&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;tests/test.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;proclaim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;proclaim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;basic DOM test&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;div&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -150,12 +150,12 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;p&gt;Ensuite, nous avons besoin d&amp;#39;une librairie qui encapsule ces tests et les lancent. &lt;a href=&quot;http://visionmedia.github.io/mocha/&quot;&gt;Mocha&lt;/a&gt; est l&amp;#39;une des plus connues.&lt;/p&gt;
 
 &lt;p&gt;Installation :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev mocha
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev mocha
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;On peut lancer nos tests avec un fichier html:&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;tests.html&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Mocha Tests&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
@@ -182,10 +182,10 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;p&gt;Karma permet de lancer les tests simultanément dans plusieurs navigateurs. Il faut installer les plugins correspondant aux navigateurs, créer un fichier de configuration, et on a le résultat dans la console.&lt;/p&gt;
 
 &lt;p&gt;Installation :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo npm install -g karma-cli &amp;amp;&amp;amp; npm install --save-dev karma karma-mocha karma-proclaim karma-chrome-launcher karma-firefox-launcher
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo npm install -g karma-cli &amp;amp;&amp;amp; npm install --save-dev karma karma-mocha karma-proclaim karma-chrome-launcher karma-firefox-launcher
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;karam.conf.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
 
         &lt;span class=&quot;c1&quot;&gt;// base path, that will be used to resolve files and exclude&lt;/span&gt;
@@ -223,7 +223,7 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;mocha.conf.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ui&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tdd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ui&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tdd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;checkLeaks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Puis lancer avec &lt;code&gt;karma start&lt;/code&gt;.&lt;/p&gt;
@@ -233,10 +233,10 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;p&gt;Il est possible de lancer ces tests sur IE via une machine virtuelle. Pour ca, il faut d&amp;#39;abord installer &lt;a href=&quot;https://github.com/xdissent/ievms&quot;&gt;ievms&lt;/a&gt; qui se charge de créer des marchines virtuelles dans VirtualBox.&lt;/p&gt;
 
 &lt;p&gt;De retour sur le projet, il faut installer un nouveau plugin:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev karma-ievms
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;npm install --save-dev karma-ievms
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Puis rajouter dans la configuration de karma:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;//...
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;//...
 
         browsers: [
             &amp;#39;Firefox&amp;#39;,
@@ -256,7 +256,7 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;p&gt;Pour terminer, on peut utiliser &lt;a href=&quot;https://ci.testling.com/&quot;&gt;Testling&lt;/a&gt; pour mettre en place ces tests à chaque push dans github et avoir un badge indiquant les navigateurs testés.&lt;/p&gt;
 
 &lt;p&gt;Il suffit de &lt;a href=&quot;https://ci.testling.com/guide/quick_start#configuring-the-web-hook&quot;&gt;configurer le web hook&lt;/a&gt; puis de modifier le fichier &lt;code&gt;package.json&lt;/code&gt; :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;json language-json&quot; data-lang=&quot;json&quot;&gt;  &lt;span class=&quot;s2&quot;&gt;&amp;quot;testling&amp;quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;  &lt;span class=&quot;s2&quot;&gt;&amp;quot;testling&amp;quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;quot;html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tests.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;quot;files&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;test/*.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;quot;browsers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
@@ -286,8 +286,8 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;h2&gt;Jekyll et internationalisation&lt;/h2&gt;
 
 &lt;p&gt;L&amp;#39;internationalisation (ou i18n) n&amp;#39;est pas supportée nativement par Jekyll. Il existe &lt;a href=&quot;https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb&quot;&gt;un plugin&lt;/a&gt; qui permet de le faire en plusieurs langues mais en utilisant un filtre différent. La &lt;a href=&quot;https://gist.github.com/remiprev/2665712&quot;&gt;solution la plus simple&lt;/a&gt; est de modifier la fonction strftime:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;_plugins/frdate.rb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# encoding: utf-8&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;_plugins/frdate.rb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# encoding: utf-8&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;date&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;time&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MONTHNAMES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)&lt;/span&gt;
@@ -326,10 +326,10 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;p&gt;Les informations nécessaires sont sur les sites officiels de &lt;a href=&quot;https://www.ruby-lang.org/fr/downloads/&quot;&gt;Ruby&lt;/a&gt; et &lt;a href=&quot;http://jekyllrb.com/docs/installation/&quot;&gt;Jekyll&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Sur Ubuntu et debian-like, cela revient à :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ruby1.9-dev &amp;amp;&amp;amp; sudo gem install jekyll
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install ruby1.9-dev &amp;amp;&amp;amp; sudo gem install jekyll
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Sur Fedora :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;sudo yum install ruby-devel &amp;amp;&amp;amp; sudo gem install jekyll
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo yum install ruby-devel &amp;amp;&amp;amp; sudo gem install jekyll
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Récupérer du blog vierge&lt;/strong&gt;&lt;/p&gt;
 
@@ -354,7 +354,7 @@ Dans un article publié, c&amp;#39;est le format du nom de fichier qui indique s
 &lt;/ul&gt;
 
 &lt;p&gt;Ensuite, on peut démarrer un serveur avec la commande suivante :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;jekyll serve --watch --drafts
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;jekyll serve --watch --drafts
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Cela démarre un serveur sur le port 4000, on peut donc visualiser le blog en &lt;a href=&quot;http://localhost:4000/&quot;&gt;local&lt;/a&gt;
 L&amp;#39;option --watch permet de ne pas avoir à redémarrer le serveur à chaque modification d&amp;#39;un article, et --drafts permet d&amp;#39;afficher les brouillons dans la liste des articles.&lt;/p&gt;
@@ -393,7 +393,7 @@ L&amp;#39;option --watch permet de ne pas avoir à redémarrer le serveur à cha
 &lt;p&gt;Chaque application correspond à une Single Page Application (SPA) qui contient quelques écrans. Elle est associée à un contrôlleur PHP, et est configurée par un fichier Yaml, ce qui permet l&amp;#39;utilisation du fichier de configuration à la fois côté javascript et côté PHP.&lt;/p&gt;
 
 &lt;p&gt;Voici un exemple de ce que peut contenir un fichier de configuration d&amp;#39;une application :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;id: dashboard
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;id: dashboard
 name: Dashboard
 acl:
     - ROLE_ADMIN

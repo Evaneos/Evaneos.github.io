@@ -71,8 +71,8 @@
 <h2>Jekyll et internationalisation</h2>
 
 <p>L&#39;internationalisation (ou i18n) n&#39;est pas supportée nativement par Jekyll. Il existe <a href="https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb">un plugin</a> qui permet de le faire en plusieurs langues mais en utilisant un filtre différent. La <a href="https://gist.github.com/remiprev/2665712">solution la plus simple</a> est de modifier la fonction strftime:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">_plugins/frdate.rb
-</code></pre></div><div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby"><span class="c1"># encoding: utf-8</span>
+<div class="highlight"><pre><code class="language-text" data-lang="text">_plugins/frdate.rb
+</code></pre></div><div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># encoding: utf-8</span>
 <span class="nb">require</span> <span class="s1">&#39;date&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;time&#39;</span>
 <span class="no">Date</span><span class="o">::</span><span class="no">MONTHNAMES</span> <span class="o">=</span> <span class="o">[</span><span class="kp">nil</span><span class="o">]</span> <span class="o">+</span> <span class="sx">%w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)</span>

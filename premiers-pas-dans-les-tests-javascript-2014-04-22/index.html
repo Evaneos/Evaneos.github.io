@@ -75,12 +75,12 @@
 <p>Il existe de nombreuses libraries pour faire des tests unitaires en javascript, à commencer par la <a href="http://nodejs.org/api/assert.html">librarie native de nodejs</a>. Mon choix s&#39;est d&#39;abord porté sur <a href="http://chaijs.com/">Chai</a>, style TDD assert, avant de me rendre compte qu&#39;il n&#39;était pas compatible avec les anciennes versions d&#39;IE et j&#39;ai donc exploré <a href="https://github.com/rowanmanning/proclaim">Proclaim</a>.</p>
 
 <p>Installation :</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">npm install --save-dev proclaim
+<div class="highlight"><pre><code class="language-text" data-lang="text">npm install --save-dev proclaim
 </code></pre></div>
 <p>Voici donc ci-dessous un test tout simple :</p>
 
 <p><code>tests/test.js</code></p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="kd">var</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">proclaim</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">proclaim</span><span class="p">;</span>
 
 <span class="nx">test</span><span class="p">(</span><span class="s1">&#39;basic DOM test&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
@@ -99,12 +99,12 @@
 <p>Ensuite, nous avons besoin d&#39;une librairie qui encapsule ces tests et les lancent. <a href="http://visionmedia.github.io/mocha/">Mocha</a> est l&#39;une des plus connues.</p>
 
 <p>Installation :</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">npm install --save-dev mocha
+<div class="highlight"><pre><code class="language-text" data-lang="text">npm install --save-dev mocha
 </code></pre></div>
 <p>On peut lancer nos tests avec un fichier html:</p>
 
 <p><code>tests.html</code></p>
-<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;title&gt;</span>Mocha Tests<span class="nt">&lt;/title&gt;</span>
@@ -131,10 +131,10 @@
 <p>Karma permet de lancer les tests simultanément dans plusieurs navigateurs. Il faut installer les plugins correspondant aux navigateurs, créer un fichier de configuration, et on a le résultat dans la console.</p>
 
 <p>Installation :</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo npm install -g karma-cli &amp;&amp; npm install --save-dev karma karma-mocha karma-proclaim karma-chrome-launcher karma-firefox-launcher
+<div class="highlight"><pre><code class="language-text" data-lang="text">sudo npm install -g karma-cli &amp;&amp; npm install --save-dev karma karma-mocha karma-proclaim karma-chrome-launcher karma-firefox-launcher
 </code></pre></div>
 <p><code>karam.conf.js</code></p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">config</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
 
         <span class="c1">// base path, that will be used to resolve files and exclude</span>
@@ -172,7 +172,7 @@
 <span class="p">};</span>
 </code></pre></div>
 <p><code>mocha.conf.js</code></p>
-<div class="highlight"><pre><code class="js language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">mocha</span><span class="p">.</span><span class="nx">setup</span><span class="p">({</span><span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;tdd&#39;</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">mocha</span><span class="p">.</span><span class="nx">setup</span><span class="p">({</span><span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;tdd&#39;</span><span class="p">});</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">mocha</span><span class="p">.</span><span class="nx">checkLeaks</span><span class="p">();</span>
 </code></pre></div>
 <p>Puis lancer avec <code>karma start</code>.</p>
@@ -182,10 +182,10 @@
 <p>Il est possible de lancer ces tests sur IE via une machine virtuelle. Pour ca, il faut d&#39;abord installer <a href="https://github.com/xdissent/ievms">ievms</a> qui se charge de créer des marchines virtuelles dans VirtualBox.</p>
 
 <p>De retour sur le projet, il faut installer un nouveau plugin:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">npm install --save-dev karma-ievms
+<div class="highlight"><pre><code class="language-text" data-lang="text">npm install --save-dev karma-ievms
 </code></pre></div>
 <p>Puis rajouter dans la configuration de karma:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">//...
+<div class="highlight"><pre><code class="language-text" data-lang="text">//...
 
         browsers: [
             &#39;Firefox&#39;,
@@ -205,7 +205,7 @@
 <p>Pour terminer, on peut utiliser <a href="https://ci.testling.com/">Testling</a> pour mettre en place ces tests à chaque push dans github et avoir un badge indiquant les navigateurs testés.</p>
 
 <p>Il suffit de <a href="https://ci.testling.com/guide/quick_start#configuring-the-web-hook">configurer le web hook</a> puis de modifier le fichier <code>package.json</code> :</p>
-<div class="highlight"><pre><code class="json language-json" data-lang="json">  <span class="s2">&quot;testling&quot;</span><span class="err">:</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-json" data-lang="json">  <span class="s2">&quot;testling&quot;</span><span class="err">:</span> <span class="p">{</span>
     <span class="nt">&quot;html&quot;</span><span class="p">:</span> <span class="s2">&quot;tests.html&quot;</span><span class="p">,</span>
     <span class="nt">&quot;files&quot;</span><span class="p">:</span> <span class="s2">&quot;test/*.js&quot;</span><span class="p">,</span>
     <span class="nt">&quot;browsers&quot;</span><span class="p">:</span> <span class="p">[</span>
