@@ -7,7 +7,7 @@ Si nécessaire, voici la référence sur [la syntaxe markdown](http://daringfire
 Voici des [idées de futurs articles](https://github.com/Evaneos/Evaneos.github.io/blob/master/idees_articles.md).
 
 
-# Publier des articles 
+# Environnement pour tester les articles :
 
     git clone git@github.com:Evaneos/Evaneos.github.io
     docker pull grahamc/jekyll
@@ -15,3 +15,11 @@ Voici des [idées de futurs articles](https://github.com/Evaneos/Evaneos.github.
     git fetch -v 
     git checkout sources 
     docker run --rm -v "$PWD:/src" -p 4123:4000 grahamc/jekyll serve -H 0.0.0.0
+
+# Publier des articles
+
+ - Créer l'article à partir d'une branche fille de source
+ - Merger dans sources la branche de développement
+ - Jouer le script compileToMaster.sh
+ - Done !
+
