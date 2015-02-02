@@ -20,8 +20,6 @@ title: Bienvenue
     {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
     {% if year != nyear %}
 
-    {% unless forloop.first %}</div></div>{% endunless %}
-
       <h2>{{ post.date | date: '%Y' }}</h2>
       <ul>
     {% endif %}
