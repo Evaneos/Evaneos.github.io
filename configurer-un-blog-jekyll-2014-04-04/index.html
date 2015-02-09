@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="Nous utilisons [Jekyll](http://jekyllrb.com) pour faire tourner ce blog technique. Il s'agit d'un générateur de blog ..." >
+<meta name="author" content="L'équipe Evaneos.com">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Configurer un blog Jekyll &middot; Blog technique Evaneos.com</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/favicon.ico" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/main.css">
+<link rel="stylesheet" href="/public/css/syntax.css">
+
+<!-- Google fonts -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,900|Raleway:500,800' rel='stylesheet' type='text/css'>
+
+<!-- feed links -->
+<link rel="alternate" href="/feed.xml" type="application/rss+xml" title="">
+
+    </head>
+    <body>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="in">
+                
+                    <div class="site-title"><a href="/"><span>Les développeurs</span> Evaneos.com</a></div>
+                
+                <nav>
+                    <ul>
+  
+    <li><a href="/" title="Le blog technique Evaneos.com"
+     >Accueil</a>
+    </li>
+  
+    <li><a href="/about" title="Pour en savoir plus"
+     >A propos</a>
+    </li>
+  
+</ul>
+
+                </nav>
+            </div>
+            <p class="legal">Site sous licence <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.en_US">CC BY-NC 4.0</a>.</p>
+        </div>
+        <div class="content-wrapper">
+            
+<article class="post">
+  <header>
+    <div class="metas">
+      Le <time datetime="2014-04-04">04/04/2014</time>, par Clément
+          
+              <a href="http://twitter.com/clemkeirua">@clemkeirua</a>
+          
+      
+    </div>
+    <h1>Configurer un blog Jekyll</h1>
+  </header>
+
+  <div class="content"><p>Nous utilisons <a href="http://jekyllrb.com">Jekyll</a> pour faire tourner ce blog technique. Il s&#39;agit d&#39;un générateur de blog statiques : on écrit les articles au format markdown, qui sont ensuite généré en html. Il n&#39;est donc pas nécessaire d&#39;avoir de base de données, allégeant le serveur, et permettant un rendu rapide des pages pour le lecteur.</p>
+
+<p>Voici quelques infos sur comment installer <em>Jekyll</em> mettre en place un blog de ce genre, et commencer à écrire des articles.</p>
+
+<h2>Installer Ruby et Jekyll</h2>
+
+<p>Les informations nécessaires sont sur les sites officiels de <a href="https://www.ruby-lang.org/fr/downloads/">Ruby</a> et <a href="http://jekyllrb.com/docs/installation/">Jekyll</a></p>
+
+<p>Sur Ubuntu et debian-like, cela revient à :</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get install ruby1.9-dev &amp;&amp; sudo gem install jekyll
+</code></pre></div>
+<p>Sur Fedora :</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">sudo yum install ruby-devel &amp;&amp; sudo gem install jekyll
+</code></pre></div>
+<p><strong>Récupérer du blog vierge</strong></p>
+
+<p>Le code est sur <a href="https://github.com/Evaneos/Evaneos.github.io">Github</a>, il suffit de cloner le repository dans un répertoire local.</p>
+
+<h2>Fonctionnement des articles</h2>
+
+<p>Comme indiqué, les articles sont au format markdown. La syntaxe est simple mais relativement riche, donc n&#39;hésitez pas à vous référer à la <a href="http://daringfireball.net/projects/markdown/syntax">documentation</a>. Pour les plus frileux, il existe des éditeurs en ligne tel que <a href="https://stackedit.io/">Stackedit</a> permettant une édition WYSIWYG du markdown.</p>
+
+<p>Sur Jekyll, les articles publiés sont stockés dans le répertoire <em>_posts</em>, et les articles en cours d&#39;écriture dans le répertoire <em>_drafts</em>.
+Dans un article publié, c&#39;est le format du nom de fichier qui indique sa date de publication. Pour un brouillon, c&#39;est la date de dernière modication du fichier. Un draft n&#39;est affiché qu&#39;en mode &#39;développement&#39; et n&#39;est donc visible qu&#39;en local.</p>
+
+<p>Tous les articles ont également une entête, qui contient ses méta données : auteur, tags, titre... Ce sont les fichiers du répertoire <em>_layout</em> qui s&#39;occupent de faire le lien entre ces meta données, et leur rendu dans la page. Au besoin, ces entêtes peuvent être enrichies et réutilisées pour des besoins plus spécifiques.</p>
+
+<h3>Tester les articles en local</h3>
+
+<p>Pour tester les articles en local, il faut donc :</p>
+
+<ul>
+<li>avoir installé Ruby et Jekyll</li>
+<li>se placer dans le répertoire du blog</li>
+</ul>
+
+<p>Ensuite, on peut démarrer un serveur avec la commande suivante :</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">jekyll serve --watch --drafts
+</code></pre></div>
+<p>Cela démarre un serveur sur le port 4000, on peut donc visualiser le blog en <a href="http://localhost:4000/">local</a>
+L&#39;option --watch permet de ne pas avoir à redémarrer le serveur à chaque modification d&#39;un article, et --drafts permet d&#39;afficher les brouillons dans la liste des articles.</p>
+
+<h2>Hébergé par Github ?</h2>
+
+<p>Une fois votre blog réalisé, vous pouvez l&#39;héberger gratuitement sur un sous domaine de <a href="http://github.io/">Github.io</a> sous réserve d&#39;héberger votre projet sur un repo Github. Il vous suffit pour cela de créer un repo username.github.io, et tout sera synchronisé en post hook de façon transparente.</p>
+
+<p>Vous avez aussi la possibilité de mettre votre propre nom de domaine très facilement. Pour plus de renseignement, rendez vous sur <a href="http://github.io/">Github.io</a>.</p>
+</div>
+
+
+  
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'tech-evaneos';
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  
+</article>
+
+        </div>
+    </div>
+
+    <!-- Google analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49353565-1', 'evaneos.github.io');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

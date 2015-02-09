@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="La gestion du déploiement est un problème complexe, il nous fallu du temps pour mettre en place une solution industri..." >
+<meta name="author" content="L'équipe Evaneos.com">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Retours sur le déploiement chez Evaneos &middot; Blog technique Evaneos.com</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/favicon.ico" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/main.css">
+<link rel="stylesheet" href="/public/css/syntax.css">
+
+<!-- Google fonts -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,900|Raleway:500,800' rel='stylesheet' type='text/css'>
+
+<!-- feed links -->
+<link rel="alternate" href="/feed.xml" type="application/rss+xml" title="">
+
+    </head>
+    <body>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="in">
+                
+                    <div class="site-title"><a href="/"><span>Les développeurs</span> Evaneos.com</a></div>
+                
+                <nav>
+                    <ul>
+  
+    <li><a href="/" title="Le blog technique Evaneos.com"
+     >Accueil</a>
+    </li>
+  
+    <li><a href="/about" title="Pour en savoir plus"
+     >A propos</a>
+    </li>
+  
+</ul>
+
+                </nav>
+            </div>
+            <p class="legal">Site sous licence <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.en_US">CC BY-NC 4.0</a>.</p>
+        </div>
+        <div class="content-wrapper">
+            
+<article class="post">
+  <header>
+    <div class="metas">
+      Le <time datetime="2015-02-02">02/02/2015</time>, par Clément
+          
+              <a href="http://twitter.com/clemkeirua">@clemkeirua</a>
+          
+      
+    </div>
+    <h1>Retours sur le déploiement chez Evaneos</h1>
+  </header>
+
+  <div class="content"><p>La gestion du déploiement est un problème complexe, il nous fallu du temps pour mettre en place une solution industrialisée. Le besoin est arrivé lorsque tout s&#39;est mis à grossir : la pile applicative, les projets et leurs besoins, et le nombre de personnes dans l&#39;équipe.</p>
+
+<p><em>Cet article est le premier d&#39;une série de trois, où nous verrons :</em></p>
+
+<ol>
+<li><em>Avant : Comment nous avons géré les déploiement lorsque l&#39;équipe et le projet était réduit</em></li>
+<li><em>Aujourd&#39;hui : Comment nous faisons actuellement</em></li>
+<li><em>Demain : Quels sont les problèmes auxquels nous sommes confrontés aujourd&#39;hui, et vers où nous nous dirigeons</em></li>
+</ol>
+
+<h2>Anciennement</h2>
+
+<p>Dans ce premier article, nous allons revenir sur la méthode utilisée pour déployer lorsque l&#39;équipe était réduite et que l&#39;application était &quot;simple&quot;.</p>
+
+<p>Comme l&#39;application était simple, longtemps, le déploiement du code en production s&#39;est fait de manière très simple également . Nous n&#39;avions qu&#39;un seul gros projet en PHP, contenant le site public et son backoffice. A ce moment là du projet, lorsque l&#39;équipe était réduite, diverses astuces ont permis de ne pas avoir à mettre en place un processus compliqué de développement et de déploiement.</p>
+
+<h2>Les ressources externes</h2>
+
+<p>Les ressources externes, par exemple. Nous n&#39;avions pas besoin de précompiler les ressources. Grâce à divers bricolages, un script listait les fichiers javascripts nécessaires sur une page, et les aggrégait à la volée avant de les servir. Ca coute un peu plus cher côté serveur au moment de la première visite, mais une fois le fichier généré mis en cache, le problème ne se pose plus jusqu&#39;à la fois suivante. Nous faisions pareil avec les fichiers Less, qui étaient de plus compilés à la volée en CSS.</p>
+
+<p>Lorsque nous n&#39;avions pas de serveur d&#39;intégration, chacun développait sur sa machine, on vérifiait que tout marchait bien en déployant sur la machine de préproduction (identique à la machine de prod), et une fois le feu vert reçu par les personnes responsables du projet en question, on déployait en prod.</p>
+
+<h2>Déployer le code</h2>
+
+<p>Pour déployer en préproduction, à cette époque on ne s&#39;embétait pas trop. On se connecte en SSH sur la machine de préproduction, on va dans le répertoire du projet, git pull origin master et roulez jeunesse.
+De toute façons, à partir du moment où la fonctionnalité était dans master elle devait être déployée. S&#39;il y avait des problèmes, il fallait les corriger, le passage en préprod était un bon moyen d&#39;identifier les problèmes éventuels dans un environnement au plus proche de la production.</p>
+
+<p>Pour deployer en production, on prenait un peu plus de gants et on s&#39;accordait le moyen de 
+Un simple script bash a longtemps fait le travail. On se connectait sur le serveur en SSH, puis executait le script de déploiement :</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$ ev_create_branch nom_de_la_fonctionnalite
+</code></pre></div>
+<p>Le nom du script n&#39;était pas forcément très clair, mais comme nous étions 4 dans l&#39;équipe, tout le monde savait ce qu&#39;il se passait. Ce script  :
+- crée une nouvelle branche git avec la date courante et le nom du déploiement 
+- récupére le code de la branche master via git dans cette nouvelle branche.
+Une mise à jour manuelle d&#39;une clé dans fichier de configuration permettait d&#39;invalider le cache pour certaines ressources (les assets javascripts et css).</p>
+
+<p>Ainsi, quand tout va bien, il n&#39;y a rien à faire; quand il y a un problème, il suffit de lister les branche (avec git branch) de faire un checkout sur la branche précédente pour revenir au déploiement précédent.</p>
+
+<p>En bonus, le script envoyait une requête sur NewRelic, pour ajouter un évènement de suivi. Sur les divers graphes s&#39;ajoutait une barre à la date du déploiement. Lors de chutes de performances après un déploiement, cela permet de comprendre rapidement quelle peut en être l&#39;origine.</p>
+
+<p>Bref, un process très simple et qui a longtemps fait correctement son travail.</p>
+
+<h2>La gestion de la base de donnée</h2>
+
+<p>Petit à petit, un ou deux outils annexes se sont greffés par dessus.
+On a notamment &quot;industrialisé&quot; les mises à jour de base de donnée. Lorsqu&#39;une table devait être créée, ou qu&#39;il fallait ajouter une colonne, ou pour toute opération sur la base, on a mis en place un outil.</p>
+
+<p>Pour que tout le monde puisse en profiter de la même manière, et que l&#39;on exécute en production le même script que sur les bases de développement, on écrivait les scripts dans un fichier d&#39;un répertoire dédié.
+Lors de la mise en production, un outil récupérait les nouveaux scripts, et les jouait.</p>
+
+<p>Comme tout se fait de manière manuelle avec ce fonctionnement, il faut d&#39;abord jouer le script de déploiement puis le script de mise à jour de base : il pouvait y avoir un léger downtime sur certaines page. Pour les pages publiques, c&#39;était masqué par notre reverse proxy. Pour les outils de backoffice, il pouvait y avoir des problèmes pendant quelques instants. Entre l&#39;exécution des deux scripts, le code utilisait des tables qui n&#39;existait pas encore, ou qui avait été modifiées. Ca n&#39;a jamais été un problème suffisament grave pour qu&#39;une meilleure solution soit nécessaire.</p>
+
+<h2>Validation</h2>
+
+<p>Niveau validation, ce fonctionnement marchait pour une petite équipe et sur des projets courts, mais dès que nous avons voulu avoir une gestion de projet plus rigoureuse nous nous sommes heurtés à des problèmes pratique : il n&#39;y avait pas d&#39;environnement dédié à la validation.</p>
+
+<p>Les développeurs développent sur leur propre machine, dans une machine virtuelle qu&#39;ils ont monté eux même, soit à partir des spécifications de la machine de prod, soit à partir d&#39;un fichier ISO partagé par un des collègues.</p>
+
+<p>Avant de déployer en production, on déploie en préproduction. On y vérifie que tout se passe bien, que la fonctionnalité marche comme prévue et qu&#39;elle n&#39;a rien cassée. C&#39;est la grande époque de la validation manuelle.</p>
+
+<p>Comme on déployait régulièrement des petites fonctionnalités, souvent réalisées individuellement et de manière autonome, cela ne posait pas trop de problèmes. Dès qu&#39;il était question de gros projets, de développement à plusieurs pendant de plus grandes périodes de temps, nous avons dû changer des choses.</p>
+
+<h2>Conclusion</h2>
+
+<p>On a vu le fonctionnement du déploiement lors des premiers âges d&#39;Evaneos. Des outils simples, pour une application qui l&#39;était également. Dans le prochain article nous verrons les solutions que nous avons mises en place lorsque les besoins ont évolué. L&#39;application s&#39;est découpée en plusieurs plus petits projets et la pile applicative a grossi. Au même moment, passer de 4 à environ 15 dans l&#39;équipe nous a poussé à changer pas mal de choses. </p>
+</div>
+
+
+  
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'tech-evaneos';
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  
+</article>
+
+        </div>
+    </div>
+
+    <!-- Google analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49353565-1', 'evaneos.github.io');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
