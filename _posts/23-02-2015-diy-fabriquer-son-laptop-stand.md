@@ -6,9 +6,9 @@ comments: true
 author: charles
 ---
 
-On conseil souvent aux personnes passant beaucoup de temps devant un ordinateur de placer l'écran à la hauteur de leurs yeux.
+On conseille souvent aux personnes passant beaucoup de temps devant un ordinateur de placer l'écran à la hauteur de leurs yeux.
 
-Jusque là chez Evaneos certains avaient une petite astuce pour sur-élever leurs ordinateurs portables. Ils allaient piocher dans notre réserve de livres pour en sortir quelques pépites :
+Jusque là, chez Evaneos, certains avaient une petite astuce pour sur-élever leurs ordinateurs portables. Ils allaient piocher dans notre réserve de livres pour en sortir quelques pépites :
 
 - Adobe Flex
 - CSS 2
