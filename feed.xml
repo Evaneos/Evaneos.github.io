@@ -6,9 +6,43 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Mon, 09 Feb 2015 17:02:05 +0100</pubDate>
-    <lastBuildDate>Mon, 09 Feb 2015 17:02:05 +0100</lastBuildDate>
+    <pubDate>Mon, 23 Feb 2015 14:38:03 +0100</pubDate>
+    <lastBuildDate>Mon, 23 Feb 2015 14:38:03 +0100</lastBuildDate>
 
+    
+      <item>
+        <title>DIY : Fabriquer son laptop stand avec du carton</title>
+        <link>/diy-fabriquer-son-laptop-stand-2015-02-23/</link>
+        <pubDate>Mon, 23 Feb 2015 00:00:00 +0100</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;On conseil souvent aux personnes passant beaucoup de temps devant un ordinateur de placer l&amp;#39;écran à la hauteur de leurs yeux.&lt;/p&gt;
+
+&lt;p&gt;Jusque là chez Evaneos certains avaient une petite astuce pour sur-élever leurs ordinateurs portables. Ils allaient piocher dans notre réserve de livres pour en sortir quelques pépites :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Adobe Flex&lt;/li&gt;
+&lt;li&gt;CCS 2&lt;/li&gt;
+&lt;li&gt;Drupal 6&lt;/li&gt;
+&lt;li&gt;Le Guide du Routard en Corée du Nord&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bref, des bouquins sans beaucoup d&amp;#39;intérêt.&lt;/p&gt;
+
+&lt;p&gt;Et puis soudain à l&amp;#39;occasion de notre déménagement beaucoup de cartons se sont accumulés. Nous avons donc décidé d&amp;#39;en récupérer une partie pour fabriquer des laptop stands avec.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../public/images/laptop/rsz_final.jpg&quot; alt=&quot;Résultat final&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../public/images/laptop/rsz_empty.jpg&quot; alt=&quot;Résultat final&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Comme on est sympas on vous donne même un croquis des pièces à découper une photo pour que vous puissiez faire le votre vous même.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../public/images/laptop/rsz_plan.jpg&quot; alt=&quot;Résultat final&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../public/images/laptop/rsz_pieces.jpg&quot; alt=&quot;Résultat final&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Rien de bien compliqué !&lt;/p&gt;
+</description>
+      </item>
     
       <item>
         <title>Le déploiement chez Evaneos aujourd'hui</title>
@@ -639,44 +673,6 @@ Pour les librairies, on concatène toutes les librairies en un fichier vendor_no
 &lt;p&gt;Ha, et se réunir pour faire les geeks ajoute un côté ludique &lt;strong&gt;très&lt;/strong&gt; motivant.&lt;/p&gt;
 
 &lt;p&gt;Si vous n&amp;#39;organisez pas déjà des activités de ce genre avec votre équipe, pensez-y !&lt;/p&gt;
-</description>
-      </item>
-    
-      <item>
-        <title>Lancement du blog technique Evaneos.com</title>
-        <link>/lancement-du-blog-technique-evaneos-com-2014-03-24/</link>
-        <pubDate>Mon, 24 Mar 2014 00:00:00 +0100</pubDate>
-        <author>L'équipe Evaneos.com</author>
-        <description>&lt;p&gt;Bonjour et bienvenue sur le blog technique d&amp;#39;&lt;a href=&quot;http://www.evaneos.com&quot;&gt;Evaneos.com&lt;/a&gt; !&lt;/p&gt;
-
-&lt;p&gt;Dans ce blog, à une fréquence régulière, vous pourrez trouver des articles sur les différents problèmes techniques auxquels nous sommes confrontés, ainsi que des retours d&amp;#39;expériences sur les technologies que nous utilisons.&lt;/p&gt;
-
-&lt;h2&gt;Ce que nous faisons&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.evaneos.com&quot;&gt;Evaneos.com&lt;/a&gt; est une plateforme de mise en relation entre des personnes qui souhaitent partir en voyage, et des agents locaux de par le monde. Ces agents, tous experts sur leur destinationaident les futurs voyageurs à concevoir le voyage de leur rêve, entièrement sur mesure et adapté à leurs envies, besoins et contraintes.&lt;/p&gt;
-
-&lt;h3&gt;Les enjeux&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;pour les voyageurs&lt;/strong&gt; : leur permettre de trouver le plus facilement possible la destination, l&amp;#39;itinéraire et l&amp;#39;agent de leurs rêves. Apporter aux voyageurs des garanties fortes additionnelles (paiement, annulation, etc) ;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;pour les agents&lt;/strong&gt; : de trouver des voyageurs vraiment intéressés par un voyage, et de faciliter au maximum la communication et le suivi tout au long des différentes étapes des projets de voyage ;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;pour nos équipes&lt;/strong&gt; : de rendre la plus simple possible la gestion et le suivi des agents avec qui nous travaillons : recrutement d&amp;#39;un nouvel agent, ajout de nouvelles idées de voyage, suivi des performances, facturation, la présence sur plusieurs marchés (français, espagnol, allemand, italien à ce jour)...&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Techniquement&lt;/h3&gt;
-
-&lt;p&gt;D&amp;#39;un point de vue informatique, cela se traduit par la conception et la réalisation de nombreux outils pour chacune de ces phases de la vie du voyage ou d&amp;#39;une agence locale.&lt;/p&gt;
-
-&lt;p&gt;Ainsi, notre quotidien en plein de mots clés, c&amp;#39;est :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Côté &lt;strong&gt;backend&lt;/strong&gt; : php5, Zend, Symfony2/stackPHP selon les projets, postgresSQL&lt;/li&gt;
-&lt;li&gt;Côté &lt;strong&gt;front&lt;/strong&gt; : angularJS, grunt, less, responsive, ...&lt;/li&gt;
-&lt;li&gt;Côté &lt;strong&gt;applicatif&lt;/strong&gt; : nginx, redis, varnish, memcached, ...&lt;/li&gt;
-&lt;li&gt;Côté &lt;strong&gt;devops&lt;/strong&gt; : git, de l&amp;#39;intégration continue, des tests unitaires/fonctionnels&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Nous sommes constamment poussés à expérimenter des outils récents et à découvrir de nouvelles choses que nous aimerions partager. Prêts pour l&amp;#39;aventure ?&lt;/p&gt;
 </description>
       </item>
     
