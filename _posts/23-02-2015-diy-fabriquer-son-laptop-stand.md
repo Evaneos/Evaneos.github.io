@@ -11,7 +11,7 @@ On conseil souvent aux personnes passant beaucoup de temps devant un ordinateur 
 Jusque là chez Evaneos certains avaient une petite astuce pour sur-élever leurs ordinateurs portables. Ils allaient piocher dans notre réserve de livres pour en sortir quelques pépites :
 
 - Adobe Flex
-- CCS 2
+- CSS 2
 - Drupal 6
 - Le Guide du Routard en Corée du Nord
 
@@ -23,7 +23,7 @@ Et puis soudain à l'occasion de notre déménagement beaucoup de cartons se son
 
 ![Résultat final](../public/images/laptop/rsz_empty.jpg)
 
-Comme on est sympas on vous donne même un croquis des pièces à découper une photo pour que vous puissiez faire le votre vous même.
+Comme on est sympas on vous donne même un croquis des pièces à découper en photo pour que vous puissiez faire le votre vous même.
 
 ![Résultat final](../public/images/laptop/rsz_plan.jpg)
 
