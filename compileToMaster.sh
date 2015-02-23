@@ -10,8 +10,8 @@ fi
 git checkout sources
 jekyll build || exit 1
 git checkout master || exit 1
-git ls-files | xargs rm
-find . -maxdepth 1 -type d -empty -exec rmdir {} \;
+# git ls-files | xargs rm
+# find . -maxdepth 1 -type d -empty -exec rmdir {} \;
 cp -r _site/* . || exit 1
 rm -Rf _site
 touch .nojekyll
