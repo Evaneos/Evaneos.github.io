@@ -80,19 +80,19 @@
 <p>Voici donc ci-dessous un test tout simple :</p>
 
 <p><code>tests/test.js</code></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">proclaim</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js">var assert = proclaim;
 
-<span class="nx">test</span><span class="p">(</span><span class="s1">&#39;basic DOM test&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
-    <span class="nx">el</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;myDiv&quot;</span><span class="p">;</span>
-    <span class="nx">el</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">myEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;myDiv&#39;</span><span class="p">);</span>
-    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">myEl</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">,</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">);</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
-    <span class="nx">el</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="nx">myEl</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-<span class="p">});</span>
+test(&#39;basic DOM test&#39;, function() {
+    var el = document.createElement(&quot;div&quot;);
+    el.id = &quot;myDiv&quot;;
+    el.innerHTML = &quot;Hello World!&quot;;
+    document.body.appendChild(el);
+    var myEl = document.getElementById(&#39;myDiv&#39;);
+    assert.equal(myEl.innerHTML, &quot;Hello World!&quot;);
+    document.body.removeChild(el);
+    el = null;
+    myEl = null;
+});
 </code></pre></div>
 <h3>Mocha</h3>
 
@@ -104,27 +104,27 @@
 <p>On peut lancer nos tests avec un fichier html:</p>
 
 <p><code>tests.html</code></p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Mocha Tests<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;node_modules/mocha/mocha.css&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;mocha&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/mocha/mocha.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;node_modules/proclaim/lib/proclaim.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script&gt;</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">assert</span> <span class="o">=</span> <span class="nx">proclaim</span><span class="p">;</span>
-        <span class="nx">mocha</span><span class="p">.</span><span class="nx">setup</span><span class="p">({</span> <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;tdd&#39;</span> <span class="p">});</span>
-    <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;tests/test.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script&gt;</span>
-        <span class="nx">mocha</span><span class="p">.</span><span class="nx">checkLeaks</span><span class="p">();</span>
-        <span class="nx">mocha</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
-    <span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Mocha Tests&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/mocha/mocha.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;mocha&quot;&gt;&lt;/div&gt;
+    &lt;script src=&quot;node_modules/mocha/mocha.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;node_modules/proclaim/lib/proclaim.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        window.assert = proclaim;
+        mocha.setup({ ui: &#39;tdd&#39; });
+    &lt;/script&gt;
+    &lt;script src=&quot;tests/test.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        mocha.checkLeaks();
+        mocha.run();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre></div>
 <h3>Karma</h3>
 
@@ -134,46 +134,46 @@
 <div class="highlight"><pre><code class="language-text" data-lang="text">sudo npm install -g karma-cli &amp;&amp; npm install --save-dev karma karma-mocha karma-proclaim karma-chrome-launcher karma-firefox-launcher
 </code></pre></div>
 <p><code>karam.conf.js</code></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">config</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js">module.exports = function(config) {
+    config.set({
 
-        <span class="c1">// base path, that will be used to resolve files and exclude</span>
-        <span class="nx">basePath</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        // base path, that will be used to resolve files and exclude
+        basePath: &#39;&#39;,
 
-        <span class="nx">frameworks</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mocha&#39;</span><span class="p">,</span> <span class="s1">&#39;proclaim&#39;</span><span class="p">],</span>
+        frameworks: [&#39;mocha&#39;, &#39;proclaim&#39;],
 
-        <span class="nx">browsers</span><span class="o">:</span> <span class="p">[</span>
-            <span class="s1">&#39;Firefox&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span>
-        <span class="p">],</span>
+        browsers: [
+            &#39;Firefox&#39;,
+            &#39;Chrome&#39;,
+        ],
 
-        <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
-            <span class="s1">&#39;mocha.conf.js&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;tests/test.js&#39;</span><span class="p">,</span>
-        <span class="p">],</span>
+        files: [
+            &#39;mocha.conf.js&#39;,
+            &#39;tests/test.js&#39;,
+        ],
 
-        <span class="c1">// test results reporter to use</span>
-        <span class="c1">// possible values: &#39;dots&#39;, &#39;progress&#39;, &#39;junit&#39;, &#39;growl&#39;, &#39;coverage&#39;</span>
-        <span class="nx">reporters</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">],</span>
-
-
-        <span class="c1">// enable / disable colors in the output (reporters and logs)</span>
-        <span class="nx">colors</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        // test results reporter to use
+        // possible values: &#39;dots&#39;, &#39;progress&#39;, &#39;junit&#39;, &#39;growl&#39;, &#39;coverage&#39;
+        reporters: [&#39;progress&#39;],
 
 
-        <span class="c1">// level of logging</span>
-        <span class="c1">// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG</span>
-        <span class="nx">logLevel</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">LOG_INFO</span><span class="p">,</span>
+        // enable / disable colors in the output (reporters and logs)
+        colors: true,
 
 
-        <span class="c1">// enable / disable watching file and executing tests whenever any file changes</span>
-        <span class="nx">autoWatch</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="p">});</span>
-<span class="p">};</span>
+        // level of logging
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_INFO,
+
+
+        // enable / disable watching file and executing tests whenever any file changes
+        autoWatch: true,
+    });
+};
 </code></pre></div>
 <p><code>mocha.conf.js</code></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">mocha</span><span class="p">.</span><span class="nx">setup</span><span class="p">({</span><span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;tdd&#39;</span><span class="p">});</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">mocha</span><span class="p">.</span><span class="nx">checkLeaks</span><span class="p">();</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js">window.mocha.setup({ui: &#39;tdd&#39;});
+window.mocha.checkLeaks();
 </code></pre></div>
 <p>Puis lancer avec <code>karma start</code>.</p>
 
@@ -205,23 +205,24 @@
 <p>Pour terminer, on peut utiliser <a href="https://ci.testling.com/">Testling</a> pour mettre en place ces tests à chaque push dans github et avoir un badge indiquant les navigateurs testés.</p>
 
 <p>Il suffit de <a href="https://ci.testling.com/guide/quick_start#configuring-the-web-hook">configurer le web hook</a> puis de modifier le fichier <code>package.json</code> :</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json">  <span class="s2">&quot;testling&quot;</span><span class="err">:</span> <span class="p">{</span>
-    <span class="nt">&quot;html&quot;</span><span class="p">:</span> <span class="s2">&quot;tests.html&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;files&quot;</span><span class="p">:</span> <span class="s2">&quot;test/*.js&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;browsers&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;ie/6..latest&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;chrome/latest&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;chrome/canary&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;firefox/3..3.6&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;firefox/latest&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;firefox/nightly&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;safari/latest&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;opera/11.0..latest&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;iphone/6&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ipad/6&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;android-browser/latest&quot;</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
+<div class="highlight"><pre><code class="language-json" data-lang="json">
+  &quot;testling&quot;: {
+    &quot;html&quot;: &quot;tests.html&quot;,
+    &quot;files&quot;: &quot;test/*.js&quot;,
+    &quot;browsers&quot;: [
+      &quot;ie/6..latest&quot;,
+      &quot;chrome/latest&quot;,
+      &quot;chrome/canary&quot;,
+      &quot;firefox/3..3.6&quot;,
+      &quot;firefox/latest&quot;,
+      &quot;firefox/nightly&quot;,
+      &quot;safari/latest&quot;,
+      &quot;opera/11.0..latest&quot;,
+      &quot;iphone/6&quot;,
+      &quot;ipad/6&quot;,
+      &quot;android-browser/latest&quot;
+    ]
+  }
 </code></pre></div></div>
 
 

@@ -72,24 +72,24 @@
 
 <p>L&#39;internationalisation (ou i18n) n&#39;est pas supportée nativement par Jekyll. Il existe <a href="https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb">un plugin</a> qui permet de le faire en plusieurs langues mais en utilisant un filtre différent. La <a href="https://gist.github.com/remiprev/2665712">solution la plus simple</a> est de modifier la fonction strftime:</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">_plugins/frdate.rb
-</code></pre></div><div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># encoding: utf-8</span>
-<span class="nb">require</span> <span class="s1">&#39;date&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;time&#39;</span>
-<span class="no">Date</span><span class="o">::</span><span class="no">MONTHNAMES</span> <span class="o">=</span> <span class="o">[</span><span class="kp">nil</span><span class="o">]</span> <span class="o">+</span> <span class="sx">%w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)</span>
-<span class="no">Date</span><span class="o">::</span><span class="no">DAYNAMES</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Dimanche&quot;</span><span class="p">,</span> <span class="s2">&quot;Lundi&quot;</span><span class="p">,</span> <span class="s2">&quot;Mardi&quot;</span><span class="p">,</span> <span class="s2">&quot;Mercredi&quot;</span><span class="p">,</span> <span class="s2">&quot;Jeudi&quot;</span><span class="p">,</span> <span class="s2">&quot;Vendredi&quot;</span><span class="p">,</span> <span class="s2">&quot;Samedi&quot;</span><span class="o">]</span>
+</code></pre></div><div class="highlight"><pre><code class="language-ruby" data-lang="ruby"># encoding: utf-8
+require &#39;date&#39;
+require &#39;time&#39;
+Date::MONTHNAMES = [nil] + %w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)
+Date::DAYNAMES = [&quot;Dimanche&quot;, &quot;Lundi&quot;, &quot;Mardi&quot;, &quot;Mercredi&quot;, &quot;Jeudi&quot;, &quot;Vendredi&quot;, &quot;Samedi&quot;]
 
-<span class="k">class</span> <span class="nc">Time</span>
-    <span class="k">alias</span> <span class="ss">:strftime_nolocale</span> <span class="ss">:strftime</span>
+class Time
+    alias :strftime_nolocale :strftime
 
-    <span class="k">def</span> <span class="nf">strftime</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
-        <span class="nb">format</span> <span class="o">=</span> <span class="nb">format</span><span class="o">.</span><span class="n">dup</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="sr">/%a/</span><span class="p">,</span> <span class="no">Date</span><span class="o">::</span><span class="no">ABBR_DAYNAMES</span><span class="o">[</span><span class="nb">self</span><span class="o">.</span><span class="n">wday</span><span class="o">]</span><span class="p">)</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="sr">/%A/</span><span class="p">,</span> <span class="no">Date</span><span class="o">::</span><span class="no">DAYNAMES</span><span class="o">[</span><span class="nb">self</span><span class="o">.</span><span class="n">wday</span><span class="o">]</span><span class="p">)</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="sr">/%b/</span><span class="p">,</span> <span class="no">Date</span><span class="o">::</span><span class="no">ABBR_MONTHNAMES</span><span class="o">[</span><span class="nb">self</span><span class="o">.</span><span class="n">mon</span><span class="o">]</span><span class="p">)</span>
-        <span class="nb">format</span><span class="o">.</span><span class="n">gsub!</span><span class="p">(</span><span class="sr">/%B/</span><span class="p">,</span> <span class="no">Date</span><span class="o">::</span><span class="no">MONTHNAMES</span><span class="o">[</span><span class="nb">self</span><span class="o">.</span><span class="n">mon</span><span class="o">]</span><span class="p">)</span>
-        <span class="nb">self</span><span class="o">.</span><span class="n">strftime_nolocale</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
-    <span class="k">end</span>
-<span class="k">end</span>
+    def strftime(format)
+        format = format.dup
+        format.gsub!(/%a/, Date::ABBR_DAYNAMES[self.wday])
+        format.gsub!(/%A/, Date::DAYNAMES[self.wday])
+        format.gsub!(/%b/, Date::ABBR_MONTHNAMES[self.mon])
+        format.gsub!(/%B/, Date::MONTHNAMES[self.mon])
+        self.strftime_nolocale(format)
+    end
+end
 </code></pre></div>
 <h2>Hébergé par GitHub ?</h2>
 
