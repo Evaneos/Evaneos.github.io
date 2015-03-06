@@ -4,11 +4,11 @@
 
 if [[ -n `git status --porcelain | tr -d '\n'` ]]; then
 	echo "You need to commit before compiling to master"
-	exit 1	
+	exit 1
 fi
 
 git checkout sources
-jekyll build || exit 1
+docker run --rm -v "$PWD:/src" -p 4123:4000 grahamc/jekyll build
 git checkout master
 git ls-files | xargs rm
 find . -depth -type d -empty -exec rmdir {} \;
