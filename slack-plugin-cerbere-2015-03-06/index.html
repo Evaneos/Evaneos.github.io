@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- meta information -->
+<meta charset="utf-8">
+<meta name="description" 
+      content="Chez **Evaneos**, nous utilisons [Slack](http://slack.com/) pour communiquer entre nous. Voici un petit exemple simpl..." >
+<meta name="author" content="L'équipe Evaneos.com">
+
+<!-- Enable responsiveness on mobile devices-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+<!-- title -->
+<title>Plugin Slack pour locker des environnements &middot; Blog technique Evaneos.com</title>
+
+<!-- icons -->
+<link rel="shortcut icon" href="/public/favicon.ico" />
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/public/css/main.css">
+<link rel="stylesheet" href="/public/css/syntax.css">
+
+<!-- Google fonts -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,900|Raleway:500,800' rel='stylesheet' type='text/css'>
+
+<!-- feed links -->
+<link rel="alternate" href="/feed.xml" type="application/rss+xml" title="">
+
+    </head>
+    <body>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="in">
+                
+                    <div class="site-title"><a href="/"><span>Les développeurs</span> Evaneos.com</a></div>
+                
+                <nav>
+                    <ul>
+  
+    <li><a href="/" title="Le blog technique Evaneos.com"
+     >Accueil</a>
+    </li>
+  
+    <li><a href="/about" title="Pour en savoir plus"
+     >A propos</a>
+    </li>
+  
+</ul>
+
+                </nav>
+            </div>
+            <p class="legal">Site sous licence <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.en_US">CC BY-NC 4.0</a>.</p>
+        </div>
+        <div class="content-wrapper">
+            
+<article class="post">
+  <header>
+    <div class="metas">
+      Le <time datetime="2015-03-06">06/03/2015</time>, par Tilap
+          
+              <a href="http://twitter.com/jlavinh">@jlavinh</a>
+          
+      
+    </div>
+    <h1>Plugin Slack pour locker des environnements</h1>
+  </header>
+
+  <div class="content"><p>Chez <strong>Evaneos</strong>, nous utilisons <a href="http://slack.com/">Slack</a> pour communiquer entre nous. Voici un petit exemple simple que nous permet cet outil fabuleux.</p>
+
+<h2>Tu ne connais pas Slack ???</h2>
+
+<p><strong>Slack</strong> est un outil de discussion pour équipe. Il reprend le fonctionnement de base d&#39;<em>IRC</em>, amplement enrichi d&#39;une surcouche d&#39;<strong>ergonomie</strong>, de <strong>versions applicatives</strong> mobile et desktop, ainsi que d&#39;une pléthore de <strong>fonctionnalités additionnelles</strong>.</p>
+
+<p>Parmi ces fonctionnalités, la <strong>possibilité d&#39;intégrer des outils tiers</strong> en font une killer app. A coté des intégration &quot;out-of-the-box&quot; comme github, rss, trello, jira, vous pouvez développer vos propres outils.</p>
+
+<h2>Notre besoin</h2>
+
+<h3>Environnement, es-tu libre ?</h3>
+
+<p>Les développeurs d&#39;<strong>Evaneos</strong> ont plusieurs environnements à disposition. Ils y déploient leur code afin de le vérifier, le faire valider, reproduire des cas complexes de bugs, ou bien préparer des mises en production.</p>
+
+<p>Mais le nombre de ces environnements est limité. Les développeurs sont donc obligés de prévenir tout le monde lorsqu&#39;ils en utilisent un, sous peine de voir leur environnement pris par un autre développeur.</p>
+
+<h3>Jusqu&#39;à maintenant...</h3>
+
+<p>Historiquement, nous avions un chan Skype, puis Slack, sur lequel nous marquions &quot;environnement-3 locked&quot; ou &quot;environnement-3 unlocked&quot;. Et nous parcourions l&#39;historique de la discussion pour savoir si l&#39;environnement était disponible ou pas.</p>
+
+<p><em>Bref, paye ta galère</em></p>
+
+<p>Avec la multiplication des environnement (et des développeurs), c&#39;est vite devenu compliqué à suivre. Nous avons pensé à faire un page web simple - après tout c&#39;est notre job et c&#39;est facile à faire - mais ça rajoutais un outil de plus. De là, l&#39;idée d&#39;intégrer ce système de &quot;lock&quot; dans slack était évidente.</p>
+
+<h2>Cerbère</h2>
+
+<p>&quot;Cerbère&quot; est un script simple, codé en PHP-simple-mais-qui-marche, hébergé sur un serveur distant (un serveur à vous). Le code est disponible sur <a href="https://github.com/tilap/slack-cerbere">github</a></p>
+
+<h4>Ce qu&#39;il sait faire...</h4>
+
+<p>Lors du lancement de commandes spécifiquement configurées dans Slack, le script est appellé via un POST http, exécute la commande (avec des arguments en option), renvoit un résultat et interagit avec les chans de Slack en fonction de ces besoins.</p>
+
+<p>Dans notre cas, nous avons ajouté 3 commandes :</p>
+
+<ul>
+<li><code>/cerbere</code></li>
+<li><code>/lock</code></li>
+<li><code>/unlock</code></li>
+</ul>
+
+<p>La commande <code>/cerbere</code> dispose de plusieurs arguments possibles (help, add, remove, status, ...) et permet d&#39;ajouter, supprimer, consulter les status des différents environnements. De cette façon, l&#39;outil reste flexible par rapport à la montée en nombre des environnements de dev que nous avons.</p>
+
+<p>Pour chaque environnement, le script stocke son statut (locked ou unlocked) et un court historique avec utilisateur et date.</p>
+
+<p>A la reception de la commande <code>/lock</code> ou <code>/unlock</code>, il met à jour le statut et l&#39;historique. Bien entendu, il s&#39;assure que l&#39;environnement en question est disponible, sinon indique qui l&#39;a locké et depuis quand.</p>
+
+<p>Un autre avantage de ce <strong>Cerbere</strong> intégré à Slack, c&#39;est qu&#39;il n&#39;y a plus besoin de chan. La commande est exécutable de n&#39;importe quel chan de discussion, et le résultat rendu n&#39;est visible que par l&#39;utilisateur l&#39;ayant appelé. Pour la forme, un chan de log technique est un chan de log fonctionnel indiquant tous les changements faits est possible.</p>
+
+<h4>Mort programmée</h4>
+
+<p>Cerbère sera sûrement remplacé dans les temps à venir par un système de token géré directement dans les scripts de déploiement.</p>
+
+<p>En attendant cette amélioration vers une intégration continue plus forte, je pense à parfaire la commande <code>/cerbere bite</code> (mordre en anglais) qui permet, adjoint à un cron, de rappeller aux développeurs ayant locké un environnement de ne pas oublier de le libérer. Son implémentation a déjà commencée, le système de notification restant à parfaire.</p>
+
+<h2>Liens utiles</h2>
+
+<ul>
+<li><a href="https://slack.com/">Slack</a>, le système de messagerie</li>
+<li>Le repo du projet <a href="https://github.com/tilap/slack-cerbere">Cerbere</a> : https://github.com/tilap/slack-cerbere</li>
+<li>La <a href="https://api.slack.com/">documentation</a> Slack pour y voir l&#39;étendue de ses possibilités</li>
+</ul>
+</div>
+
+
+  
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'tech-evaneos';
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  
+</article>
+
+        </div>
+    </div>
+
+    <!-- Google analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49353565-1', 'evaneos.github.io');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>

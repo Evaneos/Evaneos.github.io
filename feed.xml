@@ -6,14 +6,83 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description>Les articles techniques liés au fonctionnement d'Evaneos.com</description>
     <language>en-us</language>
-    <pubDate>Mon, 23 Feb 2015 14:51:40 +0100</pubDate>
-    <lastBuildDate>Mon, 23 Feb 2015 14:51:40 +0100</lastBuildDate>
+    <pubDate>Fri, 06 Mar 2015 10:04:27 +0000</pubDate>
+    <lastBuildDate>Fri, 06 Mar 2015 10:04:27 +0000</lastBuildDate>
 
+    
+      <item>
+        <title>Plugin Slack pour locker des environnements</title>
+        <link>/slack-plugin-cerbere-2015-03-06/</link>
+        <pubDate>Fri, 06 Mar 2015 00:00:00 +0000</pubDate>
+        <author>L'équipe Evaneos.com</author>
+        <description>&lt;p&gt;Chez &lt;strong&gt;Evaneos&lt;/strong&gt;, nous utilisons &lt;a href=&quot;http://slack.com/&quot;&gt;Slack&lt;/a&gt; pour communiquer entre nous. Voici un petit exemple simple que nous permet cet outil fabuleux.&lt;/p&gt;
+
+&lt;h2&gt;Tu ne connais pas Slack ???&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Slack&lt;/strong&gt; est un outil de discussion pour équipe. Il reprend le fonctionnement de base d&amp;#39;&lt;em&gt;IRC&lt;/em&gt;, amplement enrichi d&amp;#39;une surcouche d&amp;#39;&lt;strong&gt;ergonomie&lt;/strong&gt;, de &lt;strong&gt;versions applicatives&lt;/strong&gt; mobile et desktop, ainsi que d&amp;#39;une pléthore de &lt;strong&gt;fonctionnalités additionnelles&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Parmi ces fonctionnalités, la &lt;strong&gt;possibilité d&amp;#39;intégrer des outils tiers&lt;/strong&gt; en font une killer app. A coté des intégration &amp;quot;out-of-the-box&amp;quot; comme github, rss, trello, jira, vous pouvez développer vos propres outils.&lt;/p&gt;
+
+&lt;h2&gt;Notre besoin&lt;/h2&gt;
+
+&lt;h3&gt;Environnement, es-tu libre ?&lt;/h3&gt;
+
+&lt;p&gt;Les développeurs d&amp;#39;&lt;strong&gt;Evaneos&lt;/strong&gt; ont plusieurs environnements à disposition. Ils y déploient leur code afin de le vérifier, le faire valider, reproduire des cas complexes de bugs, ou bien préparer des mises en production.&lt;/p&gt;
+
+&lt;p&gt;Mais le nombre de ces environnements est limité. Les développeurs sont donc obligés de prévenir tout le monde lorsqu&amp;#39;ils en utilisent un, sous peine de voir leur environnement pris par un autre développeur.&lt;/p&gt;
+
+&lt;h3&gt;Jusqu&amp;#39;à maintenant...&lt;/h3&gt;
+
+&lt;p&gt;Historiquement, nous avions un chan Skype, puis Slack, sur lequel nous marquions &amp;quot;environnement-3 locked&amp;quot; ou &amp;quot;environnement-3 unlocked&amp;quot;. Et nous parcourions l&amp;#39;historique de la discussion pour savoir si l&amp;#39;environnement était disponible ou pas.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Bref, paye ta galère&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Avec la multiplication des environnement (et des développeurs), c&amp;#39;est vite devenu compliqué à suivre. Nous avons pensé à faire un page web simple - après tout c&amp;#39;est notre job et c&amp;#39;est facile à faire - mais ça rajoutais un outil de plus. De là, l&amp;#39;idée d&amp;#39;intégrer ce système de &amp;quot;lock&amp;quot; dans slack était évidente.&lt;/p&gt;
+
+&lt;h2&gt;Cerbère&lt;/h2&gt;
+
+&lt;p&gt;&amp;quot;Cerbère&amp;quot; est un script simple, codé en PHP-simple-mais-qui-marche, hébergé sur un serveur distant (un serveur à vous). Le code est disponible sur &lt;a href=&quot;https://github.com/tilap/slack-cerbere&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4&gt;Ce qu&amp;#39;il sait faire...&lt;/h4&gt;
+
+&lt;p&gt;Lors du lancement de commandes spécifiquement configurées dans Slack, le script est appellé via un POST http, exécute la commande (avec des arguments en option), renvoit un résultat et interagit avec les chans de Slack en fonction de ces besoins.&lt;/p&gt;
+
+&lt;p&gt;Dans notre cas, nous avons ajouté 3 commandes :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/cerbere&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/lock&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/unlock&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La commande &lt;code&gt;/cerbere&lt;/code&gt; dispose de plusieurs arguments possibles (help, add, remove, status, ...) et permet d&amp;#39;ajouter, supprimer, consulter les status des différents environnements. De cette façon, l&amp;#39;outil reste flexible par rapport à la montée en nombre des environnements de dev que nous avons.&lt;/p&gt;
+
+&lt;p&gt;Pour chaque environnement, le script stocke son statut (locked ou unlocked) et un court historique avec utilisateur et date.&lt;/p&gt;
+
+&lt;p&gt;A la reception de la commande &lt;code&gt;/lock&lt;/code&gt; ou &lt;code&gt;/unlock&lt;/code&gt;, il met à jour le statut et l&amp;#39;historique. Bien entendu, il s&amp;#39;assure que l&amp;#39;environnement en question est disponible, sinon indique qui l&amp;#39;a locké et depuis quand.&lt;/p&gt;
+
+&lt;p&gt;Un autre avantage de ce &lt;strong&gt;Cerbere&lt;/strong&gt; intégré à Slack, c&amp;#39;est qu&amp;#39;il n&amp;#39;y a plus besoin de chan. La commande est exécutable de n&amp;#39;importe quel chan de discussion, et le résultat rendu n&amp;#39;est visible que par l&amp;#39;utilisateur l&amp;#39;ayant appelé. Pour la forme, un chan de log technique est un chan de log fonctionnel indiquant tous les changements faits est possible.&lt;/p&gt;
+
+&lt;h4&gt;Mort programmée&lt;/h4&gt;
+
+&lt;p&gt;Cerbère sera sûrement remplacé dans les temps à venir par un système de token géré directement dans les scripts de déploiement.&lt;/p&gt;
+
+&lt;p&gt;En attendant cette amélioration vers une intégration continue plus forte, je pense à parfaire la commande &lt;code&gt;/cerbere bite&lt;/code&gt; (mordre en anglais) qui permet, adjoint à un cron, de rappeller aux développeurs ayant locké un environnement de ne pas oublier de le libérer. Son implémentation a déjà commencée, le système de notification restant à parfaire.&lt;/p&gt;
+
+&lt;h2&gt;Liens utiles&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://slack.com/&quot;&gt;Slack&lt;/a&gt;, le système de messagerie&lt;/li&gt;
+&lt;li&gt;Le repo du projet &lt;a href=&quot;https://github.com/tilap/slack-cerbere&quot;&gt;Cerbere&lt;/a&gt; : https://github.com/tilap/slack-cerbere&lt;/li&gt;
+&lt;li&gt;La &lt;a href=&quot;https://api.slack.com/&quot;&gt;documentation&lt;/a&gt; Slack pour y voir l&amp;#39;étendue de ses possibilités&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      </item>
     
       <item>
         <title>DIY : Fabriquer son laptop stand avec du carton</title>
         <link>/diy-fabriquer-son-laptop-stand-2015-02-23/</link>
-        <pubDate>Mon, 23 Feb 2015 00:00:00 +0100</pubDate>
+        <pubDate>Mon, 23 Feb 2015 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;p&gt;On conseille souvent aux personnes passant beaucoup de temps devant un ordinateur de placer l&amp;#39;écran à la hauteur de leurs yeux.&lt;/p&gt;
 
@@ -47,7 +116,7 @@
       <item>
         <title>Le déploiement chez Evaneos aujourd'hui</title>
         <link>/le-deploiement-actuellement-2015-02-08/</link>
-        <pubDate>Sun, 08 Feb 2015 00:00:00 +0100</pubDate>
+        <pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;p&gt;La gestion du déploiement est un problème complexe, il nous fallu du temps pour mettre en place une solution industrialisée. Le besoin est arrivé lorsque tout s&amp;#39;est mis à grossir : la pile applicative, les projets et leurs besoins, et le nombre de personnes dans l&amp;#39;équipe.&lt;/p&gt;
 
@@ -146,7 +215,7 @@ Nous ne générons &lt;strong&gt;pas d&amp;#39;environnement à la volée&lt;/st
       <item>
         <title>Retours sur le déploiement chez Evaneos</title>
         <link>/deploiement-avant-2015-02-02/</link>
-        <pubDate>Mon, 02 Feb 2015 00:00:00 +0100</pubDate>
+        <pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;p&gt;La gestion du déploiement est un problème complexe, il nous fallu du temps pour mettre en place une solution industrialisée. Le besoin est arrivé lorsque tout s&amp;#39;est mis à grossir : la pile applicative, les projets et leurs besoins, et le nombre de personnes dans l&amp;#39;équipe.&lt;/p&gt;
 
@@ -219,7 +288,7 @@ Lors de la mise en production, un outil récupérait les nouveaux scripts, et le
       <item>
         <title>Soirées dev été 2014</title>
         <link>/soiree-dev-ete-2014-2014-08-20/</link>
-        <pubDate>Wed, 20 Aug 2014 00:00:00 +0200</pubDate>
+        <pubDate>Wed, 20 Aug 2014 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;p&gt;Cet été, quand certains partaient en vacances, les dévs d&amp;#39;Evaneos.com profitaient du calme estival pour se plogner dans du code à l&amp;#39;occasion de &lt;a href=&quot;/soiree-dev-2014-03-25/&quot;&gt;soirées dév&lt;/a&gt;.&lt;/p&gt;
 
@@ -269,7 +338,7 @@ Lors de la mise en production, un outil récupérait les nouveaux scripts, et le
       <item>
         <title>Suivre ses données grâce à Chart.io</title>
         <link>/suivre-ses-donnees-grace-a-chartio-2014-05-05/</link>
-        <pubDate>Mon, 05 May 2014 00:00:00 +0200</pubDate>
+        <pubDate>Mon, 05 May 2014 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;h2&gt;Introduction&lt;/h2&gt;
 
@@ -321,7 +390,7 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
       <item>
         <title>Premiers pas dans les tests en javascript</title>
         <link>/premiers-pas-dans-les-tests-javascript-2014-04-22/</link>
-        <pubDate>Tue, 22 Apr 2014 00:00:00 +0200</pubDate>
+        <pubDate>Tue, 22 Apr 2014 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;h2&gt;Contexte&lt;/h2&gt;
 
@@ -337,19 +406,19 @@ Nos données sont sélectionnées et l&amp;#39;on peut ensuite faire des opérat
 &lt;p&gt;Voici donc ci-dessous un test tout simple :&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;tests/test.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;var assert = proclaim;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;proclaim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-test(&amp;#39;basic DOM test&amp;#39;, function() {
-    var el = document.createElement(&amp;quot;div&amp;quot;);
-    el.id = &amp;quot;myDiv&amp;quot;;
-    el.innerHTML = &amp;quot;Hello World!&amp;quot;;
-    document.body.appendChild(el);
-    var myEl = document.getElementById(&amp;#39;myDiv&amp;#39;);
-    assert.equal(myEl.innerHTML, &amp;quot;Hello World!&amp;quot;);
-    document.body.removeChild(el);
-    el = null;
-    myEl = null;
-});
+&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;basic DOM test&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;div&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;myDiv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;myEl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;myDiv&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;myEl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hello World!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;removeChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;myEl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Mocha&lt;/h3&gt;
 
@@ -361,27 +430,27 @@ test(&amp;#39;basic DOM test&amp;#39;, function() {
 &lt;p&gt;On peut lancer nos tests avec un fichier html:&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;tests.html&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&amp;lt;html&amp;gt;
-&amp;lt;head&amp;gt;
-    &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
-    &amp;lt;title&amp;gt;Mocha Tests&amp;lt;/title&amp;gt;
-    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;node_modules/mocha/mocha.css&amp;quot; /&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;div id=&amp;quot;mocha&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-    &amp;lt;script src=&amp;quot;node_modules/mocha/mocha.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;node_modules/proclaim/lib/proclaim.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script&amp;gt;
-        window.assert = proclaim;
-        mocha.setup({ ui: &amp;#39;tdd&amp;#39; });
-    &amp;lt;/script&amp;gt;
-    &amp;lt;script src=&amp;quot;tests/test.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-    &amp;lt;script&amp;gt;
-        mocha.checkLeaks();
-        mocha.run();
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Mocha Tests&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;node_modules/mocha/mocha.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;mocha&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;node_modules/mocha/mocha.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;node_modules/proclaim/lib/proclaim.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;proclaim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ui&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tdd&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tests/test.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;checkLeaks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Karma&lt;/h3&gt;
 
@@ -391,46 +460,46 @@ test(&amp;#39;basic DOM test&amp;#39;, function() {
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo npm install -g karma-cli &amp;amp;&amp;amp; npm install --save-dev karma karma-mocha karma-proclaim karma-chrome-launcher karma-firefox-launcher
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;karam.conf.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;module.exports = function(config) {
-    config.set({
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
 
-        // base path, that will be used to resolve files and exclude
-        basePath: &amp;#39;&amp;#39;,
+        &lt;span class=&quot;c1&quot;&gt;// base path, that will be used to resolve files and exclude&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;basePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 
-        frameworks: [&amp;#39;mocha&amp;#39;, &amp;#39;proclaim&amp;#39;],
+        &lt;span class=&quot;nx&quot;&gt;frameworks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;mocha&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;proclaim&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 
-        browsers: [
-            &amp;#39;Firefox&amp;#39;,
-            &amp;#39;Chrome&amp;#39;,
-        ],
+        &lt;span class=&quot;nx&quot;&gt;browsers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;Firefox&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;Chrome&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 
-        files: [
-            &amp;#39;mocha.conf.js&amp;#39;,
-            &amp;#39;tests/test.js&amp;#39;,
-        ],
+        &lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;mocha.conf.js&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;tests/test.js&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 
-        // test results reporter to use
-        // possible values: &amp;#39;dots&amp;#39;, &amp;#39;progress&amp;#39;, &amp;#39;junit&amp;#39;, &amp;#39;growl&amp;#39;, &amp;#39;coverage&amp;#39;
-        reporters: [&amp;#39;progress&amp;#39;],
-
-
-        // enable / disable colors in the output (reporters and logs)
-        colors: true,
+        &lt;span class=&quot;c1&quot;&gt;// test results reporter to use&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// possible values: &amp;#39;dots&amp;#39;, &amp;#39;progress&amp;#39;, &amp;#39;junit&amp;#39;, &amp;#39;growl&amp;#39;, &amp;#39;coverage&amp;#39;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;reporters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;progress&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 
 
-        // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_INFO,
+        &lt;span class=&quot;c1&quot;&gt;// enable / disable colors in the output (reporters and logs)&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;colors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 
 
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
-    });
-};
+        &lt;span class=&quot;c1&quot;&gt;// level of logging&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;logLevel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;LOG_INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+
+        &lt;span class=&quot;c1&quot;&gt;// enable / disable watching file and executing tests whenever any file changes&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;autoWatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;mocha.conf.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;window.mocha.setup({ui: &amp;#39;tdd&amp;#39;});
-window.mocha.checkLeaks();
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ui&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tdd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mocha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;checkLeaks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Puis lancer avec &lt;code&gt;karma start&lt;/code&gt;.&lt;/p&gt;
 
@@ -462,31 +531,30 @@ window.mocha.checkLeaks();
 &lt;p&gt;Pour terminer, on peut utiliser &lt;a href=&quot;https://ci.testling.com/&quot;&gt;Testling&lt;/a&gt; pour mettre en place ces tests à chaque push dans github et avoir un badge indiquant les navigateurs testés.&lt;/p&gt;
 
 &lt;p&gt;Il suffit de &lt;a href=&quot;https://ci.testling.com/guide/quick_start#configuring-the-web-hook&quot;&gt;configurer le web hook&lt;/a&gt; puis de modifier le fichier &lt;code&gt;package.json&lt;/code&gt; :&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;
-  &amp;quot;testling&amp;quot;: {
-    &amp;quot;html&amp;quot;: &amp;quot;tests.html&amp;quot;,
-    &amp;quot;files&amp;quot;: &amp;quot;test/*.js&amp;quot;,
-    &amp;quot;browsers&amp;quot;: [
-      &amp;quot;ie/6..latest&amp;quot;,
-      &amp;quot;chrome/latest&amp;quot;,
-      &amp;quot;chrome/canary&amp;quot;,
-      &amp;quot;firefox/3..3.6&amp;quot;,
-      &amp;quot;firefox/latest&amp;quot;,
-      &amp;quot;firefox/nightly&amp;quot;,
-      &amp;quot;safari/latest&amp;quot;,
-      &amp;quot;opera/11.0..latest&amp;quot;,
-      &amp;quot;iphone/6&amp;quot;,
-      &amp;quot;ipad/6&amp;quot;,
-      &amp;quot;android-browser/latest&amp;quot;
-    ]
-  }
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt;  &lt;span class=&quot;s2&quot;&gt;&amp;quot;testling&amp;quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;quot;html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tests.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;quot;files&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;test/*.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;quot;browsers&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;ie/6..latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;chrome/latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;chrome/canary&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;firefox/3..3.6&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;firefox/latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;firefox/nightly&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;safari/latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;opera/11.0..latest&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;iphone/6&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;ipad/6&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;android-browser/latest&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
       </item>
     
       <item>
         <title>Mettre les dates en francais dans un blog Jekyll</title>
         <link>/mettre-les-dates-en-francais-dans-un-blog-jekyll-2014-04-04/</link>
-        <pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
+        <pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;p&gt;Comme précédemment vu, ce &lt;a href=&quot;/configurer-un-blog-jekyll-2014-04-04/&quot;&gt;blog tourne sur Jekyll&lt;/a&gt;.&lt;/p&gt;
 
@@ -494,24 +562,24 @@ window.mocha.checkLeaks();
 
 &lt;p&gt;L&amp;#39;internationalisation (ou i18n) n&amp;#39;est pas supportée nativement par Jekyll. Il existe &lt;a href=&quot;https://github.com/gacha/gacha.id.lv/blob/master/_plugins/i18n_filter.rb&quot;&gt;un plugin&lt;/a&gt; qui permet de le faire en plusieurs langues mais en utilisant un filtre différent. La &lt;a href=&quot;https://gist.github.com/remiprev/2665712&quot;&gt;solution la plus simple&lt;/a&gt; est de modifier la fonction strftime:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;_plugins/frdate.rb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;# encoding: utf-8
-require &amp;#39;date&amp;#39;
-require &amp;#39;time&amp;#39;
-Date::MONTHNAMES = [nil] + %w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)
-Date::DAYNAMES = [&amp;quot;Dimanche&amp;quot;, &amp;quot;Lundi&amp;quot;, &amp;quot;Mardi&amp;quot;, &amp;quot;Mercredi&amp;quot;, &amp;quot;Jeudi&amp;quot;, &amp;quot;Vendredi&amp;quot;, &amp;quot;Samedi&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# encoding: utf-8&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;date&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;time&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MONTHNAMES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%w(janvier février mars avril mai juin juillet août septembre octobre novembre décembre)&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DAYNAMES&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Dimanche&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Lundi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Mardi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Mercredi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Jeudi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Vendredi&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Samedi&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
 
-class Time
-    alias :strftime_nolocale :strftime
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Time&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:strftime_nolocale&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:strftime&lt;/span&gt;
 
-    def strftime(format)
-        format = format.dup
-        format.gsub!(/%a/, Date::ABBR_DAYNAMES[self.wday])
-        format.gsub!(/%A/, Date::DAYNAMES[self.wday])
-        format.gsub!(/%b/, Date::ABBR_MONTHNAMES[self.mon])
-        format.gsub!(/%B/, Date::MONTHNAMES[self.mon])
-        self.strftime_nolocale(format)
-    end
-end
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dup&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%a/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ABBR_DAYNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%A/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DAYNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wday&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%b/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ABBR_MONTHNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsub!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/%B/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;MONTHNAMES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime_nolocale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Hébergé par GitHub ?&lt;/h2&gt;
 
@@ -522,7 +590,7 @@ end
       <item>
         <title>Configurer un blog Jekyll</title>
         <link>/configurer-un-blog-jekyll-2014-04-04/</link>
-        <pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
+        <pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;p&gt;Nous utilisons &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; pour faire tourner ce blog technique. Il s&amp;#39;agit d&amp;#39;un générateur de blog statiques : on écrit les articles au format markdown, qui sont ensuite généré en html. Il n&amp;#39;est donc pas nécessaire d&amp;#39;avoir de base de données, allégeant le serveur, et permettant un rendu rapide des pages pour le lecteur.&lt;/p&gt;
 
@@ -577,7 +645,7 @@ L&amp;#39;option --watch permet de ne pas avoir à redémarrer le serveur à cha
       <item>
         <title>Configuration d'applications Javascript avec Grunt et Bower</title>
         <link>/configuration-d-applications-javascript-2014-03-31/</link>
-        <pubDate>Mon, 31 Mar 2014 00:00:00 +0200</pubDate>
+        <pubDate>Mon, 31 Mar 2014 00:00:00 +0000</pubDate>
         <author>L'équipe Evaneos.com</author>
         <description>&lt;p&gt;Dans cet article je vais vous présenter comment nous gérons les déploiements d&amp;#39;applications javascript. Notre backoffice est constitué d&amp;#39;un grand nombre d&amp;#39;applications ayant chacun un rôle propre. Il y a notamment plusieurs CRUD pour les différents rôles métiers et les différents aspects de notre travail, ainsi que des outils de statistiques pour les différents pôles. Bref pour répondre aux divers besoins métiers, pour être efficace, et pour éviter la duplication, l&amp;#39;utilisation de Grunt et Bower s&amp;#39;est avérée être un atout.&lt;/p&gt;
 
@@ -643,37 +711,6 @@ Pour les librairies, on concatène toutes les librairies en un fichier vendor_no
 &lt;/ul&gt;
 
 &lt;p&gt;Evidemment, bien que Grunt et Bower nous ait apporté beaucoup, tout n&amp;#39;est pas rose. Configurer des tâches Grunt est particulièrement désagréable, car la syntaxe utilisée n&amp;#39;est pas pratique. De plus, la courbe d&amp;#39;apprentissage n&amp;#39;est pas aussi rapide que nous le pensions au départ. Mais une fois mis en place, cela nous a permis d&amp;#39;uniformiser la conception et le déploiement des applications.&lt;/p&gt;
-</description>
-      </item>
-    
-      <item>
-        <title>Les soirées Dev</title>
-        <link>/soiree-dev-2014-03-25/</link>
-        <pubDate>Tue, 25 Mar 2014 00:00:00 +0100</pubDate>
-        <author>L'équipe Evaneos.com</author>
-        <description>&lt;p&gt;Pour démarrer ce blog technique, quoi de mieux qu&amp;#39;un article qui ne parle pas de technique ? Je vais plutôt commencer par vous parler d&amp;#39;un des éléments de notre &lt;strong&gt;culture d&amp;#39;entreprise&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;La particularité de notre équipe chez Evaneos.com, est d&amp;#39;être constituée de &lt;em&gt;passionnés&lt;/em&gt;. Des passionnés par l&amp;#39;univers du web, et de tout ce qui gravite autour : qu&amp;#39;il s&amp;#39;agisse d&amp;#39;une librairie javascript intéressante, d&amp;#39;une nouveauté dans un language backend, des nouvelles idées en matière d&amp;#39;ergonomie grâce à la montée de web mobile, d&amp;#39;un point de détail de génie logiciel qui commence à trouver sa place dans le web... la liste pourrait continuer longtemps, mais tous les aspects de la technique et de ce que cela permet de réaliser sont, pour nous, très motivants.&lt;/p&gt;
-
-&lt;p&gt;Ainsi, nous faisons tous, chacun de notre côté, pas mal de veille pour nous tenir à jour (ou tenter de l&amp;#39;être), mais il n&amp;#39;est pas toujours facile de l&amp;#39;être. Le web étant en continuelle évolution, il est difficile de jouer avec tout ce que l&amp;#39;on souhaiterait. Notre temps étant limité, ce n&amp;#39;est pas non plus forcément souhaitable, alors on a cherché un compromis.&lt;/p&gt;
-
-&lt;p&gt;Une solution que nous avons trouvé, c&amp;#39;est d&amp;#39;organiser des &lt;strong&gt;soirées dev&lt;/strong&gt;. L&amp;#39;idée ? Rester tard un soir, commander des pizzas, et passer la soirée à bricoler un bout de code qu&amp;#39;on a envie de faire depuis un moment, mais qui, pour diverses raisons, n&amp;#39;a jamais pris réalité. Seul ou en groupe, en rapport avec ce qu&amp;#39;on fait au travail ou non, sur un langage, une librairie, un applicatif... l&amp;#39;important c&amp;#39;est de s&amp;#39;amuser.&lt;/p&gt;
-
-&lt;p&gt;Voici un petit éventail de ce qui a été bricolé lors de la dernière soirée dev :&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Mise en place d&amp;#39;un serveur local &lt;a href=&quot;http://openstreetmap.fr/&quot;&gt;Open Street maps&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Découverte d&amp;#39;&lt;a href=&quot;www.elasticsearch.org&quot;&gt;Elasticsearch&lt;/a&gt; autour de la conception d&amp;#39;une petite appli de recherche de films&lt;/li&gt;
-&lt;li&gt;Bricolage autour de &lt;a href=&quot;http://logstash.net/&quot;&gt;logstash&lt;/a&gt; pour avoir un moteur de recherche dans nos logs basé sur Elasticsearch et Kibana. Pour ceux que ça intéresse, voici un &lt;a href=&quot;http://linuxfr.org/news/gestion-des-logs-avec-logstash-elasticsearch-kibana&quot;&gt;point de départ possible&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Découverte de &lt;a href=&quot;http://sailsjs.org/&quot;&gt;SailsJS&lt;/a&gt; via le bricolage d&amp;#39;une petit appli. SailsJS est un framework javascript MVC basé sur du nodeJS.&lt;/li&gt;
-&lt;li&gt;Essai de mise en corrélation de titres d&amp;#39;articles de journaux, pour essayer de déterminer qui reprend ses informations chez les autres.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Comme vous pouvez le voir, les mots qui reviennent sont &amp;quot;essai&amp;quot;, &amp;quot;bricolage&amp;quot;, &amp;quot;découverte&amp;quot;... On ne cherche pas à concevoir des applications finies, ce qui est plutôt difficile quand on ne connait pas une technologie. On cherche plutôt à découvrir la technologie en question, s&amp;#39;ouvrir l&amp;#39;esprit à de nouveaux outils, et expérimenter. Tout ne marche pas comme prévu, par exemple nous avons eu de nombreux problèmes de compatibilité avec le serveur OpenStreetMaps, j&amp;#39;ai pu voir que mettre en place et requêter Elasticsearch est loin d&amp;#39;être trivial en une soirée... En fait, cette phase de découverte permet de prendre conscience des possibilités et des limitations de nouveaux outils, que ce soit pour s&amp;#39;en servir, ou au contraire pour les rayer de la liste des possibles.&lt;/p&gt;
-
-&lt;p&gt;Ha, et se réunir pour faire les geeks ajoute un côté ludique &lt;strong&gt;très&lt;/strong&gt; motivant.&lt;/p&gt;
-
-&lt;p&gt;Si vous n&amp;#39;organisez pas déjà des activités de ce genre avec votre équipe, pensez-y !&lt;/p&gt;
 </description>
       </item>
     

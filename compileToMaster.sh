@@ -4,16 +4,16 @@
 
 if [[ -n `git status --porcelain | tr -d '\n'` ]]; then
 	echo "You need to commit before compiling to master"
-	exit 1
+	exit 1	
 fi
 
 git checkout sources
 jekyll build || exit 1
-git checkout master || exit 1
-# git ls-files | xargs rm
-# find . -maxdepth 1 -type d -empty -exec rmdir {} \;
-cp -r _site/* . || exit 1
-rm -Rf _site
+git checkout master
+git ls-files | xargs rm
+find . -depth -type d -empty -exec rmdir {} \;
+mv _site/* .
+rmdir _site
 touch .nojekyll
 
 git add -A
